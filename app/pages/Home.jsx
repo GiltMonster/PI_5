@@ -1,28 +1,25 @@
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import { StatusBar } from 'expo-status-bar';
 import { GlobalStyles } from "../style/GlobalStyle";
 
 import Header from "../components/Header";
-interface HomeProps {
-  nome: String,
-  id: number
-};
-export default function Home({ id, nome }: HomeProps) {
+
+export default function Home() {
   return (
-    <View style={GlobalStyles.container}>
+    <SafeAreaView style={GlobalStyles.container}>
       <Header></Header>
       <View style={GlobalStyles.container}>
 
         <View>
-          <Text>teste {id}</Text>
+          <Text>teste </Text>
         </View>
         
         <View>
-          <Text>Ola {nome}</Text>
+          <Text>Ola </Text>
           <StatusBar style="auto" />
         </View>
       </View>
 
-    </View>
+    </SafeAreaView>
   );
 }
