@@ -1,6 +1,10 @@
 import { View, StyleSheet } from 'react-native';
 import { useState } from 'react';
 import Home from './app/pages/Home';
+import {useEffect} from 'react';
+import { View, Text, Button } from 'react-native';
+import { initDatabase } from "./app/services/initDB";
+
 
 export default function App() {
   const [userName, setUserName] = useState('Barbara');
