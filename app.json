@@ -2,6 +2,7 @@
   "expo": {
     "name": "pi5semestre",
     "slug": "pi5semestre",
+    "scheme": "pi5semestre",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
@@ -24,7 +25,8 @@
       }
     },
     "web": {
-      "favicon": "./app/assets/favicon.png"
+      "favicon": "./app/assets/favicon.png",
+      "bundler": "metro"      
     }
   }
 }

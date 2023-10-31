@@ -3,6 +3,8 @@ import * as SQLite from 'expo-sqlite';
 import { Asset } from 'expo-asset';
 
 export async function initDatabase() {
+
+    //Aqui ele vai, verificar os diretórios de arquivos no dispositivo, caso 
     const documentDirectory = FileSystem.documentDirectory;
     const directoryPath = documentDirectory + 'SQLite';
     const databaseFilePath = documentDirectory + 'SQLite/herdeiros.db';
