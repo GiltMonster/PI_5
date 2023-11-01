@@ -5,20 +5,19 @@ import { EvilIcons } from '@expo/vector-icons';
 
 export default function TabRoutesLayout() {
     return (
-        // <Tabs screenOptions={{ headerShown: false}}>
-        <Tabs>
+        <Tabs screenOptions={{ headerShown: false}}>
             <Tabs.Screen
                 name="index"
                 options={{
                     title: "Home",
-                    tabBarIcon: () => <Ionicons name="home" size={24} color="black" />
+                    tabBarIcon: ({size, color}) => <Ionicons name="home" size={24} color={color} />
                 }}
             />
             <Tabs.Screen
                 name="profile"
                 options={{
                     title: "Perfil",
-                    tabBarIcon: () => <EvilIcons name="user" size={34} color="black" />
+                    tabBarIcon: ({size, color}) => <EvilIcons name="user" size={34} color={color} />
                 }}
             />
         </Tabs>

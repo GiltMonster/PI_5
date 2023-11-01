@@ -1,7 +1,7 @@
 {
   "name": "PI5",
   "version": "1.0.0",
-  "main": "expo-router/entry",  
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -23,10 +23,10 @@
     "metro-file-map": "^0.79.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.72.5",
+    "react-native": "0.72.6",
     "react-native-elements": "^3.4.3",
     "react-native-gesture-handler": "~2.12.0",
-    "react-native-safe-area-context": "^4.6.3",
+    "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6",
     "typescript": "^5.1.3",

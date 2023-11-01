@@ -1,11 +1,12 @@
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
+import { Link } from 'expo-router';
 
 export default function WorkoutButton({ onPress, trainingName, members }) {
   const [loaded, error] = useFonts({
     sfProTextSemibold: require('../assets/fonts/sf-pro-text-semibold.ttf'),
   });
-  
+
   if (error) {
     console.log("Erro ao carregar a fonte: ", error);
   }
@@ -15,7 +16,12 @@ export default function WorkoutButton({ onPress, trainingName, members }) {
   return (
     <TouchableOpacity onPress={() => onPress()} style={styles.workoutButton}>
       <Text style={[styles.workoutButtonText, { fontFamily: font, color: '#EDEDED' }]}>{trainingName}</Text>
-      <Text style={[styles.workoutButtonText, { fontFamily: font, color: '#BF5BF3' }]}>{members}</Text>
+
+      {/* Aqui tem a tag <Link> que tem como objetivo de informar o proximo componente  */}
+      <Link href={"/profile"} asChild style={styles.workoutButtonText}>
+        <Text style={{ fontFamily: font, color: '#BF5BF3' }}>{members}</Text>
+      </Link>
+
     </TouchableOpacity>
   );
 }
