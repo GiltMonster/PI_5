@@ -1,6 +1,5 @@
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
-import { Link } from 'expo-router';
 
 export default function WorkoutButton({ onPress, trainingName, members }) {
   const [loaded, error] = useFonts({
@@ -18,9 +17,8 @@ export default function WorkoutButton({ onPress, trainingName, members }) {
       <Text style={[styles.workoutButtonText, { fontFamily: font, color: '#EDEDED' }]}>{trainingName}</Text>
 
       {/* Aqui tem a tag <Link> que tem como objetivo de informar o proximo componente  */}
-      <Link href={"/profile"} asChild style={styles.workoutButtonText}>
-        <Text style={{ fontFamily: font, color: '#BF5BF3' }}>{members}</Text>
-      </Link>
+      <Text style={{ fontFamily: font, color: '#BF5BF3' }}>{members}</Text>
+
 
     </TouchableOpacity>
   );
