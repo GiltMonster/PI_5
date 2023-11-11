@@ -25,7 +25,7 @@ export default function App() {
     } else if (imcValue >= 30){
       setImcCategory("Obesidade");
     } else {
-      message = 'Os valores informados são inválidos!'
+      message = 'Os valores informados são inválidos!';
     }
   }
 
