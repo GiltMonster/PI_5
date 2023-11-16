@@ -34,7 +34,7 @@ export default function Header({ onPress }) {
 const styles = StyleSheet.create({
   emptyView: {
     backgroundColor: '#28A3CC',
-    height: 20
+    height: 10
   },
   headerContainer: {
     flexDirection: 'row',
