@@ -4,13 +4,12 @@ import HomePage from './HomePage';
 import replace from '../util/replace';
 
 export default function Home({navigation}) {
-  const [userName, setUserName] = useState('lukinhas');
+  const [userName, setUserName] = useState('Lukinhas');
   const [height, setHeight] = useState(1.69);
   const [weight, setWeight] = useState(85.00);
   const [imcCategory, setImcCategory] = useState("Peso Normal");
   const [idealWeight, setIdealWeight] = useState("41,63 Kg - 56,25 Kg");
-  // const [members, setMembers] = useState("Costas e Bíceps");
-  // const [trainingName, setTrainingName] = useState("Superior");
+  const [targetWeight, setTargetWeight] = useState(65.00);
 
   const calculatesImc = (weight, height) => {
     const imcValue = weight / Math.pow(height,2);
@@ -53,6 +52,7 @@ export default function Home({navigation}) {
         weight={weight}
         imcCategory={imcCategory}
         idealWeight={idealWeight}
+        targetWeight={targetWeight}
       />
     </View>
   );
