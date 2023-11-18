@@ -55,10 +55,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#232325',
     height: 84,
     borderRadius: 10,
-    // shadowRadius: 10,
-    // shadowOffset: {width: 5, height: 5},
-    // shadowOpacity: 0.1,
-    // shadowColor: '#EDEDED'
   },
   imcTextContainer: {
     flex: 1,

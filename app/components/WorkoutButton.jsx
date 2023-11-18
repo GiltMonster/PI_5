@@ -17,7 +17,7 @@ export default function WorkoutButton({ onPress, trainingName, members }) {
       <Text style={[styles.workoutButtonText, { fontFamily: font, color: '#EDEDED' }]}>{trainingName}</Text>
 
       {/* Aqui tem a tag <Link> que tem como objetivo de informar o proximo componente  */}
-      <Text style={{ fontFamily: font, color: '#BF5BF3' }}>{members}</Text>
+      <Text style={[styles.workoutButtonText,{ fontFamily: font, color: '#BF5BF3' }]}>{members}</Text>
 
 
     </TouchableOpacity>
@@ -34,10 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#232325',
     height: 66,
     borderRadius: 10,
-    // shadowRadius: 10,
-    // shadowOffset: {width: 5, height: 5},
-    // shadowOpacity: 0.1,
-    // shadowColor: '#EDEDED',
   },
   workoutButtonText: {
     color: 'white',
