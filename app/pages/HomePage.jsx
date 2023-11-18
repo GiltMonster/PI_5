@@ -1,10 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useFonts } from 'expo-font';
 import Header from '../components/Header';
 import WorkoutButton from '../components/WorkoutButton';
 import Imc from '../components/Imc';
 import Goal from '../components/Goal';
 import Summary from '../components/Summary';
+import TabBar from '../components/TabBar';
 
 export default function HomePage({ userName, onPress, trainingName, members, height, weight , imcCategory, idealWeight, targetWeight }) {
   const [loaded, error] = useFonts({
@@ -24,12 +25,15 @@ export default function HomePage({ userName, onPress, trainingName, members, hei
   return (
     <View>
       <Header/>
-      <Text style={[styles.homeText, { fontFamily: sfProDisplayBold }]}>Treino de hoje, {userName}</Text>
-      <WorkoutButton onPress={onPress} trainingName={trainingName} members={members}/>
-      <Imc height={height} weight={weight} imcCategory={imcCategory} idealWeight={idealWeight}/>
-      <Text style={[styles.targetText, { fontFamily: sfProDisplayBold }]}>Meta</Text>
-      <Goal currentWeight={weight} targetWeight={targetWeight}/>
-      <Summary onPress={onPress}/>
+      <ScrollView>
+        <Text style={[styles.homeText, { fontFamily: sfProDisplayBold }]}>Treino de hoje, {userName}</Text>
+        <WorkoutButton onPress={onPress} trainingName={trainingName} members={members}/>
+        <Imc height={height} weight={weight} imcCategory={imcCategory} idealWeight={idealWeight}/>
+        <Text style={[styles.targetText, { fontFamily: sfProDisplayBold }]}>Meta</Text>
+        <Goal currentWeight={weight} targetWeight={targetWeight}/>
+        <Summary onPress={onPress}/>
+      </ScrollView>
+      <TabBar/>
     </View>
   );
 }
