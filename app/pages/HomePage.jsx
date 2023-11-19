@@ -8,25 +8,30 @@ import Summary from '../components/Summary';
 import TabBar from '../components/TabBar';
 
 export default function HomePage({ userName, onPress, trainingName, members, height, weight , imcCategory, idealWeight, targetWeight }) {
+  const homeText = userName === '' ? '' : 'Treino de hoje,';
+
   return (
-    <View>
-      <View style={{ height: 100 }}>
+    <View style={styles.homePageContainer}>
+      <View style={styles.headerView}>
         <Header/>
       </View>
-      {/* <ScrollView> */}
-        <Text style={[styles.homeText, { fontFamily: getFont('sfProDisplayBold') }]}>Treino de hoje, {userName}</Text>
+      <ScrollView>
+        <Text style={[styles.homeText, { fontFamily: getFont('sfProDisplayBold') }]}>{homeText} {userName}</Text>
         <WorkoutButton onPress={onPress} trainingName={trainingName} members={members}/>
         <Imc height={height} weight={weight} imcCategory={imcCategory} idealWeight={idealWeight}/>
         <Text style={[styles.targetText, { fontFamily: getFont('sfProDisplayBold') }]}>Meta</Text>
         <Goal currentWeight={weight} targetWeight={targetWeight}/>
         <Summary onPress={onPress}/>
-      {/* </ScrollView> */}
-      <TabBar/>
+      </ScrollView>
+      <TabBar style={styles.tabBarStyle}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  homePageContainer: {
+    flex: 1,
+  },
   homeText: {
     marginTop: 15,
     paddingHorizontal: 20,
@@ -39,4 +44,11 @@ const styles = StyleSheet.create({
     fontSize: 23,
     color: '#E3ECF1'
   },
+  headerView: {
+    height: 100, 
+    zIndex: 1
+  },
+  tabBarStyle: {
+    justifyContent: 'flex-end'
+  }
 });
