@@ -10,6 +10,7 @@ export default function Home({navigation}) {
   const [imcCategory, setImcCategory] = useState("Peso Normal");
   const [idealWeight, setIdealWeight] = useState("41,63 Kg - 56,25 Kg");
   const [targetWeight, setTargetWeight] = useState(65.00);
+  const [trainingName, setTrainingName] = useState('');
 
   const calculatesImc = (weight, height) => {
     const imcValue = weight / Math.pow(height,2);
@@ -46,7 +47,7 @@ export default function Home({navigation}) {
       <HomePage 
         onPress={onPress}
         userName={userName} 
-        trainingName={'Costas e Bíceps'} 
+        trainingName={trainingName} 
         members={'Superior'}
         height={height}
         weight={weight}

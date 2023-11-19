@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50,
     paddingTop: 5,
     backgroundColor: '#232325',
-    height: 83
+    height: 90
   },
   tabBarText: {
     fontSize: 13,
