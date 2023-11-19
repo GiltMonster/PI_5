@@ -1,19 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { useFonts } from 'expo-font';
+import getFont from '../util/fonts';
 
 export default function Imc({ height, weight , imcCategory, idealWeight }) {
-  const [loaded, error] = useFonts({
-    sfProDisplayBold: require('../assets/fonts/SF-Pro-Display-Bold.ttf'),
-    sfProTextRegular: require('../assets/fonts/sf-pro-text-regular.ttf'),
-  });
-  
-  if (error) {
-    console.log("Erro ao carregar a fonte: ", error);
-  }
-
-  const sfProDisplayBold = loaded ? 'sfProDisplayBold' : null;
-  const sfProTextRegular = loaded ? 'sfProTextRegular' : null;
-
   const heightNumber = parseFloat(height);
   const weightNumber = parseFloat(weight);
 
@@ -23,17 +11,17 @@ export default function Imc({ height, weight , imcCategory, idealWeight }) {
 
   return (
     <View>
-      <Text style={[styles.titleText, { fontFamily: sfProDisplayBold }]}>IMC</Text>
+      <Text style={[styles.titleText, { fontFamily: getFont('sfProDisplayBold') }]}>IMC</Text>
       <View style={styles.imcContainer}>
         <View style={styles.imcTextContainer}>
-          <Text style={[styles.imcText, { fontFamily: sfProTextRegular }]}>Altura: {replace(heightNumber.toFixed(2))} m</Text>
-          <Text style={[styles.imcText, { fontFamily: sfProTextRegular }]}>Peso:   {replace(weightNumber.toFixed(2))} kg</Text>
+          <Text style={[styles.imcText, { fontFamily: getFont('sfProTextRegular') }]}>Altura: {replace(heightNumber.toFixed(2))} m</Text>
+          <Text style={[styles.imcText, { fontFamily: getFont('sfProTextRegular') }]}>Peso:   {replace(weightNumber.toFixed(2))} kg</Text>
         </View>
         <View style={[styles.imcTextContainer, { alignItems: 'center' }]}>
-          <Text style={[styles.imcText, { fontFamily: sfProDisplayBold }]}>{ imcCategory }</Text>
+          <Text style={[styles.imcText, { fontFamily: getFont('sfProDisplayBold') }]}>{ imcCategory }</Text>
           <View style={{alignItems: 'center'}}>
-            <Text style={[styles.imcText, { fontFamily: sfProTextRegular }]}>Peso ideal:</Text>
-            <Text style={[styles.imcText, { fontFamily: sfProTextRegular }]}>{ idealWeight }</Text>
+            <Text style={[styles.imcText, { fontFamily: getFont('sfProTextRegular') }]}>Peso ideal:</Text>
+            <Text style={[styles.imcText, { fontFamily: getFont('sfProTextRegular') }]}>{ idealWeight }</Text>
           </View>
         </View>
       </View>

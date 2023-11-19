@@ -3,7 +3,6 @@ import Svg, { Rect, Line, Text } from 'react-native-svg';
 import replace from '../util/replace';
 
 export default function Goal({ currentWeight, targetWeight }) {
-    const weightDifference = (currentWeight - targetWeight);
     const heightContainer = currentWeight > targetWeight ? currentWeight+50 : targetWeight+50;
 
   return (

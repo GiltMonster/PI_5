@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { useFonts } from 'expo-font';
+import getFont from '../util/fonts';
 import Header from '../components/Header';
 import WorkoutButton from '../components/WorkoutButton';
 import Imc from '../components/Imc';
@@ -8,31 +8,19 @@ import Summary from '../components/Summary';
 import TabBar from '../components/TabBar';
 
 export default function HomePage({ userName, onPress, trainingName, members, height, weight , imcCategory, idealWeight, targetWeight }) {
-  const [loaded, error] = useFonts({
-    sfProDisplayBold: require('../assets/fonts/SF-Pro-Display-Bold.ttf'),
-    sfProTextSemibold: require('../assets/fonts/sf-pro-text-semibold.ttf'),
-    sfProTextRegular: require('../assets/fonts/sf-pro-text-regular.ttf'),
-  });
-
-  if (error) {
-    console.log("Erro ao carregar a fonte: ", error);
-  }
-
-  const sfProDisplayBold = loaded ? 'sfProDisplayBold' : null;
-  const sfProTextSemibold = loaded ? 'sfProTextSemibold' : null;
-  const sfProTextRegular = loaded ? 'sfProTextRegular' : null;
-
   return (
     <View>
-      <Header/>
-      <ScrollView>
-        <Text style={[styles.homeText, { fontFamily: sfProDisplayBold }]}>Treino de hoje, {userName}</Text>
+      <View style={{ height: 100 }}>
+        <Header/>
+      </View>
+      {/* <ScrollView> */}
+        <Text style={[styles.homeText, { fontFamily: getFont('sfProDisplayBold') }]}>Treino de hoje, {userName}</Text>
         <WorkoutButton onPress={onPress} trainingName={trainingName} members={members}/>
         <Imc height={height} weight={weight} imcCategory={imcCategory} idealWeight={idealWeight}/>
-        <Text style={[styles.targetText, { fontFamily: sfProDisplayBold }]}>Meta</Text>
+        <Text style={[styles.targetText, { fontFamily: getFont('sfProDisplayBold') }]}>Meta</Text>
         <Goal currentWeight={weight} targetWeight={targetWeight}/>
         <Summary onPress={onPress}/>
-      </ScrollView>
+      {/* </ScrollView> */}
       <TabBar/>
     </View>
   );
@@ -50,5 +38,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     fontSize: 23,
     color: '#E3ECF1'
-  }
+  },
 });

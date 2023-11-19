@@ -1,38 +1,28 @@
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { useFonts } from 'expo-font';
+import getFont from '../util/fonts';
 
 export default function TabBar({ onPress }) {
-  const [loaded, error] = useFonts({
-    sfProTextRegular: require('../assets/fonts/sf-pro-text-regular.ttf')
-  });
-
-  if (error) {
-    console.log("Erro ao carregar a fonte: ", error);
-  }
-
-  const sfProTextRegular = loaded ? 'sfProTextRegular' : null;
-
   return (
-    <View style={styles.headerContainer}>
+    <View style={styles.tabBarContainer}>
         <View>
             <TouchableOpacity onPress={() => onPress()}>
                 <Icon name={'fitness-center'} color='black' size={40}/>
             </TouchableOpacity>
-            <Text style={[styles.headerText, { fontFamily: sfProTextRegular }]}>Histórico</Text>
+            <Text style={[styles.tabBarText, { fontFamily: getFont('sfProTextRegular') }]}>Histórico</Text>
         </View>
         <View>
             <TouchableOpacity onPress={() => onPress()}>
                 <Icon name={'add-circle-outline'} color='black' size={40}/>
             </TouchableOpacity>
-            <Text style={[styles.headerText, { fontFamily: sfProTextRegular }]}>Criar Treino</Text>
+            <Text style={[styles.tabBarText, { fontFamily: getFont('sfProTextRegular') }]}>Criar Treino</Text>
         </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  headerContainer: {
+  tabBarContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 50,
@@ -40,7 +30,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#232325',
     height: 83
   },
-  headerText: {
+  tabBarText: {
     fontSize: 13,
     position: 'relative',
     color: 'lightgray',

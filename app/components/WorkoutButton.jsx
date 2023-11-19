@@ -1,23 +1,13 @@
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useFonts } from 'expo-font';
+import getFont from '../util/fonts';
 
 export default function WorkoutButton({ onPress, trainingName, members }) {
-  const [loaded, error] = useFonts({
-    sfProTextSemibold: require('../assets/fonts/sf-pro-text-semibold.ttf'),
-  });
-
-  if (error) {
-    console.log("Erro ao carregar a fonte: ", error);
-  }
-
-  const font = loaded ? 'sfProTextSemibold' : null;
-
   return (
     <TouchableOpacity onPress={() => onPress()} style={styles.workoutButton}>
-      <Text style={[styles.workoutButtonText, { fontFamily: font, color: '#EDEDED' }]}>{trainingName}</Text>
+      <Text style={[styles.workoutButtonText, { fontFamily: getFont('sfProTextSemibold'), color: '#EDEDED' }]}>{trainingName}</Text>
 
       {/* Aqui tem a tag <Link> que tem como objetivo de informar o proximo componente  */}
-      <Text style={[styles.workoutButtonText,{ fontFamily: font, color: '#BF5BF3' }]}>{members}</Text>
+      <Text style={[styles.workoutButtonText,{ fontFamily: getFont('sfProTextSemibold'), color: '#BF5BF3' }]}>{members}</Text>
 
 
     </TouchableOpacity>

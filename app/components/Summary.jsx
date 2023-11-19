@@ -1,29 +1,15 @@
-import { Text, Image, StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { useFonts } from 'expo-font';
-import img from '../assets/images/TelaInicial.png'
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import getFont from '../util/fonts';
 
 export default function Summary({ onPress }) {
-  const [loaded, error] = useFonts({
-    sfProDisplayBold: require('../assets/fonts/SF-Pro-Display-Bold.ttf'),
-    sfProTextSemibold: require('../assets/fonts/sf-pro-text-semibold.ttf'),
-  });
-
-  if (error) {
-    console.log("Erro ao carregar a fonte: ", error);
-  }
-
-  const sfProDisplayBold = loaded ? 'sfProDisplayBold' : null;
-  const sfProTextSemibold = loaded ? 'sfProTextSemibold' : null;
-
   return (
     <View>
-      <Text style={[styles.titleText, { fontFamily: sfProDisplayBold }]}>Resumo</Text>
+      <Text style={[styles.titleText, { fontFamily: getFont('sfProDisplayBold') }]}>Resumo</Text>
       <TouchableOpacity onPress={() => onPress()} style={styles.summaryButton}>
-        <Text style={[styles.summaryButtonText,{ fontFamily: sfProTextSemibold }]}>Treinos</Text>
+        <Text style={[styles.summaryButtonText,{ fontFamily: getFont('sfProTextSemibold') }]}>Treinos</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => onPress()} style={styles.summaryButton}>
-        <Text style={[styles.summaryButtonText,{ fontFamily: sfProTextSemibold }]}>Meta</Text>
+        <Text style={[styles.summaryButtonText,{ fontFamily: getFont('sfProTextSemibold') }]}>Meta</Text>
       </TouchableOpacity>
     </View>
   );
