@@ -2,9 +2,11 @@ import { View, StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
 import HomePage from './HomePage';
 import replace from '../util/replace';
+import img from '../assets/images/avatar.jpg';
 
 export default function Home({navigation}) {
   const [userName, setUserName] = useState('Lukinhas');
+  const [userImage, setUserImage] = useState(img);
   const [height, setHeight] = useState(1.69);
   const [weight, setWeight] = useState(85.00);
   const [imcCategory, setImcCategory] = useState("Peso Normal");
@@ -37,7 +39,7 @@ export default function Home({navigation}) {
   }, [weight, height]);
 
   const onPress = () => {
-
+    console.log('teste');
   }
 
   // const criarExercicio = () => navigation.navigate("CriarExercicio")
@@ -46,7 +48,8 @@ export default function Home({navigation}) {
     <View style={styles.container}>
       <HomePage 
         onPress={onPress}
-        userName={userName} 
+        userName={userName}
+        userImage={userImage}
         trainingName={trainingName} 
         members={'Superior'}
         height={height}
@@ -55,6 +58,7 @@ export default function Home({navigation}) {
         idealWeight={idealWeight}
         targetWeight={targetWeight}
       />
+      {/* <Profile/> */}
     </View>
   );
 }

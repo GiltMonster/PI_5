@@ -7,13 +7,13 @@ import Goal from '../components/Goal';
 import Summary from '../components/Summary';
 import TabBar from '../components/TabBar';
 
-export default function HomePage({ userName, onPress, trainingName, members, height, weight , imcCategory, idealWeight, targetWeight }) {
+export default function HomePage({ userName, userImage, onPress, trainingName, members, height, weight , imcCategory, idealWeight, targetWeight }) {
   const homeText = userName === '' ? '' : 'Treino de hoje,';
 
   return (
     <View style={styles.homePageContainer}>
       <View style={styles.headerView}>
-        <Header/>
+        <Header onPress={onPress} userImage={userImage}/>
       </View>
       <ScrollView>
         <Text style={[styles.homeText, { fontFamily: getFont('sfProDisplayBold') }]}>{homeText} {userName}</Text>
@@ -23,7 +23,7 @@ export default function HomePage({ userName, onPress, trainingName, members, hei
         <Goal currentWeight={weight} targetWeight={targetWeight}/>
         <Summary onPress={onPress}/>
       </ScrollView>
-      <TabBar style={styles.tabBarStyle}/>
+      <TabBar onPress={onPress} style={styles.tabBarStyle}/>
     </View>
   );
 }

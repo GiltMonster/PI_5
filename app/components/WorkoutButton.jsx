@@ -7,7 +7,7 @@ export default function WorkoutButton({ onPress, trainingName, members }) {
   return (
     <View>
       {!noTraining && (
-        <TouchableOpacity onPress={() => onPress()} style={styles.workoutButton}>
+        <TouchableOpacity onPress={onPress} style={styles.workoutButton}>
           <Text style={[styles.workoutButtonText, { fontFamily: getFont('sfProTextSemibold'), color: '#EDEDED' }]}>{trainingName}</Text>
 
           {/* Aqui tem a tag <Link> que tem como objetivo de informar o proximo componente  */}

@@ -1,25 +1,36 @@
 import { Text, Image, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import getFont from '../util/fonts';
-import img from '../assets/images/TelaInicial.png'
+import img from '../assets/images/TelaInicial.png';
 
-export default function Header({ onPress }) {
+export default function Header({ onPress, userImage }) {
+  const avatar = userImage !== undefined ? true : false;
+  
   return (
     <View style={styles.headerContainer}>
-      {/* <View style={styles.emptyView}></View> */}
       <Image
         source={img}
         style={styles.headerImage}
       />
       <View style={styles.headerContent}>
         <Text style={[styles.headerText, { fontFamily: getFont('sfProDisplayBold') }]}>FitTrack</Text>
-        <TouchableOpacity style={styles.userButton} onPress={() => onPress()}>
-          <Icon 
-            name={'account-circle'}  
-            color='black' 
-            size={65} 
-          />
-        </TouchableOpacity>
+        {!avatar && (
+          <TouchableOpacity style={styles.userButton} onPress={onPress}>
+            <Icon 
+              name={'account-circle'}  
+              color='black' 
+              size={65} 
+            />
+          </TouchableOpacity>
+        )}
+        {avatar && (
+          <TouchableOpacity style={styles.userImageButton} onPress={onPress}>
+            <Image
+              source={userImage}
+              style={styles.avatar}
+            />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -46,12 +57,20 @@ const styles = StyleSheet.create({
   },
   headerImage: {
     position: 'absolute',
-    // top: 10,
     resizeMode: 'cover',
     width: '100%',
     height: '100%',
   },
   userButton: {
     top: 11,
+  },
+  avatar: {
+    height: 60,
+    width: 60,
+    borderRadius: '50%'
+  },
+  userImageButton: {
+    top: 13,
+    right: 5
   }
 });

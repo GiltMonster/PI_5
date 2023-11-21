@@ -5,10 +5,10 @@ export default function Summary({ onPress }) {
   return (
     <View>
       <Text style={[styles.titleText, { fontFamily: getFont('sfProDisplayBold') }]}>Resumo</Text>
-      <TouchableOpacity onPress={() => onPress()} style={styles.summaryButton}>
+      <TouchableOpacity onPress={onPress} style={styles.summaryButton}>
         <Text style={[styles.summaryButtonText,{ fontFamily: getFont('sfProTextSemibold') }]}>Treinos</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => onPress()} style={styles.summaryButton}>
+      <TouchableOpacity onPress={onPress} style={styles.summaryButton}>
         <Text style={[styles.summaryButtonText,{ fontFamily: getFont('sfProTextSemibold') }]}>Meta</Text>
       </TouchableOpacity>
     </View>
