@@ -19,7 +19,7 @@ export default function TabBar({ onPress }) {
         </View>
         <View style={styles.tabBarItem}>
             <TouchableOpacity onPress={onPress}>
-                <Icon name={'tune'} color='lightgray' size={40}/>
+                <Icon name={'settings'} color='lightgray' size={40}/>
                 <Text style={[styles.tabBarText, { fontFamily: getFont('sfProTextRegular') }]}>Configurações</Text>
             </TouchableOpacity>
         </View>
