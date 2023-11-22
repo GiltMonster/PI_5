@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import HomePage from './HomePage';
 import replace from '../util/replace';
 import img from '../assets/images/avatar.jpg';
+import Perfil from './Perfil';
 
 export default function Home({navigation}) {
   const [userName, setUserName] = useState('Lukinhas');
@@ -46,7 +47,7 @@ export default function Home({navigation}) {
 
   return (
     <View style={styles.container}>
-      <HomePage 
+      {/* <HomePage 
         onPress={onPress}
         userName={userName}
         userImage={userImage}
@@ -57,8 +58,8 @@ export default function Home({navigation}) {
         imcCategory={imcCategory}
         idealWeight={idealWeight}
         targetWeight={targetWeight}
-      />
-      {/* <Profile/> */}
+      /> */}
+      <Perfil/>
     </View>
   );
 }
