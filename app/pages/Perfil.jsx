@@ -5,12 +5,15 @@ import img from '../assets/images/perfil.png';
 import PhotoProfile from '../components/profileComponents/PhotoProfile';
 import UserDataProfile from '../components/profileComponents/UserDataProfile';
 
-export default function Perfil({ onPress, userName, onChangeUserName, height, onChangeHeight, weight, onChangeWeight }) {
+export default function Perfil({ onPress, userName, userImage, onChangeUserName, height, onChangeHeight, weight, onChangeWeight }) {
     return (
         <View style={styles.perfilContainer}>
             <View style={styles.content}>
                 <SafeAreaView style={styles.content}>
-                    <PhotoProfile onPress={onPress}/>
+                    <PhotoProfile 
+                        onPress={onPress}
+                        userImage={userImage}
+                    />
                     <UserDataProfile 
                         userName={userName} 
                         onChangeUserName={onChangeUserName} 

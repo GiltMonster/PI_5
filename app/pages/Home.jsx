@@ -6,10 +6,10 @@ import img from '../assets/images/avatar.jpg';
 import Perfil from './Perfil';
 
 export default function Home({navigation}) {
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState('Lukinhas');
   const [userImage, setUserImage] = useState(img);
-  const [height, setHeight] = useState(0);
-  const [weight, setWeight] = useState(0);
+  const [height, setHeight] = useState(1.69);
+  const [weight, setWeight] = useState(85.00);
   const [imcCategory, setImcCategory] = useState("Peso Normal");
   const [idealWeight, setIdealWeight] = useState("41,63 Kg - 56,25 Kg");
   const [targetWeight, setTargetWeight] = useState(65.00);
@@ -74,6 +74,7 @@ export default function Home({navigation}) {
       <Perfil
         onPress={onPress} 
         userName={userName} 
+        userImage={userImage}
         onChangeUserName={onChangeUserName} 
         height={height} 
         onChangeHeight={onChangeHeight} 
