@@ -1,9 +1,9 @@
 import { View, StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
 import HomePage from './HomePage';
-import replace from '../util/replace';
 import img from '../assets/images/avatar.jpg';
 import Perfil from './Perfil';
+import { calculatesImc } from '../util/calculatesImc';
 
 export default function Home({navigation}) {
   const [userName, setUserName] = useState('Lukinhas');
@@ -14,26 +14,6 @@ export default function Home({navigation}) {
   const [idealWeight, setIdealWeight] = useState("41,63 Kg - 56,25 Kg");
   const [targetWeight, setTargetWeight] = useState(65.00);
   const [trainingName, setTrainingName] = useState('Costas e Bíceps');
-
-  const calculatesImc = (weight, height) => {
-    const imcValue = weight / Math.pow(height,2);
-    const maxIdealWeight = 25 * Math.pow(height,2);
-    const minIdealWeight = 18.5 * Math.pow(height,2);
-    
-    if (imcValue < 18.5) {
-      setImcCategory("Abaixo do Peso");
-    } else if (imcValue < 25) {
-      setImcCategory("Peso Normal");
-    } else if (imcValue < 30) {
-      setImcCategory("Acima do Peso");
-    } else if (imcValue >= 30){
-      setImcCategory("Obesidade");
-    } else {
-      message = 'Os valores informados são inválidos!'
-    }
-
-    setIdealWeight(`${replace(minIdealWeight.toFixed(2))} Kg - ${replace(maxIdealWeight.toFixed(2))} Kg`)
-  }
 
   const onChangeUserName = (name) => {
     setUserName(name);
@@ -48,7 +28,7 @@ export default function Home({navigation}) {
   }
 
   useEffect(() => {
-    calculatesImc(weight, height);
+    calculatesImc(weight, height, setImcCategory, setIdealWeight);
   }, [weight, height]);
 
   const onPress = () => {
@@ -59,7 +39,7 @@ export default function Home({navigation}) {
 
   return (
     <View style={styles.container}>
-      {/* <HomePage 
+      <HomePage 
         onPress={onPress}
         userName={userName}
         userImage={userImage}
@@ -70,8 +50,8 @@ export default function Home({navigation}) {
         imcCategory={imcCategory}
         idealWeight={idealWeight}
         targetWeight={targetWeight}
-      /> */}
-      <Perfil
+      />
+      {/* <Perfil
         onPress={onPress} 
         userName={userName} 
         userImage={userImage}
@@ -80,7 +60,7 @@ export default function Home({navigation}) {
         onChangeHeight={onChangeHeight} 
         weight={weight} 
         onChangeWeight={onChangeWeight}
-      />
+      /> */}
     </View>
   );
 }
