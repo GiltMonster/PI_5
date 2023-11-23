@@ -6,10 +6,10 @@ import img from '../assets/images/avatar.jpg';
 import Perfil from './Perfil';
 
 export default function Home({navigation}) {
-  const [userName, setUserName] = useState('Lukinhas');
+  const [userName, setUserName] = useState('');
   const [userImage, setUserImage] = useState(img);
-  const [height, setHeight] = useState(1.69);
-  const [weight, setWeight] = useState(85.00);
+  const [height, setHeight] = useState(0);
+  const [weight, setWeight] = useState(0);
   const [imcCategory, setImcCategory] = useState("Peso Normal");
   const [idealWeight, setIdealWeight] = useState("41,63 Kg - 56,25 Kg");
   const [targetWeight, setTargetWeight] = useState(65.00);
@@ -33,6 +33,18 @@ export default function Home({navigation}) {
     }
 
     setIdealWeight(`${replace(minIdealWeight.toFixed(2))} Kg - ${replace(maxIdealWeight.toFixed(2))} Kg`)
+  }
+
+  const onChangeUserName = (name) => {
+    setUserName(name);
+  }
+
+  const onChangeHeight = (height) => {
+    setHeight(height);
+  }
+
+  const onChangeWeight = (weight) => {
+    setWeight(weight);
   }
 
   useEffect(() => {
@@ -59,7 +71,15 @@ export default function Home({navigation}) {
         idealWeight={idealWeight}
         targetWeight={targetWeight}
       /> */}
-      <Perfil/>
+      <Perfil
+        onPress={onPress} 
+        userName={userName} 
+        onChangeUserName={onChangeUserName} 
+        height={height} 
+        onChangeHeight={onChangeHeight} 
+        weight={weight} 
+        onChangeWeight={onChangeWeight}
+      />
     </View>
   );
 }
