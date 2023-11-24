@@ -5,7 +5,10 @@ export default function Imc({ height, weight , imcCategory, idealWeight }) {
   const heightNumber = parseFloat(height);
   const weightNumber = parseFloat(weight);
 
-  const noImc = height <= 0 || weight <= 0 ? true : false;
+  const noImc = height <= 0 ||
+                height === undefined ||
+                weight <= 0 ||
+                weight === undefined ? true : false;
 
   const replace = (number) => {
     return String(number).replace('.', ',');

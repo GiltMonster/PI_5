@@ -5,7 +5,10 @@ import getFont from '../util/fonts';
 
 export default function Goal({ currentWeight, targetWeight }) {
   const heightContainer = currentWeight > targetWeight ? currentWeight+50 : targetWeight+50;
-  const noGoal = currentWeight <= 0 || targetWeight <= 0 ? true : false;
+  const noGoal = currentWeight <= 0 || 
+                currentWeight === undefined || 
+                targetWeight <= 0 ||
+                targetWeight === undefined ? true : false;
 
   return (
     <View>
