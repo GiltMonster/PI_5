@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import img from '../assets/images/avatar.jpg';
 import Perfil from './Perfil';
 import { calculatesImc } from '../util/calculatesImc';
+import Settings from './Settings';
 
 export default function Home({navigation}) {
   const [userName, setUserName] = useState('Lukinhas');
@@ -18,6 +19,13 @@ export default function Home({navigation}) {
   const onChangeUserName = (name) => {
     setUserName(name);
   }
+
+  // const onChangeUserImage = async () => {
+  //   const resp = await fetch("https://www.thispersondoesnotexist.com/");
+  //   const imageBlob = await resp.blob();
+  //   const imageUrl = URL.createObjectURL(imageBlob);
+  //   setUserImage(imageUrl);
+  // }  
 
   const onChangeHeight = (height) => {
     setHeight(height);
@@ -39,7 +47,7 @@ export default function Home({navigation}) {
 
   return (
     <View style={styles.container}>
-      <HomePage 
+      {/* <HomePage 
         onPress={onPress}
         userName={userName}
         userImage={userImage}
@@ -50,7 +58,7 @@ export default function Home({navigation}) {
         imcCategory={imcCategory}
         idealWeight={idealWeight}
         targetWeight={targetWeight}
-      />
+      /> */}
       {/* <Perfil
         onPress={onPress} 
         userName={userName} 
@@ -61,6 +69,7 @@ export default function Home({navigation}) {
         weight={weight} 
         onChangeWeight={onChangeWeight}
       /> */}
+      <Settings onPress={onPress}/>
     </View>
   );
 }

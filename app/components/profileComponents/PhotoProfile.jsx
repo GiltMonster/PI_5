@@ -20,6 +20,7 @@ export default function PhotoProfile({ onPress, userImage }) {
             {avatar && (
                 <TouchableOpacity style={styles.userImage} onPress={onPress}>
                     <Image
+                        // source={{uri: userImage}}
                         source={userImage}
                         style={styles.avatar}
                     />
