@@ -47,7 +47,7 @@ export default function Home({navigation}) {
 
   return (
     <View style={styles.container}>
-      {/* <HomePage 
+      <HomePage 
         onPress={onPress}
         userName={userName}
         userImage={userImage}
@@ -58,7 +58,7 @@ export default function Home({navigation}) {
         imcCategory={imcCategory}
         idealWeight={idealWeight}
         targetWeight={targetWeight}
-      /> */}
+      />
       {/* <Perfil
         onPress={onPress} 
         userName={userName} 
@@ -69,7 +69,7 @@ export default function Home({navigation}) {
         weight={weight} 
         onChangeWeight={onChangeWeight}
       /> */}
-      <Settings onPress={onPress}/>
+      {/* <Settings onPress={onPress}/> */}
     </View>
   );
 }
