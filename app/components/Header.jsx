@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   avatar: {
     height: 60,
     width: 60,
-    borderRadius: '50%'
+    borderRadius: 60/2
   },
   userImageButton: {
     top: 13,
