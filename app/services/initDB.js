@@ -2,7 +2,7 @@ import * as FileSystem from 'expo-file-system';
 import * as SQLite from 'expo-sqlite';
 import { Asset } from 'expo-asset';
 
-export async function initDatabase() {
+export async function getUser() {
 
     //Aqui ele vai, verificar os diretórios de arquivos no dispositivo, caso 
     const documentDirectory = FileSystem.documentDirectory;
@@ -22,13 +22,13 @@ export async function initDatabase() {
         const db = SQLite.openDatabase('herdeiros.db');
         db.transaction((tx) => {
             // Verifica se a tabela "Usuario" existe
-            tx.executeSql('SELECT * FROM Usuario;',[],(tx, result) => {
-                    // Tabela "Usuario" foi criada ou já existe
-                    alert('success');
-                    console.info('Tabela "Usuario" verificada e pronta para uso.');
-                    console.log(result.rows);
-                    // Agora, você pode realizar outras operações com a tabela "Usuario" aqui
-                },
+            tx.executeSql('SELECT * FROM Usuario;', [], (tx, result) => {
+                // Tabela "Usuario" foi criada ou já existe
+                alert('success');
+                console.info('Tabela "Usuario" verificada e pronta para uso.');
+                return result.rows._array;
+                // Agora, você pode realizar outras operações com a tabela "Usuario" aqui
+            },
                 (_, error) => {
                     console.error('Erro ao verificar/criar a tabela "Usuario":', error);
                 }
@@ -41,22 +41,22 @@ export async function initDatabase() {
 
 // Função para testar se o banco de dados existe e contém a tabela "Usuario"
 // export async function testarBancoDeDados() {   
-    // try {
-    //     // Tente abrir o banco de dados
-    //     const db = initDatabase();
-    //     db.transaction((tx) => {
-    //         // Verifica se a tabela "Usuario" existe
-    //         tx.executeSql('SELECT * FROM Usuario;',[],() => {
-    //                 // Tabela "Usuario" foi criada ou já existe
-    //                 console.log('Tabela "Usuario" verificada e pronta para uso.');
-    //                 // Agora, você pode realizar outras operações com a tabela "Usuario" aqui
-    //             },
-    //             (_, error) => {
-    //                 console.error('Erro ao verificar/criar a tabela "Usuario":', error);
-    //             }
-    //         );
-    //     });
-    // } catch (error) {
-    //     console.error('Erro ao abrir o banco de dados:', error);
-    // }
+// try {
+//     // Tente abrir o banco de dados
+//     const db = initDatabase();
+//     db.transaction((tx) => {
+//         // Verifica se a tabela "Usuario" existe
+//         tx.executeSql('SELECT * FROM Usuario;',[],() => {
+//                 // Tabela "Usuario" foi criada ou já existe
+//                 console.log('Tabela "Usuario" verificada e pronta para uso.');
+//                 // Agora, você pode realizar outras operações com a tabela "Usuario" aqui
+//             },
+//             (_, error) => {
+//                 console.error('Erro ao verificar/criar a tabela "Usuario":', error);
+//             }
+//         );
+//     });
+// } catch (error) {
+//     console.error('Erro ao abrir o banco de dados:', error);
+// }
 // }
