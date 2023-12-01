@@ -4,7 +4,7 @@ import { Asset } from 'expo-asset';
 
 export async function getUser() {
 
-    //Aqui ele vai, verificar os diretórios de arquivos no dispositivo, caso 
+//Aqui ele vai, verificar os diretórios de arquivos no dispositivo, caso 
     const documentDirectory = FileSystem.documentDirectory;
     const directoryPath = documentDirectory + 'SQLite';
     const databaseFilePath = documentDirectory + 'SQLite/herdeiros.db';
@@ -22,16 +22,13 @@ export async function getUser() {
         const db = SQLite.openDatabase('herdeiros.db');
         db.transaction((tx) => {
             // Verifica se a tabela "Usuario" existe
-            tx.executeSql('SELECT * FROM Usuario;', [], (tx, result) => {
-                // Tabela "Usuario" foi criada ou já existe
-                alert('success');
-                console.info('Tabela "Usuario" verificada e pronta para uso.');
-                return result.rows._array;
-                // Agora, você pode realizar outras operações com a tabela "Usuario" aqui
-            },
-                (_, error) => {
-                    console.error('Erro ao verificar/criar a tabela "Usuario":', error);
-                }
+            tx.executeSql('SELECT * FROM Usuario;', [], (_, result) => {
+                result.rows._array.map((item) => {
+                    return item;
+                })
+            }, (_, error) => {
+                console.error('Erro ao verificar/criar a tabela "Usuario":', error);
+            }
             );
         });
     } catch (error) {
@@ -40,7 +37,7 @@ export async function getUser() {
 }
 
 // Função para testar se o banco de dados existe e contém a tabela "Usuario"
-// export async function testarBancoDeDados() {   
+// export async function testarBancoDeDados() {
 // try {
 //     // Tente abrir o banco de dados
 //     const db = initDatabase();

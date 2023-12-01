@@ -1,9 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
+import { UserProvider } from "../context/UserContext";
 import Perfil from "../pages/Perfil";
 import CriarTreino from "../pages/CriarTreino";
-import Exercicios from "../pages/Execicíos";
+import Exercicios from "../pages/Exercicios";
 import Treinos from "../pages/Treinos";
 import Home from "../pages/Home";
 
@@ -22,9 +21,8 @@ const { Screen, Navigator } = createNativeStackNavigator();
  * @return {Navigator} 
  */
 export default function StackRoutesLayout() {
-    const user = useContext(UserContext);
     return (
-        <UserContext.Provider value={user}>
+        <UserProvider>
             <Navigator initialRouteName='Home' screenOptions={{ headerShown: false }}>
                 <Screen name="home" component={Home} />
                 <Screen name="perfil" component={Perfil} />
@@ -32,6 +30,6 @@ export default function StackRoutesLayout() {
                 <Screen name="criarTreino" component={CriarTreino} />
                 <Screen name="exercicios" component={Exercicios} />
             </Navigator>
-        </UserContext.Provider>
+        </UserProvider>
     );
 }
