@@ -1,31 +1,36 @@
 import { Text, Image, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { useFonts } from 'expo-font';
-import img from '../assets/images/TelaInicial.png'
+import getFont from '../util/fonts';
+import img from '../assets/images/TelaInicial.png';
 
-export default function Header({ onPress }) {
-  const [loaded, error] = useFonts({
-    sfProDisplayBold: require('../assets/fonts/SF-Pro-Display-Bold.ttf')
-  });
-
-  if (error) {
-    console.log("Erro ao carregar a fonte: ", error);
-  }
-
-  const font = loaded ? 'sfProDisplayBold' : null;
-
+export default function Header({ onPress, userImage }) {
+  const avatar = userImage !== undefined ? true : false;
+  
   return (
-    <View>
-      <View style={styles.emptyView}></View>
+    <View style={styles.headerContainer}>
       <Image
         source={img}
         style={styles.headerImage}
       />
-      <View style={styles.headerContainer}>
-        <Text style={[styles.headerText, { fontFamily: font }]}>FitTrack</Text>
-        <TouchableOpacity onPress={() => onPress()}>
-          <Icon name={'account-circle'} color='black' size={65}/>
-        </TouchableOpacity>
+      <View style={styles.headerContent}>
+        <Text style={[styles.headerText, { fontFamily: getFont('sfProDisplayBold') }]}>FitTrack</Text>
+        {!avatar && (
+          <TouchableOpacity style={styles.userButton} onPress={onPress}>
+            <Icon 
+              name={'account-circle'}  
+              color='black' 
+              size={65} 
+            />
+          </TouchableOpacity>
+        )}
+        {avatar && (
+          <TouchableOpacity style={styles.userImageButton} onPress={onPress}>
+            <Image
+              source={userImage}
+              style={styles.avatar}
+            />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -34,9 +39,12 @@ export default function Header({ onPress }) {
 const styles = StyleSheet.create({
   emptyView: {
     backgroundColor: '#28A3CC',
-    height: 20
+    height: 10
   },
   headerContainer: {
+    height: 115,
+  },
+  headerContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
@@ -45,14 +53,24 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 30,
     position: 'relative',
-    top: 10
+    top: 23
   },
   headerImage: {
     position: 'absolute',
-    top: 10,
-    left: 0,
     resizeMode: 'cover',
     width: '100%',
     height: '100%',
   },
+  userButton: {
+    top: 11,
+  },
+  avatar: {
+    height: 60,
+    width: 60,
+    borderRadius: 60/2
+  },
+  userImageButton: {
+    top: 13,
+    right: 5
+  }
 });

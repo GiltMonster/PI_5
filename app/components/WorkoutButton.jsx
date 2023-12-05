@@ -1,28 +1,28 @@
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useFonts } from 'expo-font';
-import { Link } from 'expo-router';
+import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
+import getFont from '../util/fonts';
 
 export default function WorkoutButton({ onPress, trainingName, members }) {
-  const [loaded, error] = useFonts({
-    sfProTextSemibold: require('../assets/fonts/sf-pro-text-semibold.ttf'),
-  });
-
-  if (error) {
-    console.log("Erro ao carregar a fonte: ", error);
-  }
-
-  const font = loaded ? 'sfProTextSemibold' : null;
-
+  const noTraining = trainingName === "" ? true : false;
+  
   return (
-    <TouchableOpacity onPress={() => onPress()} style={styles.workoutButton}>
-      <Text style={[styles.workoutButtonText, { fontFamily: font, color: '#EDEDED' }]}>{trainingName}</Text>
+    <View>
+      {!noTraining && (
+        <TouchableOpacity onPress={onPress} style={styles.workoutButton}>
+          <Text style={[styles.workoutButtonText, { fontFamily: getFont('sfProTextSemibold'), color: '#EDEDED' }]}>{trainingName}</Text>
 
-      {/* Aqui tem a tag <Link> que tem como objetivo de informar o proximo componente  */}
-      <Link href={"/profile"} asChild style={styles.workoutButtonText}>
-        <Text style={{ fontFamily: font, color: '#BF5BF3' }}>{members}</Text>
-      </Link>
+          {/* Aqui tem a tag <Link> que tem como objetivo de informar o proximo componente  */}
+          <Text style={[styles.workoutButtonText,{ fontFamily: getFont('sfProTextSemibold'), color: '#BF5BF3' }]}>{members}</Text>
 
-    </TouchableOpacity>
+
+        </TouchableOpacity>
+      )}
+
+      {noTraining && (
+        <View style={styles.noTraining}>
+          <Text style={[styles.noTrainingText, {fontFamily: getFont('sfProTextSemibold')} ]}>SEM TREINO REGISTRADO</Text>
+        </View>
+      )}
+    </View>
   );
 }
 
@@ -32,18 +32,27 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginHorizontal: 20,
-    marginVertical: 15,
+    marginVertical: 10,
     backgroundColor: '#232325',
     height: 66,
     borderRadius: 10,
-    // shadowRadius: 10,
-    // shadowOffset: {width: 5, height: 5},
-    // shadowOpacity: 0.1,
-    // shadowColor: '#EDEDED',
   },
   workoutButtonText: {
     color: 'white',
     paddingHorizontal: 20,
     fontSize: 17
+  },
+  noTraining: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginVertical: 10,
+    backgroundColor: '#232325',
+    height: 66,
+    borderRadius: 10,
+  },
+  noTrainingText: {
+    color: 'gray',
+    fontSize: 17,
   }
 });
