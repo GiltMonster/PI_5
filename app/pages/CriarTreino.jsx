@@ -1,7 +1,8 @@
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Picker } from 'react-native';
 
-export default function App() {
+export default function CriarTreino() {
   const [nome, setNome] = useState('');
   const [categoria, setCategoria] = useState('');
   const [diaDaSemana, setDiaDaSemana] = useState('');
