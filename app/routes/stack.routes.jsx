@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { UserProvider } from "../context/UserContext";
 import Perfil from "../pages/Perfil";
 import CriarTreino from "../pages/CriarTreino";
-import Exercicios from "../pages/Execicíos";
+import Exercicios from "../pages/Exercicios";
 import Treinos from "../pages/Treinos";
 import Home from "../pages/Home";
 
@@ -21,12 +22,14 @@ const { Screen, Navigator } = createNativeStackNavigator();
  */
 export default function StackRoutesLayout() {
     return (
-        <Navigator initialRouteName='Home' screenOptions={{ headerShown: false }}>
-            <Screen name="home"component={Home} />
-            <Screen name="perfil" component={Perfil} />
-            <Screen name="treinos" component={Treinos} />
-            <Screen name="criarTreino" component={CriarTreino} />
-            <Screen name="exercicios" component={Exercicios} />
-        </Navigator>
+        <UserProvider>
+            <Navigator initialRouteName='Home' screenOptions={{ headerShown: false }}>
+                <Screen name="home" component={Home} />
+                <Screen name="perfil" component={Perfil} />
+                <Screen name="treinos" component={Treinos} />
+                <Screen name="criarTreino" component={CriarTreino} />
+                <Screen name="exercicios" component={Exercicios} />
+            </Navigator>
+        </UserProvider>
     );
 }
