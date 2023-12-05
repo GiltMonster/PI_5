@@ -1,8 +1,10 @@
 import { View, StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
 import HomePage from './HomePage';
-import replace from '../util/replace';
 import img from '../assets/images/avatar.jpg';
+import Perfil from './Perfil';
+import { calculatesImc } from '../util/calculatesImc';
+import Settings from './Settings';
 
 export default function Home({navigation}) {
   const [userName, setUserName] = useState('Lukinhas');
@@ -14,28 +16,27 @@ export default function Home({navigation}) {
   const [targetWeight, setTargetWeight] = useState(65.00);
   const [trainingName, setTrainingName] = useState('Costas e Bíceps');
 
-  const calculatesImc = (weight, height) => {
-    const imcValue = weight / Math.pow(height,2);
-    const maxIdealWeight = 25 * Math.pow(height,2);
-    const minIdealWeight = 18.5 * Math.pow(height,2);
-    
-    if (imcValue < 18.5) {
-      setImcCategory("Abaixo do Peso");
-    } else if (imcValue < 25) {
-      setImcCategory("Peso Normal");
-    } else if (imcValue < 30) {
-      setImcCategory("Acima do Peso");
-    } else if (imcValue >= 30){
-      setImcCategory("Obesidade");
-    } else {
-      message = 'Os valores informados são inválidos!'
-    }
+  const onChangeUserName = (name) => {
+    setUserName(name);
+  }
 
-    setIdealWeight(`${replace(minIdealWeight.toFixed(2))} Kg - ${replace(maxIdealWeight.toFixed(2))} Kg`)
+  // const onChangeUserImage = async () => {
+  //   const resp = await fetch("https://www.thispersondoesnotexist.com/");
+  //   const imageBlob = await resp.blob();
+  //   const imageUrl = URL.createObjectURL(imageBlob);
+  //   setUserImage(imageUrl);
+  // }  
+
+  const onChangeHeight = (height) => {
+    setHeight(height);
+  }
+
+  const onChangeWeight = (weight) => {
+    setWeight(weight);
   }
 
   useEffect(() => {
-    calculatesImc(weight, height);
+    calculatesImc(weight, height, setImcCategory, setIdealWeight);
   }, [weight, height]);
 
   const onPress = () => {
@@ -58,7 +59,17 @@ export default function Home({navigation}) {
         idealWeight={idealWeight}
         targetWeight={targetWeight}
       />
-      {/* <Profile/> */}
+      {/* <Perfil
+        onPress={onPress} 
+        userName={userName} 
+        userImage={userImage}
+        onChangeUserName={onChangeUserName} 
+        height={height} 
+        onChangeHeight={onChangeHeight} 
+        weight={weight} 
+        onChangeWeight={onChangeWeight}
+      /> */}
+      {/* <Settings onPress={onPress}/> */}
     </View>
   );
 }

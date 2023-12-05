@@ -5,8 +5,6 @@ import { initDatabase } from "./app/services/initDB";
 
 import Routes from './app/routes';
 
-
-
 export default function App() {
   return (
     <Routes></Routes>
