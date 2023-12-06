@@ -3,7 +3,7 @@ import { Icon } from 'react-native-elements';
 import getFont from '../util/fonts';
 import img from '../assets/images/TelaInicial.png';
 
-export default function Header({ onPress, userImage }) {
+export default function Header({ takeRouter, userImage }) {
   const avatar = userImage !== undefined ? true : false;
   
   return (
@@ -15,7 +15,7 @@ export default function Header({ onPress, userImage }) {
       <View style={styles.headerContent}>
         <Text style={[styles.headerText, { fontFamily: getFont('sfProDisplayBold') }]}>FitTrack</Text>
         {!avatar && (
-          <TouchableOpacity style={styles.userButton} onPress={onPress}>
+          <TouchableOpacity style={styles.userButton} onPress={takeRouter}>
             <Icon 
               name={'account-circle'}  
               color='black' 
@@ -24,7 +24,7 @@ export default function Header({ onPress, userImage }) {
           </TouchableOpacity>
         )}
         {avatar && (
-          <TouchableOpacity style={styles.userImageButton} onPress={onPress}>
+          <TouchableOpacity style={styles.userImageButton} onPress={takeRouter}>
             <Image
               source={userImage}
               style={styles.avatar}

@@ -1,18 +1,26 @@
 import { View, Text, StyleSheet } from 'react-native';
 import getFont from '../util/fonts';
+import { calculatesImc } from '../util/calculatesImc';
+import { useState, useEffect } from 'react';
 
-export default function Imc({ height, weight , imcCategory, idealWeight }) {
+export default function Imc({ height, weight }) {
+
+  const [imcCategory, setImcCategory] = useState();
+  const [idealWeight, setIdealWeight] = useState();
+
   const heightNumber = parseFloat(height);
   const weightNumber = parseFloat(weight);
 
-  const noImc = height <= 0 ||
-                height === undefined ||
-                weight <= 0 ||
-                weight === undefined ? true : false;
+  const noImc = height === undefined || weight === undefined ? true : false;
 
   const replace = (number) => {
     return String(number).replace('.', ',');
   }
+
+  useEffect(() => {
+    calculatesImc(weight, height, setImcCategory, setIdealWeight);
+  }, [weight, height]);
+
 
   return (
     <View>
