@@ -1,14 +1,14 @@
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import getFont from '../util/fonts';
 
-export default function Summary({ onPress }) {
+export default function Summary({ takeRouter }) {
   return (
     <View>
       <Text style={[styles.titleText, { fontFamily: getFont('sfProDisplayBold') }]}>Resumo</Text>
-      <TouchableOpacity onPress={onPress} style={styles.summaryButton}>
+      <TouchableOpacity onPress={()=>{takeRouter("treinos")}} style={styles.summaryButton}>
         <Text style={[styles.summaryButtonText,{ fontFamily: getFont('sfProTextSemibold') }]}>Treinos</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={onPress} style={styles.summaryButton}>
+      <TouchableOpacity onPress={()=>{takeRouter("meta")}} style={styles.summaryButton}>
         <Text style={[styles.summaryButtonText,{ fontFamily: getFont('sfProTextSemibold') }]}>Meta</Text>
       </TouchableOpacity>
     </View>

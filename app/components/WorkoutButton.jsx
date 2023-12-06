@@ -1,13 +1,13 @@
 import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import getFont from '../util/fonts';
 
-export default function WorkoutButton({ onPress, trainingName, members }) {
+export default function WorkoutButton({ takeRouter, trainingName, members }) {
   const noTraining = trainingName === "" ? true : false;
   
   return (
     <View>
       {!noTraining && (
-        <TouchableOpacity onPress={onPress} style={styles.workoutButton}>
+        <TouchableOpacity onPress={takeRouter} style={styles.workoutButton}>
           <Text style={[styles.workoutButtonText, { fontFamily: getFont('sfProTextSemibold'), color: '#EDEDED' }]}>{trainingName}</Text>
 
           {/* Aqui tem a tag <Link> que tem como objetivo de informar o proximo componente  */}

@@ -4,22 +4,50 @@ import TabBar from '../components/TabBar';
 import img from '../assets/images/perfil.png';
 import PhotoProfile from '../components/profileComponents/PhotoProfile';
 import UserDataProfile from '../components/profileComponents/UserDataProfile';
+import { useState } from 'react';
 
-export default function Perfil({ onPress, userName, userImage, onChangeUserName, height, onChangeHeight, weight, onChangeWeight }) {
+import imgAvatar from '../assets/images/avatar.jpg';
+
+export default function Perfil({ onPress, }) {
+
+    const onChangeUserName = (name) => {
+        setUserName(name);
+    }
+
+    const onChangeHeight = (height) => {
+        setHeight(height);
+    }
+
+    const onChangeWeight = (weight) => {
+        setWeight(weight);
+    }
+
+    const [userName, setUserName] = useState('Lukinhas');
+    const [userImage, setUserImage] = useState(imgAvatar);
+    const [height, setHeight] = useState(1.69);
+    const [weight, setWeight] = useState(85.00);
+
+    const [user, setUser] = useState({
+        name: userName,
+        image: userImage,
+        height: height,
+        weight: weight,
+    });
+
     return (
         <View style={styles.perfilContainer}>
             <View style={styles.content}>
                 <SafeAreaView style={styles.content}>
-                    <PhotoProfile 
+                    <PhotoProfile
                         onPress={onPress}
-                        userImage={userImage}
+                        userImage={user.image}
                     />
-                    <UserDataProfile 
-                        userName={userName} 
-                        onChangeUserName={onChangeUserName} 
-                        height={height} 
-                        onChangeHeight={onChangeHeight} 
-                        weight={weight} 
+                    <UserDataProfile
+                        userName={user.name}
+                        onChangeUserName={onChangeUserName}
+                        height={user.height}
+                        onChangeHeight={onChangeHeight}
+                        weight={user.weight}
                         onChangeWeight={onChangeWeight}
                     />
                     <Image
@@ -28,7 +56,7 @@ export default function Perfil({ onPress, userName, userImage, onChangeUserName,
                     />
                 </SafeAreaView>
             </View>
-            <TabBar onPress={onPress} style={styles.tabBarStyle}/>
+            <TabBar onPress={onPress} style={styles.tabBarStyle} />
         </View>
     );
 }
@@ -36,9 +64,11 @@ export default function Perfil({ onPress, userName, userImage, onChangeUserName,
 const styles = StyleSheet.create({
     perfilContainer: {
         flex: 1,
+        backgroundColor: '#1C1C1E',
     },
     content: {
         flex: 1,
+        backgroundColor: '#1C1C1E',
     },
     perfilImage: {
         position: 'absolute',

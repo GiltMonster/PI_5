@@ -66,7 +66,7 @@ const Item = ({ title, subtitle, color }) => {
   );
 };
 
-export default function App({ navigation }) {
+export default function TelaTreinos({ navigation }) {
   const renderItem = ({ item }) => {
     const color = item.id % 2 === 0 ? '#FFA500' : '#993399';
     return <Item title={item.title} subtitle={item.subtitle} color={color} navigation={navigation} />;

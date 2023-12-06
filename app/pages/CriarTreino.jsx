@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Picker } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 
 export default function CriarTreino() {
   const [nome, setNome] = useState('');

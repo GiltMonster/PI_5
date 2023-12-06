@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useState } from 'react';
 import getFont from '../util/fonts';
 import Header from '../components/Header';
 import WorkoutButton from '../components/WorkoutButton';
@@ -7,23 +8,39 @@ import Goal from '../components/Goal';
 import Summary from '../components/Summary';
 import TabBar from '../components/TabBar';
 
-export default function HomePage({ userName, userImage, onPress, trainingName, members, height, weight , imcCategory, idealWeight, targetWeight }) {
-  const homeText = userName === '' ? '' : 'Treino de hoje,';
+import img from '../assets/images/avatar.jpg';
+
+export default function HomePage({takeRouter}) {
+
+  const [treino, setTreino] = useState({
+    name: 'Costas e Bíceps',
+    members: "s"
+  });
+
+  const [user, setUser] = useState({
+    name: 'Lukinhas',
+    image: img,
+    height: 1.69,
+    weight: 85.00,
+    targetWeight: 65.00,
+  });
+
+  const homeText = user.name === '' ? '' : 'Treino de hoje,';
 
   return (
     <View style={styles.homePageContainer}>
       <View style={styles.headerView}>
-        <Header onPress={onPress} userImage={userImage}/>
+        <Header takeRouter={()=>{takeRouter("perfil")}} userImage={user.image}/>
       </View>
       <ScrollView>
-        <Text style={[styles.homeText, { fontFamily: getFont('sfProDisplayBold') }]}>{homeText} {userName}</Text>
-        <WorkoutButton onPress={onPress} trainingName={trainingName} members={members}/>
-        <Imc height={height} weight={weight} imcCategory={imcCategory} idealWeight={idealWeight}/>
+        <Text style={[styles.homeText, { fontFamily: getFont('sfProDisplayBold') }]}>{homeText} {user.name}</Text> 
+        <WorkoutButton takeRouter={takeRouter} trainingName={treino.name} members={treino.members === 's' ? "Superior" : "Inferior"}/>
+        <Imc height={user.height} weight={user.weight}/>
         <Text style={[styles.targetText, { fontFamily: getFont('sfProDisplayBold') }]}>Meta</Text>
-        <Goal currentWeight={weight} targetWeight={targetWeight}/>
-        <Summary onPress={onPress}/>
+        <Goal currentWeight={user.weight} targetWeight={user.targetWeight}/>
+        <Summary takeRouter={takeRouter}/>
       </ScrollView>
-      <TabBar onPress={onPress} style={styles.tabBarStyle}/>
+      <TabBar takeRouter={takeRouter} style={styles.tabBarStyle}/>
     </View>
   );
 }
@@ -31,6 +48,7 @@ export default function HomePage({ userName, userImage, onPress, trainingName, m
 const styles = StyleSheet.create({
   homePageContainer: {
     flex: 1,
+    backgroundColor: '#1C1C1E',
   },
   homeText: {
     marginTop: 15,

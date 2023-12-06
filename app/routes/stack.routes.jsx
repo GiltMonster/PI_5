@@ -3,8 +3,12 @@ import { UserProvider } from "../context/UserContext";
 import Perfil from "../pages/Perfil";
 import CriarTreino from "../pages/CriarTreino";
 import Exercicios from "../pages/Exercicios";
-import Treinos from "../pages/Treinos";
+import TelaTreinos from "../pages/TelaTreino";
 import Home from "../pages/Home";
+import CriarExercicio from "../pages/CriarExercicio";
+import History from "../pages/History";
+import Settings from "../pages/Settings";
+import Meta from "../pages/Meta";
 
 // import { Ionicons } from '@expo/vector-icons';
 // para ter acesso as bibliotecas de ícones, entrar no link: https://icons.expo.fyi/Index
@@ -26,9 +30,13 @@ export default function StackRoutesLayout() {
             <Navigator initialRouteName='Home' screenOptions={{ headerShown: false }}>
                 <Screen name="home" component={Home} />
                 <Screen name="perfil" component={Perfil} />
-                <Screen name="treinos" component={Treinos} />
+                <Screen name="treinos" component={TelaTreinos} />
                 <Screen name="criarTreino" component={CriarTreino} />
                 <Screen name="exercicios" component={Exercicios} />
+                <Screen name="criarExercicio" component={CriarExercicio} />
+                <Screen name="history" component={History} />
+                <Screen name="settings" component={Settings} />
+                <Screen name="meta" component={Meta} />
             </Navigator>
         </UserProvider>
     );
