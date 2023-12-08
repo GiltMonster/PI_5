@@ -1,104 +1,127 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet} from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import ActionSheet from 'react-native-actionsheet';
 
-export default function CriarTreino() {
+const CriarTreino = ({ navigation }) => {
   const [nome, setNome] = useState('');
-  const [categoria, setCategoria] = useState('');
-  const [diaDaSemana, setDiaDaSemana] = useState('');
-  const [duracao, setDuracao] = useState('');
-  const [horario, setHorario] = useState('');
+  const [categoria, setCategoria] = useState('Superior');
+  const [diaDaSemana, setDiaDaSemana] = useState('Domingo');
+  const categoriaActionSheetRef = React.createRef();
+  const diaDaSemanaActionSheetRef = React.createRef();
+
+  const categorias = ['Superior', 'Inferior'];
+  const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+
+  const handleSalvar = () => {
+    const treinoSalvo = {
+      titulo: nome,
+      categoria,
+      diaDaSemana,
+    };
+    //banco
+
+    navigation.navigate('treinos', { treinoSalvo });
+  };
+
+  const showCategoriaActionSheet = () => {
+    categoriaActionSheetRef.current.show();
+  };
+
+  const showDiaDaSemanaActionSheet = () => {
+    diaDaSemanaActionSheetRef.current.show();
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.navBar}>
-        <Text style={styles.title}>Criar Treino</Text>
-        <View style={styles.buttons}>
-          <Button title="Salvar" onPress={() => {}} />
-        </View>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back" size={24} color="#fff" />
+        </TouchableOpacity>
+        <Text style={styles.header}>Treinos</Text>
+        <TouchableOpacity onPress={showCategoriaActionSheet}>
+          <MaterialIcons name="add" size={24} color='#1C1C1E' />
+        </TouchableOpacity>
       </View>
-      <Text style={styles.label}>Nome do Treino</Text>
+
+      <Text style={styles.label}>Nome:</Text>
       <TextInput
         style={styles.input}
         value={nome}
         onChangeText={setNome}
+        placeholder="Digite o nome do treino"
       />
+
       <View style={styles.row}>
-        <Text style={styles.label}>Categoria</Text>
-        <Picker
-          selectedValue={categoria}
-          style={styles.picker}
-          onValueChange={(itemValue, itemIndex) => setCategoria(itemValue)}
-        >
-          <Picker.Item label="Superior" value="superior" color={categoria === 'superior' ? '#fff' : '#000'} />
-          <Picker.Item label="Inferior" value="inferior" color={categoria === 'inferior' ? '#fff' : '#000'} />
-        </Picker>
+        <Text style={styles.label}>Categoria:</Text>
+        <Text style={styles.modalText} onPress={showCategoriaActionSheet}>
+          {categoria}
+        </Text>
       </View>
+
       <View style={styles.row}>
-        <Text style={styles.label}>Dia da Semana</Text>
-        <Picker
-          selectedValue={diaDaSemana}
-          style={styles.picker}
-          onValueChange={(itemValue, itemIndex) => setDiaDaSemana(itemValue)}
-        >
-          <Picker.Item label="Domingo" value="domingo" color={diaDaSemana === 'domingo' ? '#fff' : '#000'} />
-          <Picker.Item label="Segunda-feira" value="segunda" color={diaDaSemana === 'segunda' ? '#fff' : '#000'} />
-          <Picker.Item label="Terça-feira" value="terca" color={diaDaSemana === 'terca' ? '#fff' : '#000'} />
-          <Picker.Item label="Quarta-feira" value="quarta" color={diaDaSemana === 'quarta' ? '#fff' : '#000'} />
-          <Picker.Item label="Quinta-feira" value="quinta" color={diaDaSemana === 'quinta' ? '#fff' : '#000'} />
-          <Picker.Item label="Sexta-feira" value="sexta" color={diaDaSemana === 'sexta' ? '#fff' : '#000'} />
-          <Picker.Item label="Sábado" value="sabado" color={diaDaSemana === 'sabado' ? '#fff' : '#000'} />
-        </Picker>
+        <Text style={styles.label}>Dia da Semana:</Text>
+        <Text style={styles.modalText} onPress={showDiaDaSemanaActionSheet}>
+          {diaDaSemana}
+        </Text>
       </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Duração</Text>
-        <Picker
-          selectedValue={horario}
-          style={styles.picker}
-          onValueChange={(itemValue, itemIndex) => setHorario(itemValue)}
-        >
-          {Array.from({length: 24}, (_, i) => i).map((_, i) => (
-            Array.from({length: 60}, (_, j) => j).map((_, j) => (
-              <Picker.Item 
-                key={`${i}:${j}`} 
-                label={`${i}h:${j < 10 ? `0${j}` : j}m`} 
-                value={`${i}:${j < 10 ? `0${j}` : j}`} 
-                color={horario === `${i}:${j < 10 ? `0${j}` : j}` ? '#fff' : '#000'} 
-              />
-            ))
-          ))}
-        </Picker>
-      </View>
+
+      <Button title="Salvar" onPress={handleSalvar} style={styles.button} />
+
+      <ActionSheet
+        ref={categoriaActionSheetRef}
+        title={'Selecione uma Categoria'}
+        options={[...categorias, 'Cancelar']}
+        cancelButtonIndex={categorias.length}
+        destructiveButtonIndex={categorias.length}
+        onPress={(index) => {
+          if (index < categorias.length) {
+            setCategoria(categorias[index]);
+          }
+        }}
+      />
+
+      <ActionSheet
+        ref={diaDaSemanaActionSheetRef}
+        title={'Selecione um Dia da Semana'}
+        options={[...diasDaSemana, 'Cancelar']}
+        cancelButtonIndex={diasDaSemana.length}
+        destructiveButtonIndex={diasDaSemana.length}
+        onPress={(index) => {
+          if (index < diasDaSemana.length) {
+            setDiaDaSemana(diasDaSemana[index]);
+          }
+        }}
+      />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#1C1C1E',
     flex: 1,
-    backgroundColor: '#000',
     padding: 20,
   },
-  navBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  title: {
-    color: '#fff',
-    fontSize: 20,
-  },
-  buttons: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    width: 160,
-  },
+headerContainer: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: 20,
+  padding: 30,
+  paddingLeft: 20, 
+  paddingRight: 20,
+},
+header: {
+  //backgroundColor: '#1C1C1E',
+  padding: 10,
+  fontSize: 17,
+  color: '#fff',
+},
   label: {
     color: '#fff',
     fontSize: 16,
     marginBottom: 10,
-    paddingLeft: 5,
   },
   input: {
     borderColor: '#fff',
@@ -113,13 +136,35 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  picker: {
-    height: 50,
-    width: 120,
+  modalText: {
     color: '#fff',
-    borderColor: '#000',
-    borderWidth: 0,
-    backgroundColor: 'transparent',
-    borderRadius: 10,
+    fontSize: 16,
+    borderBottomWidth: 1,
+    borderColor: '#fff',
+    paddingVertical: 5,
+    marginLeft: 5,
+  },
+  button: {
+    marginTop: 20,
   },
 });
+
+export default CriarTreino;
+
+
+
+// headerContainer: {
+//   flexDirection: 'row',
+//   justifyContent: 'space-between',
+//   alignItems: 'center',
+//   marginBottom: 20,
+//   padding: 30,
+//   paddingLeft: 20, 
+//   paddingRight: 20,
+// },
+// header: {
+//   backgroundColor: '#1C1C1E',
+//   padding: 10,
+//   fontSize: 17,
+//   color: '#fff',
+// },
