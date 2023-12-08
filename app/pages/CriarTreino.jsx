@@ -1,8 +1,29 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { createTreino } from '../services/TreinoDB';
 
 export default function CriarTreino() {
+  const [treino, setTreino] = useState(
+    {
+      "idUsuario": 1,
+      "data": "2023-12-04T12:00:00",
+      "duracao": "02:52:00",
+      "nome": "Treino de perna",
+      "categoria": "S",
+      "conclusao": 0
+    });
+
+  function newCreateTreino() {
+    createTreino(treino).then((res) => {
+      if (!res) {
+        console.log('Treino não criado');
+      } else {
+        console.log("Treino criado com sucesso", res);
+      }
+    });
+  }
+
   const [nome, setNome] = useState('');
   const [categoria, setCategoria] = useState('');
   const [diaDaSemana, setDiaDaSemana] = useState('');
@@ -14,7 +35,7 @@ export default function CriarTreino() {
       <View style={styles.navBar}>
         <Text style={styles.title}>Criar Treino</Text>
         <View style={styles.buttons}>
-          <Button title="Salvar" onPress={() => {}} />
+          <Button title="Salvar" onPress={() => { newCreateTreino()}} />
         </View>
       </View>
       <Text style={styles.label}>Nome do Treino</Text>
@@ -57,13 +78,13 @@ export default function CriarTreino() {
           style={styles.picker}
           onValueChange={(itemValue, itemIndex) => setHorario(itemValue)}
         >
-          {Array.from({length: 24}, (_, i) => i).map((_, i) => (
-            Array.from({length: 60}, (_, j) => j).map((_, j) => (
-              <Picker.Item 
-                key={`${i}:${j}`} 
-                label={`${i}h:${j < 10 ? `0${j}` : j}m`} 
-                value={`${i}:${j < 10 ? `0${j}` : j}`} 
-                color={horario === `${i}:${j < 10 ? `0${j}` : j}` ? '#fff' : '#000'} 
+          {Array.from({ length: 24 }, (_, i) => i).map((_, i) => (
+            Array.from({ length: 60 }, (_, j) => j).map((_, j) => (
+              <Picker.Item
+                key={`${i}:${j}`}
+                label={`${i}h:${j < 10 ? `0${j}` : j}m`}
+                value={`${i}:${j < 10 ? `0${j}` : j}`}
+                color={horario === `${i}:${j < 10 ? `0${j}` : j}` ? '#fff' : '#000'}
               />
             ))
           ))}
