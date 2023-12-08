@@ -1,14 +1,15 @@
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TabBar from '../components/TabBar';
 import img from '../assets/images/perfil.png';
 import PhotoProfile from '../components/profileComponents/PhotoProfile';
 import UserDataProfile from '../components/profileComponents/UserDataProfile';
+import ProfileHeader from '../components/profileComponents/ProfileHeader';
 import { useState } from 'react';
 
 import imgAvatar from '../assets/images/avatar.jpg';
 
-export default function Perfil({ onPress, }) {
+export default function Perfil({ navigation, onPress }) {
 
     const onChangeUserName = (name) => {
         setUserName(name);
@@ -36,6 +37,7 @@ export default function Perfil({ onPress, }) {
 
     return (
         <View style={styles.perfilContainer}>
+            <ProfileHeader onPress={navigation.goBack}/>
             <View style={styles.content}>
                 <SafeAreaView style={styles.content}>
                     <PhotoProfile
@@ -77,5 +79,5 @@ const styles = StyleSheet.create({
     },
     tabBarStyle: {
         justifyContent: 'flex-end'
-    }
+    },
 });

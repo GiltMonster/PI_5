@@ -12,7 +12,7 @@ export default function PhotoProfile({ onPress, userImage }) {
                     <Icon 
                         name={'account-circle'}  
                         color='white' 
-                        size={165} 
+                        size={135} 
                     />
                     <Text style={[styles.editText, { fontFamily: getFont('sfProTextRegular') }]}>Editar Foto</Text>
                 </TouchableOpacity>
@@ -20,7 +20,6 @@ export default function PhotoProfile({ onPress, userImage }) {
             {avatar && (
                 <TouchableOpacity style={styles.userImage} onPress={onPress}>
                     <Image
-                        // source={{uri: userImage}}
                         source={userImage}
                         style={styles.avatar}
                     />
@@ -34,15 +33,15 @@ export default function PhotoProfile({ onPress, userImage }) {
 const styles = StyleSheet.create({
     userImage: {
         alignItems: 'center',
-        marginVertical: 50
+        marginBottom: 50
     },
     editText: {
         color: '#007AFF',
-        fontSize: 16
+        fontSize: 13
     },
     avatar: {
-        height: 150,
-        width: 150,
+        height: 120,
+        width: 120,
         borderRadius: 150/2,
         marginBottom: 15
     },

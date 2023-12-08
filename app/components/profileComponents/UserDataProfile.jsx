@@ -7,8 +7,7 @@ export default function UserDataProfile({ userName, onChangeUserName, height, on
     const profileWeight = weight === 0 || weight === undefined ? '' : replace(String(weight))
 
     return (
-        <View>
-            <View style={styles.line}></View>
+        <View style={styles.dataProfileContainer}>
             <View style={styles.inputContainer}>
                 <Text style={[styles.inputText, { fontFamily: getFont('sfProTextRegular') }]}>Nome:</Text>
                 <TextInput
@@ -17,7 +16,7 @@ export default function UserDataProfile({ userName, onChangeUserName, height, on
                     value={userName}
                 />
             </View>
-            <View style={styles.lineCenter}></View>
+            <View style={styles.line}></View>
             <View style={styles.inputContainer}>
                 <Text style={[styles.inputText, { fontFamily: getFont('sfProTextRegular') }]}>Altura:</Text>
                 <TextInput
@@ -27,7 +26,7 @@ export default function UserDataProfile({ userName, onChangeUserName, height, on
                     keyboardType="numeric"
                 />
             </View>
-            <View style={styles.lineCenter}></View>
+            <View style={styles.line}></View>
             <View style={styles.inputContainer}>
                 <Text style={[styles.inputText, { fontFamily: getFont('sfProTextRegular') }]}>Peso:</Text>
                 <TextInput
@@ -37,21 +36,21 @@ export default function UserDataProfile({ userName, onChangeUserName, height, on
                     keyboardType="numeric"
                 />
             </View>
-            <View style={styles.line}></View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    line: {
-        backgroundColor: '#A3A3A3',
-        height: 1,
-        width: '100%',
+    dataProfileContainer: {
+        borderWidth: 1,
+        borderRadius: 12,
+        borderColor: '#FAFAFA',
+        marginHorizontal: 10
     },
-    lineCenter: {
-        backgroundColor: '#A3A3A3',
+    line: {
+        backgroundColor: '#FAFAFA',
         height: 1,
-        width: '73%',
+        width: '78%',
         alignSelf: 'flex-end'
     },
     inputContainer: {
@@ -60,17 +59,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     inputText: {
-        color: '#A3A3A3',
-        fontSize: 17,
+        color: '#FAFAFA',
+        fontSize: 15,
         marginLeft: 20,
     },
     input: {
-        height: 40,
-        width: '70%',
+        height: 35,
+        width: '75%',
         margin: 12,
         padding: 10,
-        color: '#A3A3A3',
-        fontSize: 20,
+        color: '#FAFAFA',
+        fontSize: 17,
         // borderWidth: 1
     },
 });
