@@ -1,7 +1,7 @@
 import { Text, Image, StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
 import getFont from '../util/fonts';
 import img from '../assets/images/TelaInicial.png';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function Header({ takeRouter, userImage }) {
   const avatar = userImage !== undefined ? true : false;
@@ -16,11 +16,7 @@ export default function Header({ takeRouter, userImage }) {
         <Text style={[styles.headerText, { fontFamily: getFont('sfProDisplayBold') }]}>FitTrack</Text>
         {!avatar && (
           <TouchableOpacity style={styles.userButton} onPress={takeRouter}>
-            <Icon 
-              name={'account-circle'}  
-              color='black' 
-              size={65} 
-            />
+            <FontAwesome name="user-circle" size={55} color="black" />
           </TouchableOpacity>
         )}
         {avatar && (
@@ -62,7 +58,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   userButton: {
-    top: 11,
+    top: 15,
   },
   avatar: {
     height: 60,
