@@ -5,7 +5,7 @@ import { Checkbox } from 'react-native-paper';
 
 
 const CardTreino = ({ titulo, categoria, diaSemana, isChecked, onCheckboxToggle, navigation }) => {
-  
+
   const handleCardPress = () => {
     navigation.navigate('exercicios');
   };

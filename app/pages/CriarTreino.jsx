@@ -118,27 +118,6 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     marginLeft: 5,
   },
-  button: {
-    marginTop: 20,
-  },
 });
 
 export default CriarTreino;
-
-
-
-// headerContainer: {
-//   flexDirection: 'row',
-//   justifyContent: 'space-between',
-//   alignItems: 'center',
-//   marginBottom: 20,
-//   padding: 30,
-//   paddingLeft: 20, 
-//   paddingRight: 20,
-// },
-// header: {
-//   backgroundColor: '#1C1C1E',
-//   padding: 10,
-//   fontSize: 17,
-//   color: '#fff',
-// },
