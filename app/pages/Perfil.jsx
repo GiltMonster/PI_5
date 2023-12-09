@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TabBar from '../components/TabBar';
 import img from '../assets/images/perfil.png';
@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 import imgAvatar from '../assets/images/avatar.jpg';
 
-export default function Perfil({ navigation, onPress }) {
+export default function Perfil({ navigation, onPress, takeRouter }) {
 
     const onChangeUserName = (name) => {
         setUserName(name);
@@ -30,7 +30,7 @@ export default function Perfil({ navigation, onPress }) {
 
     const [user, setUser] = useState({
         name: userName,
-        image: userImage,
+        image: undefined,
         height: height,
         weight: weight,
     });
@@ -58,7 +58,7 @@ export default function Perfil({ navigation, onPress }) {
                     />
                 </SafeAreaView>
             </View>
-            <TabBar onPress={onPress} style={styles.tabBarStyle} />
+            <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
         </View>
     );
 }
