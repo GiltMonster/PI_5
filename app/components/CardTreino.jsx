@@ -3,26 +3,34 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Checkbox } from 'react-native-paper';
 
-const CardTreino = ({ titulo, categoria, diaSemana, isChecked, onCheckboxToggle }) => {
+
+const CardTreino = ({ titulo, categoria, diaSemana, isChecked, onCheckboxToggle, navigation }) => {
+  
+  const handleCardPress = () => {
+    navigation.navigate('exercicios');
+  };
+
   return (
-    <View style={styles.cardContainer}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.tituloTreino}>{`${titulo}`}</Text>
-        <Text style={styles.tituloCategoria}>{`${categoria}`}</Text>
-      </View>
-      <View style={styles.detailsContainer}>
-        <View style={styles.leftDetails}>
-          <Text style={styles.diaSemana}>{diaSemana}</Text>
+    <TouchableOpacity onPress={handleCardPress}>
+      <View style={styles.cardContainer}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.tituloTreino}>{`${titulo}`}</Text>
+          <Text style={styles.tituloCategoria}>{`${categoria}`}</Text>
         </View>
-        <View style={styles.rightDetails}>
-          <Checkbox.Android
-            status={isChecked ? 'checked' : 'unchecked'}
-            onPress={onCheckboxToggle}
-            color="#fff"
-          />
+        <View style={styles.detailsContainer}>
+          <View style={styles.leftDetails}>
+            <Text style={styles.diaSemana}>{diaSemana}</Text>
+          </View>
+          <View style={styles.rightDetails}>
+            <Checkbox.Android
+              status={isChecked ? 'checked' : 'unchecked'}
+              onPress={onCheckboxToggle}
+              color="#fff"
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -35,7 +43,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     padding: 10,
     alignSelf: 'center'
-
   },
   headerContainer: {
     flexDirection: 'row',
@@ -55,7 +62,6 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     flexDirection: 'row',
-   // marginTop: 10,
   },
   leftDetails: {
     marginHorizontal: 10,

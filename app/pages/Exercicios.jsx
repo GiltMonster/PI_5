@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-//import CardTreino from '../components/CardTreino'; // Ajuste o caminho conforme necessário
+//import CardTreino from '../components/CardTreino'; 
 
 const TelaExercicio = ({ route, navigation }) => {
  // const treinoSalvo = route.params?.treinoSalvo || null;
@@ -11,8 +11,8 @@ const TelaExercicio = ({ route, navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <MaterialIcons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.header}>Treinos</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('criarExercicios')}>
+        <Text style={styles.header}>Exercícios</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('criarExercicio')}>
           <MaterialIcons name="add" size={24} color="#fff" />
         </TouchableOpacity>
       </View>

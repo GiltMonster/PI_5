@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import ActionSheet from 'react-native-actionsheet';
+import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
+import BackgroundContainer from '../components/BackgroundContainer';
+import TextField from '../components/TextField';
 
 const CriarTreino = ({ navigation }) => {
   const [nome, setNome] = useState('');
@@ -20,7 +23,6 @@ const CriarTreino = ({ navigation }) => {
       diaDaSemana,
     };
     //banco
-
     navigation.navigate('treinos', { treinoSalvo });
   };
 
@@ -33,112 +35,84 @@ const CriarTreino = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <MaterialIcons name="arrow-back" size={24} color="#fff" />
-        </TouchableOpacity>
-        <Text style={styles.header}>Treinos</Text>
-        <TouchableOpacity onPress={showCategoriaActionSheet}>
-          <MaterialIcons name="add" size={24} color='#1C1C1E' />
-        </TouchableOpacity>
-      </View>
-
-      <Text style={styles.label}>Nome:</Text>
-      <TextInput
-        style={styles.input}
+    <BackgroundContainer>
+        <HeaderScreensNavigations navigation={navigation} title="Criar Treino" onSavePress={() => handleSalvar()} />
+  
+        <TextField
+        label="Nome:"
         value={nome}
         onChangeText={setNome}
         placeholder="Digite o nome do treino"
+        placeholderTextColor="#A3A3A3"
       />
-
-      <View style={styles.row}>
-        <Text style={styles.label}>Categoria:</Text>
-        <Text style={styles.modalText} onPress={showCategoriaActionSheet}>
-          {categoria}
-        </Text>
-      </View>
-
-      <View style={styles.row}>
-        <Text style={styles.label}>Dia da Semana:</Text>
-        <Text style={styles.modalText} onPress={showDiaDaSemanaActionSheet}>
-          {diaDaSemana}
-        </Text>
-      </View>
-
-      <Button title="Salvar" onPress={handleSalvar} style={styles.button} />
-
-      <ActionSheet
-        ref={categoriaActionSheetRef}
-        title={'Selecione uma Categoria'}
-        options={[...categorias, 'Cancelar']}
-        cancelButtonIndex={categorias.length}
-        destructiveButtonIndex={categorias.length}
-        onPress={(index) => {
-          if (index < categorias.length) {
-            setCategoria(categorias[index]);
-          }
-        }}
-      />
-
-      <ActionSheet
-        ref={diaDaSemanaActionSheetRef}
-        title={'Selecione um Dia da Semana'}
-        options={[...diasDaSemana, 'Cancelar']}
-        cancelButtonIndex={diasDaSemana.length}
-        destructiveButtonIndex={diasDaSemana.length}
-        onPress={(index) => {
-          if (index < diasDaSemana.length) {
-            setDiaDaSemana(diasDaSemana[index]);
-          }
-        }}
-      />
-    </View>
+  
+        <View style={styles.row}>
+          <Text style={styles.label}>Categoria:</Text>
+          <Text style={styles.modalText} onPress={showCategoriaActionSheet}>
+            {categoria}
+          </Text>
+        </View>
+  
+        <View style={styles.row}>
+          <Text style={styles.label}>Dia da Semana:</Text>
+          <Text style={styles.modalText} onPress={showDiaDaSemanaActionSheet}>
+            {diaDaSemana}
+          </Text>
+        </View>
+  
+        <ActionSheet
+          ref={categoriaActionSheetRef}
+          title={'Selecione uma Categoria'}
+          options={[...categorias, 'Cancelar']}
+          cancelButtonIndex={categorias.length}
+          destructiveButtonIndex={categorias.length}
+          onPress={(index) => {
+            if (index < categorias.length) {
+              setCategoria(categorias[index]);
+            }
+          }}
+        />
+  
+        <ActionSheet
+          ref={diaDaSemanaActionSheetRef}
+          title={'Selecione um Dia da Semana'}
+          options={[...diasDaSemana, 'Cancelar']}
+          cancelButtonIndex={diasDaSemana.length}
+          destructiveButtonIndex={diasDaSemana.length}
+          onPress={(index) => {
+            if (index < diasDaSemana.length) {
+              setDiaDaSemana(diasDaSemana[index]);
+            }
+          }}
+        />
+    </BackgroundContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#1C1C1E',
-    flex: 1,
-    padding: 20,
-  },
-headerContainer: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  marginBottom: 20,
-  padding: 30,
-  paddingLeft: 20, 
-  paddingRight: 20,
-},
-header: {
-  //backgroundColor: '#1C1C1E',
-  padding: 10,
-  fontSize: 17,
-  color: '#fff',
-},
+ 
   label: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 20,
     marginBottom: 10,
   },
   input: {
     borderColor: '#fff',
     borderWidth: 1,
-    marginBottom: 10,
+    marginBottom: 20,
     padding: 10,
     borderRadius: 10,
     color: '#fff',
   },
   row: {
+    marginBottom: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   modalText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 18,
     borderBottomWidth: 1,
     borderColor: '#fff',
     paddingVertical: 5,
