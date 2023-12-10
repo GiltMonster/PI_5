@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import TabBarButton from './tabBarComponents/TabBarButton';
+import TabBarButton from './TabBarButton';
 
 export default function TabBar({ takeRouter }) {
   return (

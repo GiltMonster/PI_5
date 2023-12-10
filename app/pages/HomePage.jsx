@@ -6,7 +6,7 @@ import WorkoutButton from '../components/WorkoutButton';
 import Imc from '../components/Imc';
 import Goal from '../components/Goal';
 import Summary from '../components/Summary';
-import TabBar from '../components/TabBar';
+import TabBar from '../components/tabBarComponents/TabBar';
 
 import img from '../assets/images/avatar.jpg';
 
