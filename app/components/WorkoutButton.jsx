@@ -2,7 +2,7 @@ import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import getFont from '../util/fonts';
 
 export default function WorkoutButton({ takeRouter, trainingName, members }) {
-  const noTraining = trainingName === "" ? true : false;
+  const noTraining = trainingName === "" || trainingName === undefined ? true : false;
   
   return (
     <View>

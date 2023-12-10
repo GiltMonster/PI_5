@@ -6,7 +6,7 @@ import WorkoutButton from '../components/WorkoutButton';
 import Imc from '../components/Imc';
 import Goal from '../components/Goal';
 import Summary from '../components/Summary';
-import TabBar from '../components/TabBar';
+import TabBar from '../components/tabBarComponents/TabBar';
 
 import img from '../assets/images/avatar.jpg';
 
@@ -19,13 +19,13 @@ export default function HomePage({takeRouter}) {
 
   const [user, setUser] = useState({
     name: 'Lukinhas',
-    image: img,
+    image: undefined,
     height: 1.69,
     weight: 85.00,
     targetWeight: 65.00,
   });
 
-  const homeText = user.name === '' ? '' : 'Treino de hoje,';
+  const homeText = user.name === '' || user.name === undefined ? '' : 'Treino de hoje,';
 
   return (
     <View style={styles.homePageContainer}>

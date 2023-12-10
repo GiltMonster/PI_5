@@ -1,14 +1,15 @@
 import { View, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import TabBar from '../components/TabBar';
+import TabBar from '../components/tabBarComponents/TabBar';
 import img from '../assets/images/perfil.png';
 import PhotoProfile from '../components/profileComponents/PhotoProfile';
 import UserDataProfile from '../components/profileComponents/UserDataProfile';
+import ToolBar from '../components/toolBarComponents/ToolBar';
 import { useState } from 'react';
 
 import imgAvatar from '../assets/images/avatar.jpg';
 
-export default function Perfil({ onPress, }) {
+export default function Perfil({ navigation, onPress, takeRouter }) {
 
     const onChangeUserName = (name) => {
         setUserName(name);
@@ -29,13 +30,14 @@ export default function Perfil({ onPress, }) {
 
     const [user, setUser] = useState({
         name: userName,
-        image: userImage,
+        image: undefined,
         height: height,
         weight: weight,
     });
 
     return (
         <View style={styles.perfilContainer}>
+            <ToolBar onPressBack={navigation.goBack} screenName={"Perfil"} iconName={"infocirlceo"}/>
             <View style={styles.content}>
                 <SafeAreaView style={styles.content}>
                     <PhotoProfile
@@ -56,7 +58,7 @@ export default function Perfil({ onPress, }) {
                     />
                 </SafeAreaView>
             </View>
-            <TabBar onPress={onPress} style={styles.tabBarStyle} />
+            <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
         </View>
     );
 }
@@ -77,5 +79,5 @@ const styles = StyleSheet.create({
     },
     tabBarStyle: {
         justifyContent: 'flex-end'
-    }
+    },
 });
