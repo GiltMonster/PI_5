@@ -1,19 +1,31 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
-//import CardTreino from '../components/CardTreino'; 
+import CardExercicio from '../components/CardExercicio';
 
 const TelaExercicio = ({ route, navigation }) => {
-  // const treinoSalvo = route.params?.treinoSalvo || null;
+  const treinoSalvo = route.params?.treinoSalvo || { titulo: 'Treino Padrão' };
+  const exercicioSalvo = route.params?.exercicioSalvo || null;
+
   return (
     <View style={styles.container}>
       <HeaderScreensNavigations
-        title="Criar Exercício"
+        title="Exercícios"
         onAddPress={() => navigation.navigate('criarExercicio')}
       />
-      <ScrollView>
-
+      <View style={styles.titleContainer}>
+        <Text style={styles.header}>{`${treinoSalvo.titulo}`}</Text>
+      </View>
+      <ScrollView style={styles.scrollView}>
+        {exercicioSalvo && (
+          <CardExercicio
+            nome={exercicioSalvo.nome}
+            series={exercicioSalvo.series}
+            repeticoes={exercicioSalvo.repeticoes}
+            carga={exercicioSalvo.carga}
+            navigation={navigation}
+          />
+        )}
       </ScrollView>
     </View>
   );
@@ -23,24 +35,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1C1C1E',
-   // paddingTop: 50,
+    // paddingTop: 50,
     paddingLeft: 20,
     paddingRight: 20,
   },
   header: {
-    fontSize: 17,
-    color: '#fff',
+    fontSize: 20,
+    color: '#BF5BF3',
     textAlign: 'center',
-    padding: 10,
+    fontWeight: 'bold'
+   // padding: 10,
   },
-  headerContainer: {
+  titleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 30,
-    paddingLeft: 20,
+   // backgroundColor: 'red',
     paddingRight: 20,
   },
+  scrollView: {
+    flex: 1,
+  }
 });
 
 export default TelaExercicio;

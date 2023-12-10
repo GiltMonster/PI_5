@@ -20,6 +20,7 @@ const TelaTreino = ({ route, navigation }) => {
             diaSemana={treinoSalvo.diaDaSemana}
             isChecked={false}
             onCheckboxToggle={() => { }}
+            treinoSalvo={treinoSalvo} 
             navigation={navigation}
 
           />

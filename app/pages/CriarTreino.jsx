@@ -1,12 +1,34 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import ActionSheet from 'react-native-actionsheet';
 import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
 import BackgroundContainer from '../components/BackgroundContainer';
 import TextField from '../components/TextField';
+import { Picker } from '@react-native-picker/picker';
+import { createTreino } from '../services/TreinoDB';
 
-const CriarTreino = ({ navigation }) => {
+export default function CriarTreino({ navigation }) {
+  const [treino, setTreino] = useState(
+    {
+      "idUsuario": 1,
+      "data": "2023-12-04T12:00:00",
+      "duracao": "02:52:00",
+      "nome": "Treino de perna",
+      "categoria": "S",
+      "conclusao": 0
+    });
+
+  function newCreateTreino() {
+    createTreino(treino).then((res) => {
+      if (!res) {
+        console.log('Treino não criado');
+      } else {
+        console.log("Treino criado com sucesso", res);
+      }
+    });
+  }
+
   const [nome, setNome] = useState('');
   const [categoria, setCategoria] = useState('Superior');
   const [diaDaSemana, setDiaDaSemana] = useState('Domingo');
@@ -17,12 +39,17 @@ const CriarTreino = ({ navigation }) => {
   const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
 
   const handleSalvar = () => {
+    if (!isValidString(nome)) {
+      Alert.alert('Atenção', 'Por favor, preencha o nome do treino.');
+      return;
+    }
+
     const treinoSalvo = {
       titulo: nome,
       categoria,
       diaDaSemana,
     };
-    //banco
+
     navigation.navigate('treinos', { treinoSalvo });
   };
 
@@ -32,6 +59,10 @@ const CriarTreino = ({ navigation }) => {
 
   const showDiaDaSemanaActionSheet = () => {
     diaDaSemanaActionSheetRef.current.show();
+  };
+
+  const isValidString = (value) => {
+    return typeof value === 'string' && value.trim() !== '';
   };
 
   return (
@@ -120,4 +151,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CriarTreino;
