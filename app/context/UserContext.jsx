@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { Asset } from 'expo-asset';
-import { getUser } from '../services/initDB';
+import { getUser } from '../services/UserDB';
 
 export const UserProvider = ({ children }) => {
 
