@@ -1,34 +1,33 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 import { Checkbox } from 'react-native-paper';
 
-
-const CardTreino = ({ titulo, categoria, diaSemana, isChecked, onCheckboxToggle, treinoSalvo, navigation }) => {
-
+const CardExercicio = ({isChecked, onCheckboxToggle, nome, repeticoes, series, carga, navigation }) => {
   const handleCardPress = () => {
-    navigation.navigate('exercicios', { treinoSalvo });
+    navigation.navigate('criarExercicio', { nome, repeticoes, series, carga });
   };
 
   return (
     <TouchableOpacity onPress={handleCardPress}>
       <View style={styles.cardContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.tituloTreino}>{`${titulo}`}</Text>
-          <Text style={styles.tituloCategoria}>{`${categoria}`}</Text>
+          <Text style={styles.nomeExercicio}>{nome}</Text>
         </View>
         <View style={styles.detailsContainer}>
-          <View style={styles.leftDetails}>
-            <Text style={styles.diaSemana}>{diaSemana}</Text>
-          </View>
-          <View style={styles.rightDetails}>
+          <Text style={styles.textoDetalhes}>{`Repetições: ${repeticoes}`}</Text>
+          <Text style={styles.textoDetalhes}>{`Série: ${series}`}</Text>
+          <Text style={styles.textoDetalhes}>{`Carga: ${carga}`}</Text>
+        </View>
+                    {/* Este é um comentário dentro do JSX 
+  <View style={styles.rightDetails}>
             <Checkbox.Android
               status={isChecked ? 'checked' : 'unchecked'}
               onPress={onCheckboxToggle}
               color="#fff"
+              
             />
           </View>
-        </View>
+          */}
       </View>
     </TouchableOpacity>
   );
@@ -37,12 +36,13 @@ const CardTreino = ({ titulo, categoria, diaSemana, isChecked, onCheckboxToggle,
 const styles = StyleSheet.create({
   cardContainer: {
     width: 350,
-    height: 134,
+    height: 150,
     backgroundColor: '#121213',
     borderRadius: 12,
     marginVertical: 10,
     padding: 10,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    flex: 1, 
   },
   headerContainer: {
     flexDirection: 'row',
@@ -50,23 +50,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     alignItems: 'center',
   },
-  tituloTreino: {
-    color: '#BF5BF3',
+  nomeExercicio: {
+    color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  tituloCategoria: {
-    color: '#BF5BF3',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  detailsContainer: {
-    flexDirection: 'row',
-  },
-  leftDetails: {
-    marginHorizontal: 10,
-    flex: 1,
-    justifyContent: 'center',
+    paddingBottom: 8
   },
   rightDetails: {
     width: 97,
@@ -76,10 +64,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 10,
   },
-  diaSemana: {
-    color: '#fff',
-    fontSize: 20,
+  detailsContainer: {
+    flexDirection: 'column',
+    paddingLeft: 10
   },
+  textoDetalhes: {
+    color: '#fff',
+    fontSize: 18,
+    paddingBottom: 8
+  }
 });
 
-export default CardTreino;
+export default CardExercicio;

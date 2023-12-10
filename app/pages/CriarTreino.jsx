@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import ActionSheet from 'react-native-actionsheet';
 import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
@@ -17,12 +17,17 @@ const CriarTreino = ({ navigation }) => {
   const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
 
   const handleSalvar = () => {
+    if (!isValidString(nome)) {
+      Alert.alert('Atenção', 'Por favor, preencha o nome do treino.');
+      return;
+    }
+
     const treinoSalvo = {
       titulo: nome,
       categoria,
       diaDaSemana,
     };
-    //banco
+
     navigation.navigate('treinos', { treinoSalvo });
   };
 
@@ -32,6 +37,10 @@ const CriarTreino = ({ navigation }) => {
 
   const showDiaDaSemanaActionSheet = () => {
     diaDaSemanaActionSheetRef.current.show();
+  };
+
+  const isValidString = (value) => {
+    return typeof value === 'string' && value.trim() !== '';
   };
 
   return (
