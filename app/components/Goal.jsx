@@ -15,7 +15,7 @@ const Goal = ({ currentWeight, targetWeight, takeRouter, onUpdateWeight }) => {
       : false;
 
   const handleGoalPress = () => {
-    console.log('Meta pressionada!');
+    console.log('Meta pressionada');
     takeRouter('meta', { onUpdateWeight });
   };
 
@@ -25,7 +25,7 @@ const Goal = ({ currentWeight, targetWeight, takeRouter, onUpdateWeight }) => {
         {noGoal && (
           <View style={styles.noGoal}>
             <Text style={[styles.noGoalText, { fontFamily: getFont('sfProTextSemibold') }]}>
-              SEM DADOS REGISTRADOS
+              Sem dados registrados, inicie suas meta!
             </Text>
           </View>
         )}
