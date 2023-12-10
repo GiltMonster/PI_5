@@ -9,6 +9,7 @@ import CriarExercicio from "../pages/CriarExercicio";
 import History from "../pages/History";
 import Settings from "../pages/Settings";
 import Meta from "../pages/Meta";
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import PrivacyAndTerms from "../pages/PrivacyAndTerms";
 import About from "../pages/About";
 
@@ -29,6 +30,7 @@ const { Screen, Navigator } = createNativeStackNavigator();
 export default function StackRoutesLayout() {
     return (
         <UserProvider>
+            <ActionSheetProvider>
             <Navigator initialRouteName='Home' screenOptions={{ headerShown: false }}>
                 <Screen name="home" component={Home} />
                 <Screen name="perfil" component={Perfil} />
@@ -42,6 +44,7 @@ export default function StackRoutesLayout() {
                 <Screen name="privacy&terms" component={PrivacyAndTerms} />
                 <Screen name="about" component={About} />
             </Navigator>
+</ActionSheetProvider>
         </UserProvider>
     );
 }
