@@ -16,7 +16,7 @@ export default function ToolBar({ onPress, onPressBack, screenName, rightText, i
             <View>
                 {rightText !== undefined && (
                     <TouchableOpacity onPress={onPress}>
-                        <Text style={[styles.backText, { fontFamily: getFont('sfProTextRegular') }]}>{rightText}</Text>
+                        <Text style={[styles.rightText, { fontFamily: getFont('sfProTextRegular') }]}>{rightText}</Text>
                     </TouchableOpacity>
                 )}
                 {rightText === undefined && (
@@ -49,12 +49,17 @@ const styles = StyleSheet.create({
         zIndex: 1
     },
     backText: {
-        fontSize: 22,
+        fontSize: 20,
         color: '#FAFAFA',
         marginTop: 55
     },
+    rightText: {
+        fontSize: 20,
+        color: '#6EDEFD',
+        marginTop: 55
+    },
     titleText: {
-        fontSize: 22,
+        fontSize: 20,
         color: '#FAFAFA',
         marginTop: 55,
     },
