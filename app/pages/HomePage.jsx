@@ -10,18 +10,17 @@ import TabBar from '../components/tabBarComponents/TabBar';
 
 import img from '../assets/images/avatar.jpg';
 
-export default function HomePage({takeRouter}) {
-
+export default function HomePage({ takeRouter }) {
   const [treino, setTreino] = useState({
     name: 'Costas e Bíceps',
-    members: "s"
+    members: 's',
   });
 
   const [user, setUser] = useState({
     name: 'Lukinhas',
     image: undefined,
     height: 1.69,
-    weight: 85.00,
+    weight: 85.00, 
     targetWeight: 65.00,
   });
 
@@ -30,17 +29,23 @@ export default function HomePage({takeRouter}) {
   return (
     <View style={styles.homePageContainer}>
       <View style={styles.headerView}>
-        <Header takeRouter={()=>{takeRouter("perfil")}} userImage={user.image}/>
+        <Header takeRouter={() => takeRouter('perfil')} userImage={user.image} />
       </View>
       <ScrollView>
-        <Text style={[styles.homeText, { fontFamily: getFont('sfProDisplayBold') }]}>{homeText} {user.name}</Text> 
-        <WorkoutButton takeRouter={takeRouter} trainingName={treino.name} members={treino.members === 's' ? "Superior" : "Inferior"}/>
-        <Imc height={user.height} weight={user.weight}/>
+        <Text style={[styles.homeText, { fontFamily: getFont('sfProDisplayBold') }]}>
+          {homeText} {user.name}
+        </Text>
+        <WorkoutButton takeRouter={takeRouter} trainingName={treino.name} members={treino.members === 's' ? 'Superior' : 'Inferior'} />
+        <Imc height={user.height} weight={user.weight} />
         <Text style={[styles.targetText, { fontFamily: getFont('sfProDisplayBold') }]}>Meta</Text>
-        <Goal currentWeight={user.weight} targetWeight={user.targetWeight}/>
-        <Summary takeRouter={takeRouter}/>
+        <Goal
+        currentWeight={user.weight}
+        targetWeight={user.targetWeight}
+        takeRouter={takeRouter}
+      />
+        <Summary takeRouter={takeRouter} />
       </ScrollView>
-      <TabBar takeRouter={takeRouter} style={styles.tabBarStyle}/>
+      <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
     </View>
   );
 }

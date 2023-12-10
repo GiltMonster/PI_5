@@ -8,9 +8,9 @@ export default function Summary({ takeRouter }) {
       <TouchableOpacity onPress={()=>{takeRouter("treinos")}} style={styles.summaryButton}>
         <Text style={[styles.summaryButtonText,{ fontFamily: getFont('sfProTextSemibold') }]}>Treinos</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=>{takeRouter("meta")}} style={styles.summaryButton}>
+      {/* <TouchableOpacity onPress={()=>{takeRouter("meta")}} style={styles.summaryButton}>
         <Text style={[styles.summaryButtonText,{ fontFamily: getFont('sfProTextSemibold') }]}>Meta</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 }
