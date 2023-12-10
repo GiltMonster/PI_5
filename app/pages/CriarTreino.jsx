@@ -49,10 +49,12 @@ export default function CriarTreino({ navigation }) {
   };
 
   const showCategoriaActionSheet = () => {
-    const options = ['Superior', 'Inferior'];
-
+    const options = ['Superior', 'Inferior', 'Cancelar'];
+    const destructiveButtonIndex = 2;
     showActionSheetWithOptions({
+      title: 'Selecione uma categoria:',
       options,
+      destructiveButtonIndex
     }, (selectedIndex) => {
       switch (selectedIndex) {
         case 0:
@@ -64,15 +66,21 @@ export default function CriarTreino({ navigation }) {
           // Inferior
           setCategoria('Inferior')
           break;
+
+        case destructiveButtonIndex:
+          // Cancelar
+          break;
       }
     });
   };
 
   const showDiaDaSemanaActionSheet = () => {
-    const options = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
-
+    const options = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Cancelar'];
+    const destructiveButtonIndex = 7;
     showActionSheetWithOptions({
+      title: 'Selecione um dia da semana:',
       options,
+      destructiveButtonIndex
     }, (selectedIndex) => {
       switch (selectedIndex) {
         case 0:
@@ -108,6 +116,10 @@ export default function CriarTreino({ navigation }) {
         case 6:
           // Sábado
           setDiaDaSemana(options[6])
+          break;
+
+        case destructiveButtonIndex:
+          // Cancelar
           break;
       }
     });
