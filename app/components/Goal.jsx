@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   goalContainer: {
     alignItems: 'center',
     marginHorizontal: 20,
-    backgroundColor: '#232325',
+    backgroundColor: '#121213',
     borderRadius: 10,
     paddingVertical: 10,
   },
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 20,
-    backgroundColor: '#232325',
+    backgroundColor: '#121213',
     borderRadius: 10,
     paddingVertical: 10,
     height: 150,

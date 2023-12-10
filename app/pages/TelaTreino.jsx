@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import CardTreino from '../components/CardTreino';
+import CardTreino from '../components/Cards/CardTreino';
 import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
 
 const TelaTreino = ({ route, navigation }) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
-import CardExercicio from '../components/CardExercicio';
+import CardExercicio from '../components/Cards/CardExercicio';
 
 const TelaExercicio = ({ route, navigation }) => {
   const treinoSalvo = route.params?.treinoSalvo || { titulo: 'Treino Padrão' };
