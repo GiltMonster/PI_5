@@ -10,7 +10,6 @@ export default function TabBar({ takeRouter }) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   tabBarContainer: {
     flexDirection: 'row',

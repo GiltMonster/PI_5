@@ -15,7 +15,7 @@ const TextField = ({ label, value, onChangeText, placeholder, keyboardType, mult
         placeholder={placeholder}
         keyboardType={keyboardType}
         multiline={multiline}
-        placeholderTextColor={'white'}
+        placeholderTextColor={'#6A6767'}
       />
     </View>
   );
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     color: '#fff',
+    fontSize: 18,
   },
   inputMultiline: {
     borderColor: '#fff',
@@ -43,6 +44,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     color: '#fff',
+    fontSize: 18,
+
   },
 });
 

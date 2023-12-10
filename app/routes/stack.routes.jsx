@@ -9,6 +9,8 @@ import CriarExercicio from "../pages/CriarExercicio";
 import History from "../pages/History";
 import Settings from "../pages/Settings";
 import Meta from "../pages/Meta";
+import PrivacyAndTerms from "../pages/PrivacyAndTerms";
+import About from "../pages/About";
 
 // import { Ionicons } from '@expo/vector-icons';
 // para ter acesso as bibliotecas de ícones, entrar no link: https://icons.expo.fyi/Index
@@ -37,6 +39,8 @@ export default function StackRoutesLayout() {
                 <Screen name="history" component={History} />
                 <Screen name="settings" component={Settings} />
                 <Screen name="meta" component={Meta} />
+                <Screen name="privacy&terms" component={PrivacyAndTerms} />
+                <Screen name="about" component={About} />
             </Navigator>
         </UserProvider>
     );

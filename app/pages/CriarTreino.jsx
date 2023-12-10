@@ -74,7 +74,7 @@ export default function CriarTreino({ navigation }) {
         value={nome}
         onChangeText={setNome}
         placeholder="Digite o nome do treino"
-        placeholderTextColor="#A3A3A3"
+        placeholderTextColor="red"
       />
   
         <View style={styles.row}>
