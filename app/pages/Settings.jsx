@@ -1,6 +1,6 @@
 import { View, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import TabBar from '../components/TabBar';
+import TabBar from '../components/tabBarComponents/TabBar';
 import img from '../assets/images/perfil.png';
 import SettingsTitle from '../components/settingsComponents/SettingsTitle';
 import SettingsButtons from '../components/settingsComponents/SettingsButtons';

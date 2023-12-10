@@ -5,8 +5,30 @@ import ActionSheet from 'react-native-actionsheet';
 import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
 import BackgroundContainer from '../components/BackgroundContainer';
 import TextField from '../components/TextField';
+import { Picker } from '@react-native-picker/picker';
+import { createTreino } from '../services/TreinoDB';
 
-const CriarTreino = ({ navigation }) => {
+export default function CriarTreino({ navigation }) {
+  const [treino, setTreino] = useState(
+    {
+      "idUsuario": 1,
+      "data": "2023-12-04T12:00:00",
+      "duracao": "02:52:00",
+      "nome": "Treino de perna",
+      "categoria": "S",
+      "conclusao": 0
+    });
+
+  function newCreateTreino() {
+    createTreino(treino).then((res) => {
+      if (!res) {
+        console.log('Treino não criado');
+      } else {
+        console.log("Treino criado com sucesso", res);
+      }
+    });
+  }
+
   const [nome, setNome] = useState('');
   const [categoria, setCategoria] = useState('Superior');
   const [diaDaSemana, setDiaDaSemana] = useState('Domingo');
@@ -129,4 +151,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CriarTreino;

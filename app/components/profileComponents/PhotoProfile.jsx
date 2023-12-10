@@ -1,5 +1,5 @@
 import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { FontAwesome } from '@expo/vector-icons';
 import getFont from '../../util/fonts';
 
 export default function PhotoProfile({ onPress, userImage }) {
@@ -8,19 +8,14 @@ export default function PhotoProfile({ onPress, userImage }) {
     return (
         <View>
             {!avatar && (
-                <TouchableOpacity style={styles.userImage} onPress={onPress}>
-                    <Icon 
-                        name={'account-circle'}  
-                        color='white' 
-                        size={165} 
-                    />
+                <TouchableOpacity style={styles.userImageContainer} onPress={onPress}>
+                    <FontAwesome name="user-circle" size={120} color="white" style={styles.userImage}/>
                     <Text style={[styles.editText, { fontFamily: getFont('sfProTextRegular') }]}>Editar Foto</Text>
                 </TouchableOpacity>
             )}
             {avatar && (
-                <TouchableOpacity style={styles.userImage} onPress={onPress}>
+                <TouchableOpacity style={styles.userImageContainer} onPress={onPress}>
                     <Image
-                        // source={{uri: userImage}}
                         source={userImage}
                         style={styles.avatar}
                     />
@@ -32,17 +27,20 @@ export default function PhotoProfile({ onPress, userImage }) {
 }
 
 const styles = StyleSheet.create({
-    userImage: {
+    userImageContainer: {
         alignItems: 'center',
-        marginVertical: 50
+        marginBottom: 45
+    },
+    userImage: {
+        marginBottom: 15
     },
     editText: {
-        color: '#007AFF',
-        fontSize: 16
+        color: '#6EDEFD',
+        fontSize: 15
     },
     avatar: {
-        height: 150,
-        width: 150,
+        height: 120,
+        width: 120,
         borderRadius: 150/2,
         marginBottom: 15
     },
