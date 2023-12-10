@@ -5,13 +5,13 @@ import img from '../assets/images/perfil.png';
 import SettingsTitle from '../components/settingsComponents/SettingsTitle';
 import SettingsButtons from '../components/settingsComponents/SettingsButtons';
 
-export default function Settings({ onPress }) {
+export default function Settings({ onPress, navigation }) {
     return (
         <View style={styles.settingsContainer}>
             <View style={styles.content}>
                 <SettingsTitle />
                 <SafeAreaView style={styles.content}>
-                    <SettingsButtons onPress={onPress} />
+                <SettingsButtons navigation={navigation} />
                     <Image
                         source={img}
                         style={styles.settingsImage}

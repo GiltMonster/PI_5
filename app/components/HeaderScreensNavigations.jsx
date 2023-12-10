@@ -5,12 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 import { color } from 'react-native-elements/dist/helpers';
 import { colors } from 'react-native-elements';
 
-const HeaderScreensNavigations = ({ title, onSavePress, onAddPress }) => {
+const HeaderScreensNavigations = ({ title, onSavePress, onAddPress, paddingRight }) => {
     const navigation = useNavigation();
 
     return (
-        <View style={styles.headerContainer}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+        <View style={[styles.headerContainer, { paddingRight: paddingRight || 0 }]}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
                 <MaterialIcons name="arrow-back" size={28} padding={9} color="#fff" />
             </TouchableOpacity>
             <Text style={styles.header}>{title}</Text>
