@@ -12,7 +12,7 @@ const SettingsButtons = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.ButtonsContainer}>
+    <View>
       <View style={styles.line}></View>
       <TouchableOpacity onPress={handlePrivacyAndTermsPress}>
         <Text style={[styles.ButtonsText, { fontFamily: getFont('sfProTextRegular') }]}>Privacidade e Termos de uso</Text>
@@ -27,9 +27,6 @@ const SettingsButtons = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  ButtonsContainer: {
-    top: 30
-  },
   line: {
     backgroundColor: '#FAFAFA',
     height: 1,

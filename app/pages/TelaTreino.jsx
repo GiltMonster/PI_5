@@ -1,17 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import CardTreino from '../components/Cards/CardTreino';
-import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
+import ToolBar from '../components/toolBarComponents/ToolBar';
+import getFont from '../util/fonts';
 
 const TelaTreino = ({ route, navigation }) => {
   const treinoSalvo = route.params?.treinoSalvo || null;
   return (
     <View style={styles.container}>
-            <HeaderScreensNavigations
-        title="Criar Treino"
-        onAddPress={() => navigation.navigate('criarTreino')}
-      />
+      <ToolBar onPress={() => navigation.navigate('criarTreino')} onPressBack={navigation.goBack} screenName={"Treinos"} iconName={"plus"}/>
       <ScrollView>
         {treinoSalvo && (
           <CardTreino
@@ -25,6 +22,11 @@ const TelaTreino = ({ route, navigation }) => {
 
           />
         )}
+        {!treinoSalvo && (
+          <View style={styles.noTraining}>
+            <Text style={[styles.noTrainingText, { fontFamily: getFont('sfProTextSemibold') }]}>Sem Treinos</Text>
+          </View>
+        )}
       </ScrollView>
     </View>
   );
@@ -34,8 +36,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1C1C1E',
-    paddingLeft: 20,
-    paddingRight: 20,
+  },
+  noTraining: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: 100
+  },
+  noTrainingText: {
+    fontSize: 25,
+    color: 'gray'
   }
 });
 

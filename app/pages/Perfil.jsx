@@ -35,9 +35,13 @@ export default function Perfil({ navigation, onPress, takeRouter }) {
         weight: weight,
     });
 
+    const info = () => {
+        navigation.navigate('settings');
+    }
+
     return (
         <View style={styles.perfilContainer}>
-            <ToolBar onPressBack={navigation.goBack} screenName={"Perfil"} iconName={"infocirlceo"}/>
+            <ToolBar onPress={info} onPressBack={navigation.goBack} screenName={"Perfil"} iconName={"infocirlceo"}/>
             <View style={styles.content}>
                 <SafeAreaView style={styles.content}>
                     <PhotoProfile
