@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import BackgroundContainer from '../components/BackgroundContainer';
-import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
+import getFont from '../util/fonts';
 
 const Meta = ({ navigation, onUpdateWeight }) => {
   const [currentWeight, setCurrentWeight] = useState('');
@@ -17,40 +17,36 @@ const Meta = ({ navigation, onUpdateWeight }) => {
   };
 
   return (
-    <BackgroundContainer>
+    
     <View style={styles.container}>
-      <HeaderScreensNavigations navigation={navigation} title="Meta" paddingRight={50} />
+      <BackgroundContainer onPress={onUpdateWeight} onPressBack={navigation.goBack} screenName={'Meta'} rightText={'Salvar'}>
+        <Text style={[styles.label, { fontFamily: getFont('sfProTextSemibold') }]}>{'Peso Atual (Kg):'}</Text>
+        <TextInput
+          style={styles.input}
+          value={currentWeight}
+          onChangeText={(text) => setCurrentWeight(text)}
+          keyboardType="numeric"
+          placeholder="Digite seu peso atual"
+          placeholderTextColor={'#A3A3A3'}
+        />
 
-      <Text style={styles.label}>Peso Atual</Text>
-      <TextInput
-        style={styles.input}
-        value={currentWeight}
-        onChangeText={(text) => setCurrentWeight(text)}
-        keyboardType="numeric"
-        placeholder="Digite o peso atual"
-        placeholderTextColor={'#A3A3A3'}
-      />
-
-      <Text style={styles.label}>Peso Estimado</Text>
-      <TextInput
-        style={styles.input}
-        value={targetWeight}
-        onChangeText={(text) => setTargetWeight(text)}
-        keyboardType="numeric"
-        placeholder="Digite o peso estimado"
-        placeholderTextColor={'#A3A3A3'}
-      />
-
-      <Button title="Salvar Metas" onPress={handleSave} />
+        <Text style={[styles.label, { fontFamily: getFont('sfProTextSemibold') }]}>{'Peso Desejado (Kg):'}</Text>
+        <TextInput
+          style={styles.input}
+          value={targetWeight}
+          onChangeText={(text) => setTargetWeight(text)}
+          keyboardType="numeric"
+          placeholder="Digite sua meta de peso"
+          placeholderTextColor={'#A3A3A3'}
+        />
+      </BackgroundContainer>
     </View>
-    </BackgroundContainer>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //padding: 20,
   },
   label: {
     color: '#fff',

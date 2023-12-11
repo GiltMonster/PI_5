@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import ToolBar from './toolBarComponents/ToolBar';
 
-const BackgroundContainer = ({ children }) => {
+const BackgroundContainer = ({ children, screenName, rightText, onPress, onPressBack }) => {
     return (
         <View style={styles.container}>
+            <ToolBar onPress={onPress} onPressBack={onPressBack} screenName={screenName} rightText={rightText}/>
             <View style={styles.backgroundView} />
             <View style={styles.innerContainer}>{children}</View>
         </View>
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
     },
     innerContainer: {
         flex: 1,
-        //  paddingTop: 50,
+        paddingTop: 70, 
         paddingLeft: 20,
         paddingRight: 20,
     },
