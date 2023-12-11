@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 
-const CardExercicio = ({isChecked, onCheckboxToggle, nome, repeticoes, series, carga, navigation }) => {
+const CardExercicio = ({nome, repeticoes, series, carga, navigation }) => {
   const handleCardPress = () => {
     navigation.navigate('criarExercicio', { nome, repeticoes, series, carga });
   };

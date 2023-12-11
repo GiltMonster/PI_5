@@ -1,15 +1,27 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Checkbox } from 'react-native-paper';
-import { retornarPalavraPorLetra } from '../util/conversores';
-import { obterDiaDaSemana } from '../util/data';
+import { retornarPalavraPorLetra } from '../../util/conversores';
+import { obterDiaDaSemana } from '../../util/data';
 
+const CardTreino = ({ onCheckboxToggle, treino, navigation }) => {
+  const [checked, setChecked] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
-const CardTreino = ({onCheckboxToggle, treino, navigation }) => {
 
   const handleCardPress = () => {
     navigation.navigate('exercicios', { treino });
+  };
+
+  const handleCheckboxToggle = () => {
+    setChecked(!checked);
+    setShowMessage(!checked);
+
+    console.log(`o Estado do checkbox está: ${checked}`);
+
+    if (!checked) {
+      Alert.alert('Sucesso', 'Seu treino foi adicionado ao histórico!');
+    }
   };
 
   return (
@@ -25,10 +37,15 @@ const CardTreino = ({onCheckboxToggle, treino, navigation }) => {
           </View>
           <View style={styles.rightDetails}>
             <Checkbox.Android
-              status={treino.conclusaoTreino ? 'checked' : 'unchecked'}
-              onPress={onCheckboxToggle}
-              color="#fff"
+              status={checked ? 'checked' : 'unchecked'}
+              borderRadius={50}
+              onPress={handleCheckboxToggle}
+              color="#4DCA68"
+              uncheckedColor="#fff"
             />
+            {showMessage && (
+              <Text style={styles.message}>Treino concluído!</Text>
+            )}
           </View>
         </View>
       </View>
@@ -59,7 +76,7 @@ const styles = StyleSheet.create({
   },
   tituloCategoria: {
     color: '#BF5BF3',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   detailsContainer: {
@@ -71,7 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   rightDetails: {
-    width: 97,
+    width: 130,
     height: 97,
     borderRadius: 10,
     justifyContent: 'center',
@@ -81,6 +98,13 @@ const styles = StyleSheet.create({
   diaSemana: {
     color: '#fff',
     fontSize: 20,
+  },
+  message: {
+    color: '#4DCA68',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 5,
+    textAlign: 'center'
   },
 });
 
