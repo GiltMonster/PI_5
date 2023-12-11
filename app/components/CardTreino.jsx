@@ -2,28 +2,30 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Checkbox } from 'react-native-paper';
+import { retornarPalavraPorLetra } from '../util/conversores';
+import { obterDiaDaSemana } from '../util/data';
 
 
-const CardTreino = ({ titulo, categoria, diaSemana, isChecked, onCheckboxToggle, treinoSalvo, navigation }) => {
+const CardTreino = ({onCheckboxToggle, treino, navigation }) => {
 
   const handleCardPress = () => {
-    navigation.navigate('exercicios', { treinoSalvo });
+    navigation.navigate('exercicios', { treino });
   };
 
   return (
     <TouchableOpacity onPress={handleCardPress}>
       <View style={styles.cardContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.tituloTreino}>{`${titulo}`}</Text>
-          <Text style={styles.tituloCategoria}>{`${categoria}`}</Text>
+          <Text style={styles.tituloTreino}>{treino.nomeTreino}</Text>
+          <Text style={styles.tituloCategoria}>{retornarPalavraPorLetra(treino.categoriaTreino)}</Text>
         </View>
         <View style={styles.detailsContainer}>
           <View style={styles.leftDetails}>
-            <Text style={styles.diaSemana}>{diaSemana}</Text>
+            <Text style={styles.diaSemana}>{obterDiaDaSemana(treino.dataTreino)}</Text>
           </View>
           <View style={styles.rightDetails}>
             <Checkbox.Android
-              status={isChecked ? 'checked' : 'unchecked'}
+              status={treino.conclusaoTreino ? 'checked' : 'unchecked'}
               onPress={onCheckboxToggle}
               color="#fff"
             />
