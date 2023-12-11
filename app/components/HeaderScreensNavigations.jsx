@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { color } from 'react-native-elements/dist/helpers';
-import { colors } from 'react-native-elements';
 
 const HeaderScreensNavigations = ({ title, onSavePress, onAddPress, paddingRight }) => {
     const navigation = useNavigation();
@@ -21,7 +19,7 @@ const HeaderScreensNavigations = ({ title, onSavePress, onAddPress, paddingRight
                     </TouchableOpacity>
                 )}
                 {onAddPress && (
-                    <TouchableOpacity style={styles.button} onPress={onAddPress}>
+                    <TouchableOpacity style={styles.button} onPress={()=> {onAddPress()}}>
                         <MaterialIcons name="add" size={30} color="#6EDEFD" padding={10} />
                     </TouchableOpacity>
                 )}

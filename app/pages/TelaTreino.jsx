@@ -1,33 +1,45 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, ScrollView, Alert, FlatList } from 'react-native';
 import CardTreino from '../components/Cards/CardTreino';
+import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
+import { getTreinos } from '../services/TreinoDB';
 import ToolBar from '../components/toolBarComponents/ToolBar';
 import getFont from '../util/fonts';
 
-const TelaTreino = ({ route, navigation }) => {
-  const treinoSalvo = route.params?.treinoSalvo || null;
+const TelaTreino = ({ navigation }) => {
+  const [treino, setTreino] = useState();
+  const [checked, setChecked] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    getTreinos().then((treinos) => {
+      if (!treinos) {
+        Alert.alert('Atenção', 'Não foi possível carregar os treinos.', ['ok']);
+      } else {
+        console.log('Treinos carregados com sucesso.');
+        setTreino(treinos);
+      }
+    });
+  }, []);
+
+  const goToPage = () => {
+    navigation.navigate('criarTreino');
+  }
+
+
   return (
     <View style={styles.container}>
-      <ToolBar onPress={() => navigation.navigate('criarTreino')} onPressBack={navigation.goBack} screenName={"Treinos"} iconName={"plus"}/>
-      <ScrollView>
-        {treinoSalvo && (
-          <CardTreino
-            titulo={treinoSalvo.titulo}
-            categoria={treinoSalvo.categoria}
-            diaSemana={treinoSalvo.diaDaSemana}
-            isChecked={false}
-            onCheckboxToggle={() => { }}
-            treinoSalvo={treinoSalvo} 
+      <ToolBar onPress={() => navigation.navigate('criarTreino')} onPressBack={navigation.goBack} screenName={"Treinos"} iconName={"plus"} />
+      {treino && (
+        <FlatList
+          data={treino}
+          renderItem={({ item }) => <CardTreino
+            treino={item}
             navigation={navigation}
-
-          />
-        )}
-        {!treinoSalvo && (
-          <View style={styles.noTraining}>
-            <Text style={[styles.noTrainingText, { fontFamily: getFont('sfProTextSemibold') }]}>Sem Treinos</Text>
-          </View>
-        )}
-      </ScrollView>
+          />}
+          keyExtractor={item => item.idTreino}
+        />
+      )}
     </View>
   );
 };
