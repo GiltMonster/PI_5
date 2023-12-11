@@ -1,3 +1,10 @@
+/**
+ * Pega o dia da semana atual e retorna o dia da semana seguinte, np padrão: YYYY-MM-DDTHH:mm:ss.
+ *
+ * @export
+ * @param {string} diaDaSemana
+ * @return {string} 
+ */
 export function obterDataFormatada(diaDaSemana) {
     // Mapeia os dias da semana para seus respectivos índices (0 para Domingo, 1 para Segunda-feira, etc.)
     const diasDaSemana = {
@@ -28,21 +35,30 @@ export function obterDataFormatada(diaDaSemana) {
     console.log('Data formatada:', dataFormatada);
     return dataFormatada;
 }
-
+/**
+ * Obtém uma string contendo uma data no formato "2023-12-12T05:27:30.000Z" e retorna o dia da semana correspondente.
+ *
+ * @export
+ * @param {string} dataString
+ * @return {string} 
+ */
 export function obterDiaDaSemana(dataString) {
-    // Cria um objeto Date com base na string de data fornecida
-    const data = new Date(dataString);
+    // Cria um objeto Date com base na string de data fornecida (considerando que a string está em UTC)
+    const dataUTC = new Date(dataString);
 
     // Mapeia os dias da semana para seus respectivos nomes
-    const nomesDiasDaSemana = [
-        'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'
-    ];
+    const nomesDiasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
 
     // Obtém o índice do dia da semana correspondente
-    const indiceDia = data.getDay();
+    const indiceDia = dataUTC.getUTCDay();
 
-    // Obtém o nome do dia da semana
+    // Obtém o nome do dia da semana a partir do mapeamento
     const diaDaSemana = nomesDiasDaSemana[indiceDia];
-    console.log("diaDaSemana", diaDaSemana);
     return diaDaSemana;
+}
+
+export function pegaDiaAtual() {
+    const dataAtual = new Date();
+    const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Cancelar'];
+    return diasDaSemana[dataAtual.getDay()];
 }

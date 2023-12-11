@@ -1,4 +1,4 @@
-import { API_URL_CADASTRAR_TREINO } from "../util/consts";
+import { API_URL_CADASTRAR_TREINO, API_URL_GET_TREINO } from "../util/consts";
 
 /**
  * This method will be used to save the treino
@@ -16,6 +16,17 @@ export async function createTreino(treino) {
                 'Content-Type': 'application/json'
             }
         });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        throw error; // Se desejar propagar o erro para quem chamou a função
+    }
+}
+
+export async function getTreinos() {
+    try {
+        const response = await fetch(API_URL_GET_TREINO);
         const data = await response.json();
         return data;
     } catch (error) {
