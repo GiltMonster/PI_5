@@ -29,7 +29,9 @@ const TelaTreino = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ToolBar onPress={() => navigation.navigate('criarTreino')} onPressBack={navigation.goBack} screenName={"Treinos"} iconName={"plus"} />
+      <View style={styles.toolbar}>
+        <ToolBar onPress={() => navigation.navigate('criarTreino')} onPressBack={navigation.goBack} screenName={"Treinos"} iconName={"plus"}/>
+      </View>
       {treino && (
         <FlatList
           data={treino}
@@ -48,6 +50,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1C1C1E',
+  },
+  toolbar: {
+    marginBottom: 50
   },
   noTraining: {
     alignItems: 'center',

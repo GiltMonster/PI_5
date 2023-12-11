@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
-import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
 import BackgroundContainer from '../components/BackgroundContainer';
 import TextField from '../components/TextField';
 import { createTreino } from '../services/TreinoDB';
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import getFont from '../util/fonts';
 import { obterDataFormatada, pegaDiaAtual } from '../util/data';
 import { salvaPrimeiraLetra } from '../util/conversores';
 
 export default function CriarTreino({ navigation }) {
   const [treino, setTreino] = useState();
   const [nome, setNome] = useState('');
-  const [categoria, setCategoria] = useState('Superior');
-  const [diaDaSemana, setDiaDaSemana] = useState();
+  const [categoria, setCategoria] = useState('Selecione uma categoria');
+  const [diaDaSemana, setDiaDaSemana] = useState('Selecione um dia');
   const { showActionSheetWithOptions } = useActionSheet();
 
   useEffect(() => {
@@ -129,28 +129,31 @@ export default function CriarTreino({ navigation }) {
     return typeof value === 'string' && value.trim() !== '';
   };
 
-  return (
-    <BackgroundContainer>
-      <HeaderScreensNavigations navigation={navigation} title="Criar Treino" onSavePress={handleSalvar} />
+  const categoryColor = categoria === 'Selecione uma categoria' ? 'gray': '#FAFAFA';
+  const dayColor = diaDaSemana === 'Selecione um dia' ? 'gray': '#FAFAFA';
 
-      <TextField
-        label="Nome:"
-        value={nome}
-        onChangeText={(nome) => {setNome(nome)}}
-        placeholder="Digite o nome do treino"
-        placeholderTextColor="red"
-      />
+  return (
+    <BackgroundContainer onPress={() => handleSalvar()} onPressBack={navigation.goBack} screenName={'Criar Treino'} rightText={'Salvar'}>
+
+      <View style={styles.input}>
+        <Text style={[styles.name, { fontFamily: getFont('sfProTextSemibold') }]}>Nome</Text>
+        <TextField
+          value={nome}
+          onChangeText={setNome}
+          placeholder="Digite o nome do treino"
+        />
+      </View>
 
       <View style={styles.row}>
-        <Text style={styles.label}>Categoria:</Text>
-        <Text style={styles.modalText} onPress={showCategoriaActionSheet}>
+        <Text style={[styles.label, { fontFamily: getFont('sfProTextSemibold') }]}>Categoria</Text>
+        <Text style={[styles.modalText, { fontFamily: getFont('sfProTextRegular'), color: categoryColor }]} onPress={showCategoriaActionSheet}>
           {categoria}
         </Text>
       </View>
 
       <View style={styles.row}>
-        <Text style={styles.label}>Dia da Semana:</Text>
-        <Text style={styles.modalText} onPress={showDiaDaSemanaActionSheet}>
+        <Text style={[styles.label, { fontFamily: getFont('sfProTextSemibold') }]}>Dia da Semana</Text>
+        <Text style={[styles.modalText, { fontFamily: getFont('sfProTextRegular'), color: dayColor }]} onPress={showDiaDaSemanaActionSheet}>
           {diaDaSemana}
         </Text>
       </View>
@@ -160,32 +163,26 @@ export default function CriarTreino({ navigation }) {
 };
 
 const styles = StyleSheet.create({
+  name: {
+    color: '#FAFAFA',
+    fontSize: 20,
+    marginBottom: -10,
+  },
   label: {
-    color: '#fff',
+    color: '#FAFAFA',
     fontSize: 20,
     marginBottom: 10,
   },
   input: {
-    borderColor: '#fff',
-    borderWidth: 1,
-    marginBottom: 20,
-    padding: 10,
-    borderRadius: 10,
-    color: '#fff',
+    marginBottom: 25,
   },
   row: {
     marginBottom: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
   modalText: {
-    color: '#fff',
     fontSize: 18,
-    borderBottomWidth: 1,
-    borderColor: '#fff',
-    paddingVertical: 5,
-    marginLeft: 5,
   },
 });
 

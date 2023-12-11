@@ -23,10 +23,10 @@ export default function Perfil({ navigation, onPress, takeRouter }) {
         setWeight(weight);
     }
 
-    const [userName, setUserName] = useState('Lukinhas');
+    const [userName, setUserName] = useState('');
     const [userImage, setUserImage] = useState(imgAvatar);
-    const [height, setHeight] = useState(1.69);
-    const [weight, setWeight] = useState(85.00);
+    const [height, setHeight] = useState();
+    const [weight, setWeight] = useState();
 
     const [user, setUser] = useState({
         name: userName,
