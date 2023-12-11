@@ -9,31 +9,37 @@ export default function UserDataProfile({ userName, onChangeUserName, height, on
     return (
         <View style={styles.dataProfileContainer}>
             <View style={styles.inputContainer}>
-                <Text style={[styles.inputText, { fontFamily: getFont('sfProTextRegular') }]}>Nome:</Text>
+                <Text style={[styles.inputText, { fontFamily: getFont('sfProTextSemibold') }]}>Nome:</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeUserName}
                     value={userName}
+                    placeholder='Digite seu nome'
+                    placeholderTextColor={'gray'}
                 />
             </View>
             <View style={styles.line}></View>
             <View style={styles.inputContainer}>
-                <Text style={[styles.inputText, { fontFamily: getFont('sfProTextRegular') }]}>Altura:</Text>
+                <Text style={[styles.inputText, { fontFamily: getFont('sfProTextSemibold') }]}>Altura:</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeHeight}
                     value={profileHeight}
                     keyboardType="numeric"
+                    placeholder='Digite sua altura'
+                    placeholderTextColor={'gray'}
                 />
             </View>
             <View style={styles.line}></View>
             <View style={styles.inputContainer}>
-                <Text style={[styles.inputText, { fontFamily: getFont('sfProTextRegular') }]}>Peso:</Text>
+                <Text style={[styles.inputText, { fontFamily: getFont('sfProTextSemibold') }]}>Peso:</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeWeight}
                     value={profileWeight}
                     keyboardType="numeric"
+                    placeholder='Digite seu peso'
+                    placeholderTextColor={'gray'}
                 />
             </View>
         </View>
@@ -42,16 +48,15 @@ export default function UserDataProfile({ userName, onChangeUserName, height, on
 
 const styles = StyleSheet.create({
     dataProfileContainer: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 12,
         borderColor: '#FAFAFA',
         marginHorizontal: 10
     },
     line: {
         backgroundColor: '#FAFAFA',
-        height: 1,
-        width: '78%',
-        alignSelf: 'flex-end'
+        height: 2,
+        width: '100%',
     },
     inputContainer: {
         flexDirection: 'row',
@@ -60,7 +65,7 @@ const styles = StyleSheet.create({
     },
     inputText: {
         color: '#FAFAFA',
-        fontSize: 15,
+        fontSize: 17,
         marginLeft: 20,
     },
     input: {

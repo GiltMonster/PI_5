@@ -8,7 +8,9 @@ const TelaTreino = ({ route, navigation }) => {
   const treinoSalvo = route.params?.treinoSalvo || null;
   return (
     <View style={styles.container}>
-      <ToolBar onPress={() => navigation.navigate('criarTreino')} onPressBack={navigation.goBack} screenName={"Treinos"} iconName={"plus"}/>
+      <View style={styles.toolbar}>
+        <ToolBar onPress={() => navigation.navigate('criarTreino')} onPressBack={navigation.goBack} screenName={"Treinos"} iconName={"plus"}/>
+      </View>
       <ScrollView>
         {treinoSalvo && (
           <CardTreino
@@ -36,6 +38,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1C1C1E',
+  },
+  toolbar: {
+    marginBottom: 50
   },
   noTraining: {
     alignItems: 'center',
