@@ -4,14 +4,15 @@ import TabBar from '../components/tabBarComponents/TabBar';
 import img from '../assets/images/perfil.png';
 import SettingsTitle from '../components/settingsComponents/SettingsTitle';
 import SettingsButtons from '../components/settingsComponents/SettingsButtons';
+import ToolBar from '../components/toolBarComponents/ToolBar';
 
 export default function Settings({ onPress, navigation }) {
     return (
         <View style={styles.settingsContainer}>
+            <ToolBar onPressBack={navigation.goBack} screenName={"Informações"}/>
             <View style={styles.content}>
-                <SettingsTitle />
                 <SafeAreaView style={styles.content}>
-                <SettingsButtons navigation={navigation} />
+                    <SettingsButtons navigation={navigation} />
                     <Image
                         source={img}
                         style={styles.settingsImage}

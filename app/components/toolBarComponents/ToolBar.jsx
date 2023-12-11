@@ -21,7 +21,7 @@ export default function ToolBar({ onPress, onPressBack, screenName, rightText, i
                 )}
                 {rightText === undefined && (
                     <TouchableOpacity onPress={onPress}>
-                        <AntDesign name={iconName} size={24} color="#6EDEFD" style={{marginTop: 57}}/>
+                        <AntDesign name={iconName} size={24} color="#6EDEFD" style={{marginTop: 57, marginRight: 5}}/>
                     </TouchableOpacity>
                 )}
             </View>
