@@ -1,15 +1,20 @@
-import React ,{useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Checkbox } from 'react-native-paper';
+import { retornarPalavraPorLetra } from '../../util/conversores';
+import { obterDiaDaSemana } from '../../util/data';
 
-
-const CardTreino = ({ titulo, categoria, diaSemana, isChecked, onCheckboxToggle, treinoSalvo, navigation }) => {
-  const [checked, setChecked] = useState(isChecked);
+const CardTreino = ({ onCheckboxToggle, treino, navigation }) => {
+  const [checked, setChecked] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+
+
+  const handleCardPress = () => {
+    navigation.navigate('exercicios', { treino });
+  };
 
   const handleCheckboxToggle = () => {
     setChecked(!checked);
-    onCheckboxToggle(!checked);
     setShowMessage(!checked);
 
     console.log(`o Estado do checkbox está: ${checked}`);
@@ -19,33 +24,29 @@ const CardTreino = ({ titulo, categoria, diaSemana, isChecked, onCheckboxToggle,
     }
   };
 
-  const handleCardPress = () => {
-    navigation.navigate('exercicios', { treinoSalvo });
-  };
-
   return (
     <TouchableOpacity onPress={handleCardPress}>
       <View style={styles.cardContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.tituloTreino}>{`${titulo}`}</Text>
-          <Text style={styles.tituloCategoria}>{`${categoria}`}</Text>
+          <Text style={styles.tituloTreino}>{treino.nomeTreino}</Text>
+          <Text style={styles.tituloCategoria}>{retornarPalavraPorLetra(treino.categoriaTreino)}</Text>
         </View>
         <View style={styles.detailsContainer}>
           <View style={styles.leftDetails}>
-            <Text style={styles.diaSemana}>{diaSemana}</Text>
+            <Text style={styles.diaSemana}>{obterDiaDaSemana(treino.dataTreino)}</Text>
           </View>
           <View style={styles.rightDetails}>
-          <Checkbox.Android
+            <Checkbox.Android
               status={checked ? 'checked' : 'unchecked'}
               borderRadius={50}
               onPress={handleCheckboxToggle}
-              color="#4DCA68" 
-              uncheckedColor="#fff" 
+              color="#4DCA68"
+              uncheckedColor="#fff"
             />
-                {showMessage && (
-          <Text style={styles.message}>Treino concluído!</Text>       
-        )}
-      </View>
+            {showMessage && (
+              <Text style={styles.message}>Treino concluído!</Text>
+            )}
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   message: {
-    color: '#4DCA68', 
+    color: '#4DCA68',
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 5,

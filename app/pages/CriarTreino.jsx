@@ -1,51 +1,51 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import BackgroundContainer from '../components/BackgroundContainer';
 import TextField from '../components/TextField';
 import { createTreino } from '../services/TreinoDB';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import getFont from '../util/fonts';
+import { obterDataFormatada, pegaDiaAtual } from '../util/data';
+import { salvaPrimeiraLetra } from '../util/conversores';
 
 export default function CriarTreino({ navigation }) {
-  const [treino, setTreino] = useState(
-    {
-      "idUsuario": 1,
-      "data": "2023-12-04T12:00:00",
-      "duracao": "02:52:00",
-      "nome": "Treino de perna",
-      "categoria": "S",
-      "conclusao": 0
-    }
-  );
-
+  const [treino, setTreino] = useState();
   const [nome, setNome] = useState('');
   const [categoria, setCategoria] = useState('Selecione uma categoria');
   const [diaDaSemana, setDiaDaSemana] = useState('Selecione um dia');
   const { showActionSheetWithOptions } = useActionSheet();
 
-  function newCreateTreino() {
-    createTreino(treino).then((res) => {
-      if (!res) {
-        console.log('Treino não criado');
-      } else {
-        console.log("Treino criado com sucesso", res);
-      }
-    });
-  }
+  useEffect(() => {
+    setDiaDaSemana(pegaDiaAtual());
+  }, []);
 
   const handleSalvar = () => {
     if (!isValidString(nome)) {
       Alert.alert('Atenção', 'Por favor, preencha o nome do treino.');
       return;
+    }else{
+      const novoTreino = {
+        "idUsuario": 1,
+        "data": obterDataFormatada(diaDaSemana),
+        "duracao": "00:00:00",
+        "nome": nome,
+        "categoria": salvaPrimeiraLetra(categoria),
+        "conclusao": 0
+      };
+
+      console.log('Treino: ', novoTreino);
+      createTreino(novoTreino).then((res) => {
+        if (!res) {
+          Alert.alert('Alguma coisa deu errado','Treino não criado', ['ok']);
+        } else {
+          setNome('');
+          setCategoria('Superior');
+          setDiaDaSemana(pegaDiaAtual());
+          Alert.alert('Sucesso', "Treino criado com sucesso", ['ok']);
+          navigation.navigate('treinos');
+        }
+      });
     }
-
-    const treinoSalvo = {
-      titulo: nome,
-      categoria,
-      diaDaSemana,
-    };
-
-    navigation.navigate('treinos', { treinoSalvo });
   };
 
   const showCategoriaActionSheet = () => {
