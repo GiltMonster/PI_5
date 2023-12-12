@@ -3,12 +3,13 @@ import getFont from '../../util/fonts';
 import { AntDesign } from '@expo/vector-icons';
 
 export default function ToolBar({ onPress, onPressBack, screenName, rightText, iconName }) {
+    const backText = screenName !== 'Privacidade e Termos de Uso' ? 'Voltar' : '';
 
     return (
         <View style={styles.toolBarContainer}>
             <TouchableOpacity style={styles.backButton} onPress={onPressBack}>
                 <AntDesign name="left" size={24} color="#FAFAFA" style={{ marginTop: 55 }}/>
-                <Text style={[styles.backText, { fontFamily: getFont('sfProTextRegular') }]}>Voltar</Text>
+                <Text style={[styles.backText, { fontFamily: getFont('sfProTextRegular') }]}>{backText}</Text>
             </TouchableOpacity>
             <View style={styles.centerContainer}>
                 <Text style={[styles.titleText, { fontFamily: getFont('sfProTextSemibold') }]}>{screenName}</Text>
