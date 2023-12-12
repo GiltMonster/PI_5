@@ -7,7 +7,7 @@ import UserDataProfile from '../components/profileComponents/UserDataProfile';
 import ToolBar from '../components/toolBarComponents/ToolBar';
 import { useState } from 'react';
 
-import imgAvatar from '../assets/images/avatar.jpg';
+import imgAvatar from '../assets/images/avatares/avt03.jpeg';
 
 export default function Perfil({ navigation, onPress, takeRouter }) {
 
@@ -21,6 +21,10 @@ export default function Perfil({ navigation, onPress, takeRouter }) {
 
     const onChangeWeight = (weight) => {
         setWeight(weight);
+    }
+
+    const onChangeUserImage = (image) => {
+        setUserImage(image);
     }
 
     const [userName, setUserName] = useState('');
@@ -47,6 +51,7 @@ export default function Perfil({ navigation, onPress, takeRouter }) {
                     <PhotoProfile
                         onPress={onPress}
                         userImage={user.image}
+                        setUserImage={onChangeUserImage}
                     />
                     <UserDataProfile
                         userName={user.name}

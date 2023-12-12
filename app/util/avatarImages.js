@@ -1,0 +1,28 @@
+const avatarImages = {
+    avt00: require('../assets/images/avatares/avt00.jpeg'),
+    avt01: require('../assets/images/avatares/avt01.jpeg'),
+    avt02: require('../assets/images/avatares/avt02.jpeg'),
+    avt03: require('../assets/images/avatares/avt03.jpeg'),
+    avt04: require('../assets/images/avatares/avt04.jpeg'),
+    avt05: require('../assets/images/avatares/avt05.jpeg'),
+    avt06: require('../assets/images/avatares/avt06.jpeg'),
+    avt07: require('../assets/images/avatares/avt07.jpeg'),
+    avt08: require('../assets/images/avatares/avt08.jpeg'),
+    avt09: require('../assets/images/avatares/avt09.jpeg'),
+    avt10: require('../assets/images/avatares/avt10.jpeg'),
+    avt11: require('../assets/images/avatares/avt11.jpeg'),
+    avt12: require('../assets/images/avatares/avt12.jpeg'),
+    avt13: require('../assets/images/avatares/avt13.jpeg'),
+    avt14: require('../assets/images/avatares/avt14.jpeg'),
+    avt15: require('../assets/images/avatares/avt15.jpeg'),
+    avt16: require('../assets/images/avatares/avt16.jpeg'),
+    avt17: require('../assets/images/avatares/avt17.jpeg'),
+    avt18: require('../assets/images/avatares/avt18.jpeg'),
+    avt19: require('../assets/images/avatares/avt19.jpeg'),
+    avt20: require('../assets/images/avatares/avt20.jpeg'),
+    avt21: require('../assets/images/avatares/avt21.jpeg'),
+    avt22: require('../assets/images/avatares/avt22.jpeg'),
+    avt23: require('../assets/images/avatares/avt23.jpeg'),
+  }
+  
+  export default avatarImages;
