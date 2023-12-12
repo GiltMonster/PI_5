@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert, FlatList, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ScrollView, Alert, FlatList } from 'react-native';
 import CardTreino from '../components/Cards/CardTreino';
+import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
 import { getTreinos } from '../services/TreinoDB';
 import ToolBar from '../components/toolBarComponents/ToolBar';
+import getFont from '../util/fonts';
 
 const TelaTreino = ({ navigation }) => {
   const [treino, setTreino] = useState();
-  const [isLoad, setLoading] = useState(true);
+  const [checked, setChecked] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     getTreinos().then((treinos) => {
@@ -15,43 +18,31 @@ const TelaTreino = ({ navigation }) => {
       } else {
         console.log('Treinos carregados com sucesso.');
         setTreino(treinos);
-        setLoading(false);
       }
     });
   }, []);
 
   const goToPage = () => {
-    navigation.navigate('criarTreino',);
+    navigation.navigate('criarTreino');
   }
 
+
   return (
-    
-    isLoad ?
-
-      <View style={styles.container}>
-        <ToolBar onPress={() => goToPage()} onPressBack={navigation.goBack} screenName={"Treinos"} iconName={"plus"} />
-        <View style={styles.noTraining}>
-          <ActivityIndicator size="large" color="#6EDEFD" />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.toolbar}>
+        <ToolBar onPress={() => navigation.navigate('criarTreino')} onPressBack={navigation.goBack} screenName={"Treinos"} iconName={"plus"}/>
       </View>
-
-      :
-
-      <View style={styles.container}>
-        <ToolBar onPress={() => goToPage()} onPressBack={navigation.goBack} screenName={"Treinos"} iconName={"plus"} />
-        {treino && (
-          <FlatList
-            data={treino}
-            renderItem={({ item }) =>
-              <CardTreino
-                treino={item}
-                navigation={navigation}
-              />
-            }
-            keyExtractor={item => item.idTreino}
-          />
-        )}
-      </View>
+      {treino && (
+        <FlatList
+          data={treino}
+          renderItem={({ item }) => <CardTreino
+            treino={item}
+            navigation={navigation}
+          />}
+          keyExtractor={item => item.idTreino}
+        />
+      )}
+    </View>
   );
 };
 
@@ -66,7 +57,7 @@ const styles = StyleSheet.create({
   noTraining: {
     alignItems: 'center',
     justifyContent: 'center',
-    top: 50
+    top: 100
   },
   noTrainingText: {
     fontSize: 25,

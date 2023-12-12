@@ -2,22 +2,21 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 
-const CardExercicio = ({exercicio, treinoId, navigation }) => {
+const CardExercicio = ({nome, repeticoes, series, carga, navigation }) => {
   const handleCardPress = () => {
-    console.log('treinoId: ', treinoId);
-    navigation.navigate('criarExercicio', { exercicio });
+    navigation.navigate('criarExercicio', { nome, repeticoes, series, carga });
   };
 
   return (
     <TouchableOpacity onPress={handleCardPress}>
       <View style={styles.cardContainer}>
         <View style={styles.headerContainer}>
-          <Text style={styles.nomeExercicio}>{exercicio.nomeExercicio}</Text>
+          <Text style={styles.nomeExercicio}>{nome}</Text>
         </View>
         <View style={styles.detailsContainer}>
-          <Text style={styles.textoDetalhes}>{`Repetições: ${exercicio.repeticoesExercicio}`}</Text>
-          <Text style={styles.textoDetalhes}>{`Série: ${exercicio.serieExercicio}`}</Text>
-          <Text style={styles.textoDetalhes}>{`Carga: ${exercicio.cargaExercicio}`}</Text>
+          <Text style={styles.textoDetalhes}>{`Repetições: ${repeticoes}`}</Text>
+          <Text style={styles.textoDetalhes}>{`Série: ${series}`}</Text>
+          <Text style={styles.textoDetalhes}>{`Carga: ${carga}`}</Text>
         </View>
       </View>
     </TouchableOpacity>

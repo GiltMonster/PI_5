@@ -4,13 +4,13 @@ import { Checkbox } from 'react-native-paper';
 import { retornarPalavraPorLetra } from '../../util/conversores';
 import { obterDiaDaSemana } from '../../util/data';
 
-const CardTreino = ({ treino, navigation }) => {
+const CardTreino = ({ onCheckboxToggle, treino, navigation }) => {
   const [checked, setChecked] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 
 
   const handleCardPress = () => {
-    navigation.navigate('exercicios', {treino});
+    navigation.navigate('exercicios', { treino });
   };
 
   const handleCheckboxToggle = () => {

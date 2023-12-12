@@ -1,59 +1,30 @@
-
-import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert, ActivityIndicator } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import CardExercicio from '../components/Cards/CardExercicio';
-import { getExerciciosPeloTreino } from '../services/Exercicio';
 import ToolBar from '../components/toolBarComponents/ToolBar';
 
 const TelaExercicio = ({ route, navigation }) => {
-  const treino = route.params.treino;
-
-  const [exercicios, setExercicios] = useState([]);
-  const [isLoad, setLoading] = useState(true);
-
-  useEffect(() => {
-    console.log('treino:', treino);
-    getExerciciosPeloTreino(treino.idTreino).then((exercicios) => {
-      if (!exercicios) {
-        Alert.alert('Atenção', 'Não foi possível carregar os treinos.', ['ok']);
-      } else {
-        console.log('Exercicios carregados com sucesso.');
-        setExercicios(exercicios);
-        setLoading(false);
-      }
-    });
-  }, []);
+  const treinoSalvo = route.params?.treinoSalvo || { titulo: 'Treino Padrão' };
+  const exercicioSalvo = route.params?.exercicioSalvo || null;
 
   return (
-
-    isLoad ?
-
-      <View style={styles.container}>
-       <ToolBar onPress={() => navigation.navigate('criarExercicio')} onPressBack={navigation.goBack} screenName={"Exercícios"} iconName={"plus"}/>
-        <ActivityIndicator size="large" color="#6EDEFD" />
-      </View>
-
-      :
-
-      <View style={styles.container}>
-        <ToolBar onPress={() => navigation.navigate('criarExercicio')} onPressBack={navigation.goBack} screenName={"Exercícios"} iconName={"plus"}/>
+    <View style={styles.container}>
+      <ToolBar onPress={() => navigation.navigate('criarExercicio')} onPressBack={navigation.goBack} screenName={"Exercícios"} iconName={"plus"}/>
+      <ScrollView style={styles.scrollView}>
         <View style={styles.titleContainer}>
-          <Text style={styles.header}>{treino.nomeTreino}</Text>
+          <Text style={styles.header}>{`${treinoSalvo.titulo}`}</Text>
         </View>
-        {exercicios && (
-          <FlatList
-            data={exercicios}
-            renderItem={({ item }) =>
-              <CardExercicio
-                exercicio={item}
-                navigation={navigation}
-                treinoId={treino.idTreino}
-              />
-            }
-            keyExtractor={item => item.idExercicio}
+        {exercicioSalvo && (
+          <CardExercicio
+            nome={exercicioSalvo.nome}
+            series={exercicioSalvo.series}
+            repeticoes={exercicioSalvo.repeticoes}
+            carga={exercicioSalvo.carga}
+            navigation={navigation}
           />
         )}
-      </View>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -72,7 +43,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingRight: 20,
     marginLeft: 20,
     marginTop: 30
   },
