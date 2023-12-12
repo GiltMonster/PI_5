@@ -1,5 +1,6 @@
+
 import React, { useEffect, useState } from 'react';
-import { View, Alert } from 'react-native';
+import { View, Alert, ScrollView } from 'react-native';
 import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
 import TextField from '../components/TextField';
 import BackgroundContainer from '../components/BackgroundContainer';
@@ -95,47 +96,46 @@ const CriarExercicio = ({ route, navigation }) => {
   };
 
   return (
-    <BackgroundContainer>
-      <View>
-        <HeaderScreensNavigations navigation={navigation} title="Criar Exercício" onSavePress={() => handleSalvar()} />
-      </View>
-      <TextField
-        label="Nome:"
-        value={nome}
-        onChangeText={setNome}
-        placeholder="Digite o nome do exercício"
-      />
+    <BackgroundContainer onPress={() => handleSalvar()} onPressBack={navigation.goBack} screenName={'Criar Exercício'} rightText={'Salvar'}> 
+      <ScrollView>
+        <TextField
+          label="Nome"
+          value={nome}
+          onChangeText={setNome}
+          placeholder="Digite o nome do exercício"
+        />
 
-      <TextField
-        label="Repetições:"
-        value={repeticoes}
-        onChangeText={(text) => isValidNumber(text) && setRepeticoes(text)}
-        placeholder="Digite a quantidade de repetições"
-        keyboardType="numeric"
-      />
-      <TextField
-        label="Séries:"
-        value={series}
-        onChangeText={(text) => isValidNumber(text) && setSeries(text)}
-        placeholder="Digite a quantidade de séries"
-        keyboardType="numeric"
-      />
+        <TextField
+          label="Repetições"
+          value={repeticoes}
+          onChangeText={(text) => isValidNumber(text) && setRepeticoes(text)}
+          placeholder="Digite a quantidade de repetições"
+          keyboardType="numeric"
+        />
+        <TextField
+          label="Séries"
+          value={series}
+          onChangeText={(text) => isValidNumber(text) && setSeries(text)}
+          placeholder="Digite a quantidade de séries"
+          keyboardType="numeric"
+        />
 
-      <TextField
-        label="Carga (kg):"
-        value={carga}
-        onChangeText={(text) => isValidFloat(text) && setCarga(text)}
-        placeholder="Digite a carga em kg"
-        keyboardType="numeric"
-      />
+        <TextField
+          label="Carga (kg)"
+          value={carga}
+          onChangeText={(text) => isValidFloat(text) && setCarga(text)}
+          placeholder="Digite a carga em kg"
+          keyboardType="numeric"
+        />
 
-      <TextField
-        label="Descrição:"
-        value={descricao}
-        onChangeText={setDescricao}
-        placeholder="Digite uma descrição"
-        multiline
-      />
+        <TextField
+          label="Descrição"
+          value={descricao}
+          onChangeText={setDescricao}
+          placeholder="Digite uma descrição"
+          multiline
+        />
+      </ScrollView>
     </BackgroundContainer>
   );
 };

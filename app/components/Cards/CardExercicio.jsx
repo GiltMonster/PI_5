@@ -19,16 +19,6 @@ const CardExercicio = ({exercicio, treinoId, navigation }) => {
           <Text style={styles.textoDetalhes}>{`Série: ${exercicio.serieExercicio}`}</Text>
           <Text style={styles.textoDetalhes}>{`Carga: ${exercicio.cargaExercicio}`}</Text>
         </View>
-                    {/* Este é um comentário dentro do JSX 
-  <View style={styles.rightDetails}>
-            <Checkbox.Android
-              status={isChecked ? 'checked' : 'unchecked'}
-              onPress={onCheckboxToggle}
-              color="#fff"
-              
-            />
-          </View>
-          */}
       </View>
     </TouchableOpacity>
   );
@@ -55,7 +45,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
-    paddingBottom: 8
+    paddingBottom: 20
   },
   rightDetails: {
     width: 97,

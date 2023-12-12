@@ -24,9 +24,8 @@ const TelaTreino = ({ navigation }) => {
     navigation.navigate('criarTreino',);
   }
 
-
   return (
-
+    
     isLoad ?
 
       <View style={styles.container}>
@@ -60,6 +59,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1C1C1E',
+  },
+  toolbar: {
+    marginBottom: 50
   },
   noTraining: {
     alignItems: 'center',
