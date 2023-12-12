@@ -1,10 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
-import { View, Alert, ScrollView, StyleSheet } from 'react-native';
+import { View, Alert, ScrollView, StyleSheet, Image } from 'react-native';
 import TextField from '../components/TextField';
 import BackgroundContainer from '../components/BackgroundContainer';
 import { createDescricaoExercicio, createExercicio } from '../services/Exercicio';
 import TabBar from '../components/tabBarComponents/TabBar';
+import img from '../assets/images/perfil.png';
 
 const CriarExercicio = ({ route, navigation, takeRouter }) => {
   const idTreino = route.params.idTreino;
@@ -139,6 +140,10 @@ const CriarExercicio = ({ route, navigation, takeRouter }) => {
           />
         </ScrollView>
       </BackgroundContainer>
+      <Image
+        source={img}
+        style={styles.perfilImage}
+      />
       {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
     </View>
   );
@@ -149,5 +154,10 @@ export default CriarExercicio;
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  perfilImage: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
 });
