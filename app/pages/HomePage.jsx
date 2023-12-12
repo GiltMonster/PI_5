@@ -12,16 +12,16 @@ import img from '../assets/images/avatares/avt00.jpeg';
 
 export default function HomePage({ takeRouter }) {
   const [treino, setTreino] = useState({
-    name: 'Costas e Bíceps',
-    members: 's',
+    name: '',
+    members: '',
   });
 
   const [user, setUser] = useState({
-    name: 'Lukinhas',
+    name: '',
     image: undefined,
-    height: 1.69,
-    weight: 85.00, 
-    targetWeight: 65.00,
+    height: 0,
+    weight: 0, 
+    targetWeight: 0,
   });
 
   const homeText = user.name === '' || user.name === undefined ? '' : 'Treino de hoje,';

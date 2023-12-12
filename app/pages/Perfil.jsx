@@ -13,24 +13,40 @@ export default function Perfil({ navigation, onPress, takeRouter }) {
 
     const onChangeUserName = (name) => {
         setUserName(name);
+        setUser((prevUser) => ({
+            ...prevUser,
+            name: name,
+        }));
     }
 
     const onChangeHeight = (height) => {
         setHeight(height);
+        setUser((prevUser) => ({
+            ...prevUser,
+            height: height,
+        }));
     }
 
     const onChangeWeight = (weight) => {
         setWeight(weight);
+        setUser((prevUser) => ({
+            ...prevUser,
+            weight: weight,
+        }));
     }
 
     const onChangeUserImage = (image) => {
         setUserImage(image);
+        setUser((prevUser) => ({
+            ...prevUser,
+            image: image,
+        }));
     }
 
     const [userName, setUserName] = useState('');
     const [userImage, setUserImage] = useState(imgAvatar);
-    const [height, setHeight] = useState();
-    const [weight, setWeight] = useState();
+    const [height, setHeight] = useState(1.80);
+    const [weight, setWeight] = useState(74.45);
 
     const [user, setUser] = useState({
         name: userName,

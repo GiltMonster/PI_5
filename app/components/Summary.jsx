@@ -4,7 +4,7 @@ import getFont from '../util/fonts';
 export default function Summary({ takeRouter }) {
   return (
     <View>
-      <Text style={[styles.titleText, { fontFamily: getFont('sfProDisplayBold') }]}>Resumo</Text>
+      <Text style={[styles.titleText, { fontFamily: getFont('sfProDisplayBold') }]}></Text>
       <TouchableOpacity onPress={()=>{takeRouter("treinos")}} style={styles.summaryButton}>
         <Text style={[styles.summaryButtonText,{ fontFamily: getFont('sfProTextSemibold') }]}>Treinos</Text>
       </TouchableOpacity>
