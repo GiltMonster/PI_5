@@ -4,6 +4,8 @@ import { Checkbox } from 'react-native-paper';
 import { retornaTrueOuFalse, retornaUmOuZero, retornarPalavraPorLetra } from '../../util/conversores';
 import { obterDataFormatada, obterDiaDaSemana, pegaDiaAtual } from '../../util/data';
 import { atualizaTreino } from '../../services/TreinoDB';
+import { Ionicons } from '@expo/vector-icons';
+
 
 const CardTreino = ({ onCheckboxToggle, treino, navigation }) => {
   const [checked, setChecked] = useState(retornaTrueOuFalse(treino.conclusaoTreino));
@@ -27,6 +29,10 @@ const CardTreino = ({ onCheckboxToggle, treino, navigation }) => {
       "conclusao": retornaUmOuZero(!checked)
     };
 
+    const handleDeleteCategory = () => {
+      
+    }
+
     console.log('Treino atualizado: ', treinoAtualizado);
     atualizaTreino(treinoAtualizado, treino.idTreino).then((res) => {
       if (!res) {
@@ -49,6 +55,9 @@ const CardTreino = ({ onCheckboxToggle, treino, navigation }) => {
         <View style={styles.headerContainer}>
           <Text style={styles.tituloTreino}>{treino.nomeTreino}</Text>
           <Text style={styles.tituloCategoria}>{retornarPalavraPorLetra(treino.categoriaTreino)}</Text>
+          <TouchableOpacity onPress={() => handleDeleteCategory(treino.categoriaTreino)}>
+              <Ionicons name="md-trash" size={20} color="#CB0000" style={styles.deleteIcon} />
+            </TouchableOpacity>
         </View>
         <View style={styles.detailsContainer}>
           <View style={styles.leftDetails}>
@@ -87,11 +96,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: 10,
     alignItems: 'center',
+    
   },
   tituloTreino: {
     color: '#BF5BF3',
     fontSize: 20,
     fontWeight: 'bold',
+   width: 180
   },
   tituloCategoria: {
     color: '#BF5BF3',
@@ -113,6 +124,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 10,
+    flex: 1
   },
   diaSemana: {
     color: '#fff',
@@ -123,7 +135,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginTop: 5,
-    textAlign: 'center'
+    textAlign: 'center',
+    flex: 1
   },
 });
 
