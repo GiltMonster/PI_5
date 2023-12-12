@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
 import ToolBar from '../components/toolBarComponents/ToolBar';
 import getFont from '../util/fonts';
+import img from '../assets/images/perfil.png';
 
 const PrivacidadeTermosTela = ({navigation}) => {
   return (
@@ -17,6 +18,10 @@ const PrivacidadeTermosTela = ({navigation}) => {
           {'\n'}Se tiver dúvidas ou preocupações, entre em contato conosco em @Dominio.
         </Text>
       </ScrollView>
+      <Image
+        source={img}
+        style={styles.perfilImage}
+      />
     </View>
     
   );
@@ -36,6 +41,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     textAlign: 'justify'
+  },
+  perfilImage: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
 });
 
