@@ -1,33 +1,64 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, FlatList, Alert, ActivityIndicator } from 'react-native';
 import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
 import CardExercicio from '../components/Cards/CardExercicio';
+import { getExerciciosPeloTreino } from '../services/Exercicio';
 
 const TelaExercicio = ({ route, navigation }) => {
-  const treinoSalvo = route.params?.treinoSalvo || { titulo: 'Treino Padrão' };
-  const exercicioSalvo = route.params?.exercicioSalvo || null;
+  const treino = route.params.treino;
+
+  const [exercicios, setExercicios] = useState([]);
+  const [isLoad, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log('treino:', treino);
+    getExerciciosPeloTreino(treino.idTreino).then((exercicios) => {
+      if (!exercicios) {
+        Alert.alert('Atenção', 'Não foi possível carregar os treinos.', ['ok']);
+      } else {
+        console.log('Exercicios carregados com sucesso.');
+        setExercicios(exercicios);
+        setLoading(false);
+      }
+    });
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <HeaderScreensNavigations
-        title="Exercícios"
-        onAddPress={() => navigation.navigate('criarExercicio')}
-      />
-      <View style={styles.titleContainer}>
-        <Text style={styles.header}>{`${treinoSalvo.titulo}`}</Text>
+
+    isLoad ?
+
+      <View style={styles.container}>
+        <HeaderScreensNavigations
+          title="Exercícios"
+          onAddPress={() => navigation.navigate('criarExercicio', {treinoId: treino.idTreino})}
+        />
+        <ActivityIndicator size="large" color="#6EDEFD" />
       </View>
-      <ScrollView style={styles.scrollView}>
-        {exercicioSalvo && (
-          <CardExercicio
-            nome={exercicioSalvo.nome}
-            series={exercicioSalvo.series}
-            repeticoes={exercicioSalvo.repeticoes}
-            carga={exercicioSalvo.carga}
-            navigation={navigation}
+
+      :
+
+      <View style={styles.container}>
+        <HeaderScreensNavigations
+          title="Exercícios"
+          onAddPress={() => navigation.navigate('criarExercicio', {treinoId: treino.idTreino})}
+        />
+        <View style={styles.titleContainer}>
+          <Text style={styles.header}>{treino.nomeTreino}</Text>
+        </View>
+        {exercicios && (
+          <FlatList
+            data={exercicios}
+            renderItem={({ item }) =>
+              <CardExercicio
+                exercicio={item}
+                navigation={navigation}
+                treinoId={treino.idTreino}
+              />
+            }
+            keyExtractor={item => item.idExercicio}
           />
         )}
-      </ScrollView>
-    </View>
+      </View>
   );
 };
 
@@ -44,13 +75,13 @@ const styles = StyleSheet.create({
     color: '#BF5BF3',
     textAlign: 'center',
     fontWeight: 'bold'
-   // padding: 10,
+    // padding: 10,
   },
   titleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-   // backgroundColor: 'red',
+    // backgroundColor: 'red',
     paddingRight: 20,
   },
   scrollView: {
