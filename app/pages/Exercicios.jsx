@@ -43,11 +43,9 @@ const TelaExercicio = ({ route, navigation }) => {
           <FlatList
             data={exercicios}
             renderItem={({ item }) =>
-            
               <CardExercicio
               exercicio={item}
               navigation={navigation}
-              idTreino={treino.idTreino}
               />
           }              
             keyExtractor={item => item.idExercicio}

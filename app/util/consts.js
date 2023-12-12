@@ -12,6 +12,7 @@ export const API_URL_ATUALIZAR_TREINO = `http://${IP}:3000/treino/atualizarTrein
 export const API_URL_GET_EXERCICIO = `http://${IP}:3000/exercicio/getExercicio`;
 export const API_URL_GET_EXERCICIO_POR_TREINO = `http://${IP}:3000/exercicio/getExerciciosPeloTreino`;
 export const API_URL_CADASTRAR_EXERCICIO = `http://${IP}:3000/exercicio/cadastrarExercicio`;
+export const API_URL_ATUALIZAR_EXERCICIO = `http://${IP}:3000/exercicio/atualizarExercicio`;
 
 // DESCRICAO
 export const API_URL_GET_DESCRICAO = `http://${IP}:3000/descricaoExercicio/getDescricaoExercicio`;

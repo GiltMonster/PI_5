@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Checkbox } from 'react-native-paper';
 
-const CardExercicio = ({exercicio, idTreino, navigation }) => {
+const CardExercicio = ({exercicio, navigation }) => {
   
   const handleCardPress = () => {
-    navigation.navigate('criarExercicio', {idTreino} );
+    navigation.navigate('editarExercicio', {exercicio} );
   };
   
   useEffect(() => {
-  console.log('treinoId: ', idTreino);
+  console.log('exercicio clicado: ', exercicio);
   }, []);
   
   return (
