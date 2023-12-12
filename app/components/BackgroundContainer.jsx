@@ -15,14 +15,15 @@ const BackgroundContainer = ({ children, screenName, rightText, onPress, onPress
 const styles = StyleSheet.create({
     backgroundView: {
         marginTop: 110,
-        backgroundColor: '#121213',
+        backgroundColor: '#151515',
         flex: 1,
         position: 'absolute',
         top: 0,
         bottom: 0,
         left: 0,
         right: 0,
-        borderRadius: 45,
+        borderTopLeftRadius: 45,
+        borderTopRightRadius: 45,
     },
     container: {
         backgroundColor: '#1C1C1E',

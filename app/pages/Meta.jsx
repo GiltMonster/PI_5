@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
 import BackgroundContainer from '../components/BackgroundContainer';
 import getFont from '../util/fonts';
+import TabBar from '../components/tabBarComponents/TabBar';
+import img from '../assets/images/perfil.png';
 
-const Meta = ({ navigation, onUpdateWeight }) => {
+const Meta = ({ navigation, onUpdateWeight, takeRouter }) => {
   const [currentWeight, setCurrentWeight] = useState('');
   const [targetWeight, setTargetWeight] = useState('');
 
@@ -40,6 +42,11 @@ const Meta = ({ navigation, onUpdateWeight }) => {
           placeholderTextColor={'#A3A3A3'}
         />
       </BackgroundContainer>
+      <Image
+        source={img}
+        style={styles.perfilImage}
+      />
+      {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
     </View>
   );
 };
@@ -61,6 +68,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: '#fff',
     fontSize: 18,
+  },
+  perfilImage: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
 });
 

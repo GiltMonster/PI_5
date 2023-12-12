@@ -10,7 +10,7 @@ import TabBar from '../components/tabBarComponents/TabBar';
 
 import img from '../assets/images/avatares/avt00.jpeg';
 
-export default function HomePage({ takeRouter }) {
+export default function HomePage({ takeRouter, navigation }) {
   const [treino, setTreino] = useState({
     name: '',
     members: '',

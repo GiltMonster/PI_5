@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, Image } from 'react-native';
 import BackgroundContainer from '../components/BackgroundContainer';
 import TextField from '../components/TextField';
 import { createTreino } from '../services/TreinoDB';
@@ -7,8 +7,10 @@ import { useActionSheet } from '@expo/react-native-action-sheet';
 import getFont from '../util/fonts';
 import { obterDataFormatada, pegaDiaAtual } from '../util/data';
 import { salvaPrimeiraLetra } from '../util/conversores';
+import TabBar from '../components/tabBarComponents/TabBar';
+import img from '../assets/images/perfil.png';
 
-export default function CriarTreino({ navigation }) {
+export default function CriarTreino({ navigation, takeRouter }) {
   const [treino, setTreino] = useState();
   const [nome, setNome] = useState('');
   const [categoria, setCategoria] = useState('Selecione uma categoria');
@@ -133,6 +135,7 @@ export default function CriarTreino({ navigation }) {
   const dayColor = diaDaSemana === 'Selecione um dia' ? 'gray': '#FAFAFA';
 
   return (
+    <View style={styles.container}>
     <BackgroundContainer onPress={() => handleSalvar()} onPressBack={navigation.goBack} screenName={'Criar Treino'} rightText={'Salvar'}>
 
       <View style={styles.input}>
@@ -157,12 +160,21 @@ export default function CriarTreino({ navigation }) {
           {diaDaSemana}
         </Text>
       </View>
-
+      
     </BackgroundContainer>
+    {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
+    <Image
+        source={img}
+        style={styles.perfilImage}
+    />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   name: {
     color: '#FAFAFA',
     fontSize: 20,
@@ -183,6 +195,11 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontSize: 18,
+  },
+  perfilImage: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
 });
 
