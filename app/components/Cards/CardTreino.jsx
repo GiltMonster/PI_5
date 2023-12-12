@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    left: 15,
+    marginLeft: 10,
   },
   diaSemana: {
     color: '#fff',
