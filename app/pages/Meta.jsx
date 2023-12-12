@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import BackgroundContainer from '../components/BackgroundContainer';
 import getFont from '../util/fonts';
+import TabBar from '../components/tabBarComponents/TabBar';
 
-const Meta = ({ navigation, onUpdateWeight }) => {
+const Meta = ({ navigation, onUpdateWeight, takeRouter }) => {
   const [currentWeight, setCurrentWeight] = useState('');
   const [targetWeight, setTargetWeight] = useState('');
 
@@ -40,6 +41,7 @@ const Meta = ({ navigation, onUpdateWeight }) => {
           placeholderTextColor={'#A3A3A3'}
         />
       </BackgroundContainer>
+      <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
     </View>
   );
 };
