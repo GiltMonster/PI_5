@@ -48,8 +48,8 @@ export default function PhotoProfile({ onPress, userImage, setUserImage }) {
 
             {showPhotoList && (
                 <PhotoList
-                    imageIndex={selectedImage} // Passando o índice da imagem selecionada
-                    setImageIndex={handlePhotoSelection} // Passando a função para selecionar a imagem
+                    imageIndex={selectedImage} 
+                    setImageIndex={handlePhotoSelection} 
                 />
             )}
         </View>
@@ -59,7 +59,7 @@ export default function PhotoProfile({ onPress, userImage, setUserImage }) {
 const styles = StyleSheet.create({
     userImageContainer: {
         alignItems: 'center',
-        // marginBottom: 45
+        marginBottom: 45
     },
     userImage: {
         marginBottom: 15
