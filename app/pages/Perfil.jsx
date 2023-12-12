@@ -11,28 +11,32 @@ import imgAvatar from '../assets/images/avatares/avt03.jpeg';
 
 export default function Perfil({ navigation, onPress, takeRouter }) {
 
-    const onChangeUserName = (name) => {
-        setUserName(name);
-        setUser((prevUser) => ({
-            ...prevUser,
-            name: name,
-        }));
-    }
+    // const onChangeUserName = (name) => {
+    //     setUserName(name);
+    //     setUser((prevUser) => ({
+    //         ...prevUser,
+    //         name: name,
+    //     }));
+    // }
 
-    const onChangeHeight = (height) => {
-        setHeight(height);
-        setUser((prevUser) => ({
-            ...prevUser,
-            height: height,
-        }));
-    }
+    // const onChangeHeight = (height) => {
+    //     setHeight(height);
+    //     setUser((prevUser) => ({
+    //         ...prevUser,
+    //         height: height,
+    //     }));
+    // }
 
-    const onChangeWeight = (weight) => {
-        setWeight(weight);
-        setUser((prevUser) => ({
-            ...prevUser,
-            weight: weight,
-        }));
+    // const onChangeWeight = (weight) => {
+    //     setWeight(weight);
+    //     setUser((prevUser) => ({
+    //         ...prevUser,
+    //         weight: weight,
+    //     }));
+    // }
+
+    const onSaveUserData = (userData) => {
+        setUser(userData);
     }
 
     const onChangeUserImage = (image) => {
@@ -43,10 +47,10 @@ export default function Perfil({ navigation, onPress, takeRouter }) {
         }));
     }
 
-    const [userName, setUserName] = useState('');
+    const [userName, setUserName] = useState();
     const [userImage, setUserImage] = useState(imgAvatar);
-    const [height, setHeight] = useState(1.80);
-    const [weight, setWeight] = useState(74.45);
+    const [height, setHeight] = useState();
+    const [weight, setWeight] = useState();
 
     const [user, setUser] = useState({
         name: userName,
@@ -70,12 +74,10 @@ export default function Perfil({ navigation, onPress, takeRouter }) {
                         setUserImage={onChangeUserImage}
                     />
                     <UserDataProfile
-                        userName={user.name}
-                        onChangeUserName={onChangeUserName}
-                        height={user.height}
-                        onChangeHeight={onChangeHeight}
-                        weight={user.weight}
-                        onChangeWeight={onChangeWeight}
+                        initialUserName={user.name}
+                        initialHeight={user.height}
+                        initialWeight={user.weight}
+                        onSave={onSaveUserData}
                     />
                     <Image
                         source={img}
