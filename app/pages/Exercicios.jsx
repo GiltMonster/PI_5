@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Alert, ActivityIndicator, Image } from 'react-native';
 import CardExercicio from '../components/Cards/CardExercicio';
 import { getExerciciosPeloTreino } from '../services/Exercicio';
 import ToolBar from '../components/toolBarComponents/ToolBar';
 import TabBar from '../components/tabBarComponents/TabBar';
+import img from '../assets/images/perfil.png';
 
 const TelaExercicio = ({ route, navigation, takeRouter }) => {
   const treino = route.params.treino;
@@ -54,7 +55,11 @@ const TelaExercicio = ({ route, navigation, takeRouter }) => {
             keyExtractor={item => item.idExercicio}
           />
         )}
-        <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+        <Image
+          source={img}
+          style={styles.perfilImage}
+        />
+        {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
       </View>
   );
 };
@@ -80,7 +85,12 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-  }
+  },
+  perfilImage: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+  },
 });
 
 export default TelaExercicio;

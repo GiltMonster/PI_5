@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert, FlatList, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Alert, FlatList, ActivityIndicator, Image } from 'react-native';
 import CardTreino from '../components/Cards/CardTreino';
 import { getTreinos } from '../services/TreinoDB';
 import ToolBar from '../components/toolBarComponents/ToolBar';
 import TabBar from '../components/tabBarComponents/TabBar';
+import img from '../assets/images/perfil.png';
 
 const TelaTreino = ({ navigation, takeRouter }) => {
   const [treino, setTreino] = useState();
@@ -34,7 +35,7 @@ const TelaTreino = ({ navigation, takeRouter }) => {
         <View style={styles.noTraining}>
           <ActivityIndicator size="large" color="#6EDEFD" />
         </View>
-        <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+        {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
       </View>
 
       :
@@ -54,7 +55,11 @@ const TelaTreino = ({ navigation, takeRouter }) => {
             style={{top: 20}}
           />
         )}
-        <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+        {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
+        <Image
+          source={img}
+          style={styles.perfilImage}
+        />
       </View>
   );
 };
@@ -75,7 +80,12 @@ const styles = StyleSheet.create({
   noTrainingText: {
     fontSize: 25,
     color: 'gray'
-  }
+  },
+  perfilImage: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+  },
 });
 
 export default TelaTreino;
