@@ -62,3 +62,13 @@ export function pegaDiaAtual() {
     const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Cancelar'];
     return diasDaSemana[dataAtual.getDay()];
 }
+
+export function obterTreinoMaisRecente(listaDeObjetos) {
+    // Ordenar a lista de objetos pela data em ordem decrescente
+    listaDeObjetos.sort(function(a, b) {
+        return new Date(b.dataTreino) - new Date(a.dataTreino);
+    });
+
+    // Retornar o primeiro elemento da lista (o mais recente)
+    return listaDeObjetos[0];
+}
