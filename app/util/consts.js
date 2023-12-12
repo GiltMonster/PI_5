@@ -5,6 +5,7 @@ export const API_URL_CADASTRAR_USUARIO = `http://${IP}:3000/usuario/cadastrarUsu
 //TREINO
 export const API_URL_GET_TREINO = `http://${IP}:3000/treino/getTreino`;
 export const API_URL_CADASTRAR_TREINO = `http://${IP}:3000/treino/cadastrarTreino`;
+export const API_URL_ATUALIZAR_TREINO = `http://${IP}:3000/treino/atualizarTreino`;
 
 //EXERCICIO
 export const API_URL_GET_EXERCICIO = `http://${IP}:3000/exercicio/getExercicio`;

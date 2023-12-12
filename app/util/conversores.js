@@ -14,3 +14,19 @@ export function retornarPalavraPorLetra(letra) {
         return 'Feminino';
     }
 } 
+
+export function retornaTrueOuFalse(valor) {
+    if (valor === 1) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+export function retornaUmOuZero(valor){
+    if (valor === true) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
