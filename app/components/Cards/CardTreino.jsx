@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Checkbox } from 'react-native-paper';
-import { retornarPalavraPorLetra } from '../../util/conversores';
-import { obterDiaDaSemana } from '../../util/data';
+import { retornaTrueOuFalse, retornaUmOuZero, retornarPalavraPorLetra } from '../../util/conversores';
+import { obterDataFormatada, obterDiaDaSemana, pegaDiaAtual } from '../../util/data';
+import { atualizaTreino } from '../../services/TreinoDB';
 
 const CardTreino = ({ onCheckboxToggle, treino, navigation }) => {
-  const [checked, setChecked] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
+  const [checked, setChecked] = useState(retornaTrueOuFalse(treino.conclusaoTreino));
+  const [showMessage, setShowMessage] = useState(retornaTrueOuFalse(treino.conclusaoTreino));
 
 
   const handleCardPress = () => {
@@ -17,11 +18,29 @@ const CardTreino = ({ onCheckboxToggle, treino, navigation }) => {
     setChecked(!checked);
     setShowMessage(!checked);
 
-    console.log(`o Estado do checkbox está: ${checked}`);
+    const treinoAtualizado = {
+      "idUsuario": 1,
+      "data": obterDataFormatada(pegaDiaAtual()),
+      "duracao": "00:00:00",
+      "nome": treino.nomeTreino,
+      "categoria": treino.categoriaTreino,
+      "conclusao": retornaUmOuZero(!checked)
+    };
 
-    if (!checked) {
-      Alert.alert('Sucesso', 'Seu treino foi adicionado ao histórico!');
-    }
+    console.log('Treino atualizado: ', treinoAtualizado);
+    atualizaTreino(treinoAtualizado, treino.idTreino).then((res) => {
+      if (!res) {
+        Alert.alert('Atenção', 'Não foi possível atualizar o treino.', ['ok']);
+      } else {
+        if (!checked) {
+          Alert.alert('Sucesso', 'Seu treino foi adicionado ao histórico!');
+        }else{
+          Alert.alert('Sucesso', 'Seu treino foi removido do histórico!');
+        }
+        console.log('Treino atualizado com sucesso.');
+      }
+    });
+
   };
 
   return (
@@ -93,7 +112,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    left: 15,
+    marginLeft: 10,
   },
   diaSemana: {
     color: '#fff',

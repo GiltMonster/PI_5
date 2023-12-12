@@ -62,3 +62,52 @@ export function pegaDiaAtual() {
     const diasDaSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Cancelar'];
     return diasDaSemana[dataAtual.getDay()];
 }
+
+export function obterTreinoMaisRecente(listaDeObjetos) {
+    // Ordenar a lista de objetos pela data em ordem decrescente
+    listaDeObjetos.sort(function(a, b) {
+        return new Date(b.dataTreino) - new Date(a.dataTreino);
+    });
+
+    // Retornar o primeiro elemento da lista (o mais recente)
+    return listaDeObjetos[0];
+}
+
+export function ordenarListaPorDataEConclusao(listaTreinos) {
+     // Ordena a lista de treinos pela conclusão (em ordem decrescente) e pela data (em ordem decrescente)
+     listaTreinos.sort((a, b) => {
+        // Compara conclusão
+        if (a.conclusaoTreino !== b.conclusaoTreino) {
+            return b.conclusaoTreino - a.conclusaoTreino;
+        }
+
+        // Se a conclusão for a mesma, compara as datas
+        return new Date(b.dataTreino) - new Date(a.dataTreino);
+    });
+
+    // Filtra os treinos concluídos (conclusaoTreino igual a 1)
+    const treinosConcluidos = listaTreinos.filter(treino => treino.conclusaoTreino === 1);
+
+    // Retorna a lista de treinos concluídos ordenada
+    return treinosConcluidos;
+}
+
+/**
+ * recebe uma string no formato "2023-12-12T05:27:30.000Z" e retorna a data formatada no padrão DD/MM/YYYY.
+ *
+ * @param {string} dataString
+ * @return {string} 
+ */
+export function formatarData(dataString) {
+    const data = new Date(dataString);
+  
+    // Obtém os componentes da data
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0'); // Os meses são zero indexados
+    const ano = data.getFullYear();
+  
+    // Formata a data no formato DD/MM/YYYY
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+  
+    return dataFormatada;
+  }

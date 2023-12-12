@@ -1,32 +1,60 @@
-import React from 'react';
-import { View, ScrollView, StyleSheet, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import CardTreinoFinalizado from '../components/Cards/CardTreinoFinalizado';
 import ToolBar from '../components/toolBarComponents/ToolBar';
+import { getTreinos } from '../services/TreinoDB';
+import { formatarData, ordenarListaPorDataEConclusao } from '../util/data';
+import { retornarPalavraPorLetra } from '../util/conversores';
 
 const History = ({ navigation }) => {
   //dado estatico para teste
-  const treinosConcluidos = [
-    { id: 1, data: '01/01/2023', nomeTreino: 'Treino A', categoria: 'Superior' },
-    { id: 2, data: '02/01/2023', nomeTreino: 'Treino B', categoria: 'Inferior' },
-  ];
+  const [treino, setTreino] = useState();
+  const [isLoad, setLoading] = useState(true);
+
+  useEffect(() => {
+    getTreinos().then((treinos) => {
+      if (!treinos) {
+        Alert.alert('Atenção', 'Não foi possível carregar os treinos.', ['ok']);
+      } else {
+        console.log('Treinos carregados com sucesso.');
+        console.log(ordenarListaPorDataEConclusao(treinos));
+        setTreino(ordenarListaPorDataEConclusao(treinos));
+        setLoading(false);
+      }
+    });
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <ToolBar onPressBack={navigation.goBack} screenName={"Histórico"}/>
-      <View style={styles.content}>
+
+    isLoad ?
+
+      <View style={styles.container}>
+        <ToolBar onPressBack={navigation.goBack} screenName={"Histórico"} />
+        <View style={styles.noTraining}>
+          <ActivityIndicator size="large" color="#6EDEFD" />
+        </View>
+      </View>
+
+      :
+
+      <SafeAreaView style={styles.container} >
+        <ToolBar onPressBack={navigation.goBack} screenName={"Histórico"} />
+
         <Text style={styles.titulo}>Últimos treinos realizados:</Text>
-        <ScrollView >
-          {treinosConcluidos.map((treino) => (
+
+        <FlatList
+          style={styles.content}
+          data={treino}
+          renderItem={({ item }) =>
             <CardTreinoFinalizado
-              key={treino.id}
-              data={treino.data}
-              nomeTreino={treino.nomeTreino}
-              categoria={treino.categoria}
+              data={formatarData(item.dataTreino)}
+              nomeTreino={item.nomeTreino}
+              categoria={retornarPalavraPorLetra(item.categoriaTreino)}
             />
-          ))}
-        </ScrollView>
-      </View> 
-    </View>
+          }
+          keyExtractor={item => item.idTreino}
+        />
+      </SafeAreaView>
   );
 };
 
@@ -36,14 +64,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#1C1C1E',
   },
   content: {
-    padding: 20,
-    top: 20
+    paddingHorizontal: 20,
   },
   titulo: {
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
-    paddingBottom: 15
+    paddingBottom: 15,
+    paddingLeft: 20,
+    top: 10
   }
 });
 

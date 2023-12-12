@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { View, Alert, ScrollView } from 'react-native';
+import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
 import TextField from '../components/TextField';
 import BackgroundContainer from '../components/BackgroundContainer';
+import { createDescricaoExercicio, createExercicio } from '../services/Exercicio';
 
-const CriarExercicio = ({ navigation }) => {
+const CriarExercicio = ({ route, navigation }) => {
+  const idTreino = route.params.idTreino;
+  
   const [nome, setNome] = useState('');
   const [series, setSeries] = useState('');
   const [repeticoes, setRepeticoes] = useState('');
   const [carga, setCarga] = useState('');
-  const [descricao, setDescricao] = useState('');
+  const [descricao, setDescricao] = useState();
+
+  useEffect(() => {
+    console.log('ceiarTreino idTreino:', idTreino);
+  }, []);
 
   const handleSalvar = () => {
     // validar os dados
     if (!isValidString(nome)) {
-      Alert.alert('Erro', 'Nome deve ser umm texto válido.');
+      Alert.alert('Erro', 'Nome deve ser um texto válido.');
       return;
     }
 
@@ -29,15 +38,49 @@ const CriarExercicio = ({ navigation }) => {
     }
 
     const exercicioSalvo = {
-      nome,
-      series,
-      repeticoes,
-      carga,
-      descricao,
+      "idTreino": idTreino,
+      "repeticoes": repeticoes,
+      "serie": series,
+      "nome": nome,
+      "carga": carga,
     };
 
-    //banco
-    navigation.navigate('exercicios', { exercicioSalvo });
+    console.log('Exercicio: ', exercicioSalvo);
+    createExercicio(exercicioSalvo).then((res) => {
+      if (!res) {
+        Alert.alert('Alguma coisa deu errado', 'Exercicio não criado', ['ok']);
+      } else {
+        setNome('');
+        setCarga('');
+        setRepeticoes('');
+        setSeries('');
+        Alert.alert('Sucesso', "Exercicio criado com sucesso", ['ok']);
+        console.log('response:', res);
+        const idExercicio = res;
+
+        const descricaoExercicio = {
+          "idExercicio": idExercicio.insertId,
+          "idTreino": idTreino,
+          "descricao": descricao
+        };
+
+        console.log('descricao:', descricaoExercicio);
+        if (descricao && idExercicio) {
+
+          console.log('idExercicio: ', descricaoExercicio);
+          createDescricaoExercicio(descricaoExercicio).then((res) => {
+            if (!res) {
+              Alert.alert('Alguma coisa deu errado', 'Descrição não criada', ['ok']);
+            } else {
+              setDescricao('');
+              console.log('Sucesso', "Descrição criada com sucesso");
+            }
+          });
+        }
+
+        navigation.goBack();
+      }
+    });
   };
 
   const isValidString = (value) => {
@@ -50,7 +93,7 @@ const CriarExercicio = ({ navigation }) => {
 
   const isValidFloat = (value) => {
     return /^\d*$/.test(value) || /^\d+(\.\d{0,2})?$/.test(value) || typeof value === 'undefined';
-   // return /^\d+(\.\d*)?$/.test(value) || typeof value === 'undefined';
+    // return /^\d+(\.\d*)?$/.test(value) || typeof value === 'undefined';
   };
 
   return (

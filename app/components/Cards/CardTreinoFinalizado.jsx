@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
     fontWeight: 'bold',
-    alignSelf: 'left'
+    alignSelf: 'flex-start'
   },
 });
 
