@@ -3,8 +3,9 @@ import { View, Text, StyleSheet, FlatList, Alert, ActivityIndicator } from 'reac
 import CardExercicio from '../components/Cards/CardExercicio';
 import { getExerciciosPeloTreino } from '../services/Exercicio';
 import ToolBar from '../components/toolBarComponents/ToolBar';
+import TabBar from '../components/tabBarComponents/TabBar';
 
-const TelaExercicio = ({ route, navigation }) => {
+const TelaExercicio = ({ route, navigation, takeRouter }) => {
   const treino = route.params.treino;
 
   const [exercicios, setExercicios] = useState([]);
@@ -53,6 +54,7 @@ const TelaExercicio = ({ route, navigation }) => {
             keyExtractor={item => item.idExercicio}
           />
         )}
+        <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
       </View>
   );
 };
