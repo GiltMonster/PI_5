@@ -7,8 +7,9 @@ import { useActionSheet } from '@expo/react-native-action-sheet';
 import getFont from '../util/fonts';
 import { obterDataFormatada, pegaDiaAtual } from '../util/data';
 import { salvaPrimeiraLetra } from '../util/conversores';
+import TabBar from '../components/tabBarComponents/TabBar';
 
-export default function CriarTreino({ navigation }) {
+export default function CriarTreino({ navigation, takeRouter }) {
   const [treino, setTreino] = useState();
   const [nome, setNome] = useState('');
   const [categoria, setCategoria] = useState('Selecione uma categoria');
@@ -133,6 +134,7 @@ export default function CriarTreino({ navigation }) {
   const dayColor = diaDaSemana === 'Selecione um dia' ? 'gray': '#FAFAFA';
 
   return (
+    <View style={styles.container}>
     <BackgroundContainer onPress={() => handleSalvar()} onPressBack={navigation.goBack} screenName={'Criar Treino'} rightText={'Salvar'}>
 
       <View style={styles.input}>
@@ -157,12 +159,17 @@ export default function CriarTreino({ navigation }) {
           {diaDaSemana}
         </Text>
       </View>
-
+      
     </BackgroundContainer>
+    <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   name: {
     color: '#FAFAFA',
     fontSize: 20,
