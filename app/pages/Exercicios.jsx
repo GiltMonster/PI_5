@@ -54,7 +54,7 @@ const TelaExercicio = ({ route, navigation, takeRouter }) => {
             keyExtractor={item => item.idExercicio}
           />
         )}
-        <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+        {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
       </View>
   );
 };

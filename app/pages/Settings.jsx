@@ -19,7 +19,7 @@ export default function Settings({ onPress, navigation }) {
                     />
                 </SafeAreaView>
             </View>
-            <TabBar onPress={onPress} style={styles.tabBarStyle} />
+            {/* <TabBar onPress={onPress} style={styles.tabBarStyle} /> */}
         </View>
     );
 }

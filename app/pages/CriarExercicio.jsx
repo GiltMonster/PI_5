@@ -139,7 +139,7 @@ const CriarExercicio = ({ route, navigation, takeRouter }) => {
           />
         </ScrollView>
       </BackgroundContainer>
-      <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+      {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
     </View>
   );
 };

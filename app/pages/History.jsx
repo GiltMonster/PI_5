@@ -34,7 +34,7 @@ const History = ({ navigation, takeRouter }) => {
         <View style={styles.noTraining}>
           <ActivityIndicator size="large" color="#6EDEFD" />
         </View>
-        <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+        {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
       </View>
 
       :
@@ -57,7 +57,7 @@ const History = ({ navigation, takeRouter }) => {
             keyExtractor={item => item.idTreino}
           />
         </SafeAreaView>
-        <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+        {/* <TabBar takeRouter={navigation} style={styles.tabBarStyle} /> */}
       </View>
   );
 };

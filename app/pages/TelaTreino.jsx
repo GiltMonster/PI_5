@@ -34,7 +34,7 @@ const TelaTreino = ({ navigation, takeRouter }) => {
         <View style={styles.noTraining}>
           <ActivityIndicator size="large" color="#6EDEFD" />
         </View>
-        <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+        {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
       </View>
 
       :
@@ -54,7 +54,7 @@ const TelaTreino = ({ navigation, takeRouter }) => {
             style={{top: 20}}
           />
         )}
-        <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+        {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
       </View>
   );
 };

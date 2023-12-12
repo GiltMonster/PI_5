@@ -41,7 +41,7 @@ const Meta = ({ navigation, onUpdateWeight, takeRouter }) => {
           placeholderTextColor={'#A3A3A3'}
         />
       </BackgroundContainer>
-      <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+      {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
     </View>
   );
 };

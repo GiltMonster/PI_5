@@ -161,7 +161,7 @@ export default function CriarTreino({ navigation, takeRouter }) {
       </View>
       
     </BackgroundContainer>
-    <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+    {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
     </View>
   );
 };

@@ -85,7 +85,7 @@ export default function Perfil({ navigation, onPress, takeRouter }) {
                     />
                 </SafeAreaView>
             </View>
-            <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
+            {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
         </View>
     );
 }
