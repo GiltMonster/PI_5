@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { retornaTrueOuFalse, retornaUmOuZero, retornarPalavraPorLetra } from '../../util/conversores';
 import { obterDataFormatada, obterDiaDaSemana, pegaDiaAtual } from '../../util/data';
-import { atualizaTreino } from '../../services/TreinoDB';
+import { atualizaTreino, deletaTreino } from '../../services/TreinoDB';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -29,10 +29,6 @@ const CardTreino = ({ onCheckboxToggle, treino, navigation }) => {
       "conclusao": retornaUmOuZero(!checked)
     };
 
-    const handleDeleteCategory = () => {
-      
-    }
-
     console.log('Treino atualizado: ', treinoAtualizado);
     atualizaTreino(treinoAtualizado, treino.idTreino).then((res) => {
       if (!res) {
@@ -40,13 +36,39 @@ const CardTreino = ({ onCheckboxToggle, treino, navigation }) => {
       } else {
         if (!checked) {
           Alert.alert('Sucesso', 'Seu treino foi adicionado ao histórico!');
-        }else{
+        } else {
           Alert.alert('Sucesso', 'Seu treino foi removido do histórico!');
         }
         console.log('Treino atualizado com sucesso.');
       }
     });
+  };
 
+  const handleDeleteCategory = (idTreino) => {
+    Alert.alert(
+      'Atenção',
+      'Deseja realmente deletar o treino?',
+      [
+        {
+          text: 'Não',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel'
+        },
+        {
+          text: 'Sim', onPress: () => {
+            deletaTreino(idTreino).then((res) => {
+              if (!res) {
+                Alert.alert('Atenção', 'Não foi possível deletar o treino.', ['ok']);
+              } else {
+                Alert.alert('Sucesso', 'Treino deletado com sucesso!');
+                console.log('Treino deletado com sucesso.');
+              }
+            });
+          }
+        }
+      ],
+      { cancelable: false }
+    );
   };
 
   return (
@@ -55,9 +77,9 @@ const CardTreino = ({ onCheckboxToggle, treino, navigation }) => {
         <View style={styles.headerContainer}>
           <Text style={styles.tituloTreino}>{treino.nomeTreino}</Text>
           <Text style={styles.tituloCategoria}>{retornarPalavraPorLetra(treino.categoriaTreino)}</Text>
-          <TouchableOpacity onPress={() => handleDeleteCategory(treino.categoriaTreino)}>
-              <Ionicons name="md-trash" size={20} color="#CB0000" style={styles.deleteIcon} />
-            </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleDeleteCategory(treino.idTreino)}>
+            <Ionicons name="md-trash" size={20} color="#CB0000" style={styles.deleteIcon} />
+          </TouchableOpacity>
         </View>
         <View style={styles.detailsContainer}>
           <View style={styles.leftDetails}>
@@ -96,13 +118,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: 10,
     alignItems: 'center',
-    
+
   },
   tituloTreino: {
     color: '#BF5BF3',
     fontSize: 20,
     fontWeight: 'bold',
-   width: 180
+    width: 180
   },
   tituloCategoria: {
     color: '#BF5BF3',
@@ -137,7 +159,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     textAlign: 'center',
     flex: 1
-  },
+  }
 });
 
 export default CardTreino;
