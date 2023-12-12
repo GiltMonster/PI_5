@@ -23,9 +23,12 @@ export default function UserDataProfile({ userName, onChangeUserName, height, on
                 <Text style={[styles.inputText, { fontFamily: getFont('sfProTextSemibold') }]}>Altura:</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeHeight}
-                    value={profileHeight}
-                    keyboardType="numeric"
+                    onChangeText={(text) => {
+                        const numericValue = parseFloat(text.replace(',', '.'));
+                        onChangeHeight(numericValue);
+                    }}
+                    value={replace(String(height))}
+                    keyboardType="decimal-pad"
                     placeholder='Digite sua altura'
                     placeholderTextColor={'gray'}
                 />
@@ -35,9 +38,12 @@ export default function UserDataProfile({ userName, onChangeUserName, height, on
                 <Text style={[styles.inputText, { fontFamily: getFont('sfProTextSemibold') }]}>Peso:</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeWeight}
-                    value={profileWeight}
-                    keyboardType="numeric"
+                    onChangeText={(text) => {
+                        const numericValue = parseFloat(text.replace(',', '.'));
+                        onChangeWeight(numericValue);
+                    } }
+                    value={replace(String(weight))}
+                    keyboardType="decimal-pad"
                     placeholder='Digite seu peso'
                     placeholderTextColor={'gray'}
                 />

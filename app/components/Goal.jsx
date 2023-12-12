@@ -25,7 +25,7 @@ const Goal = ({ currentWeight, targetWeight, takeRouter, onUpdateWeight }) => {
         {noGoal && (
           <View style={styles.noGoal}>
             <Text style={[styles.noGoalText, { fontFamily: getFont('sfProTextSemibold') }]}>
-              Sem dados registrados, inicie suas meta!
+              SEM DADOS REGISTRADOS
             </Text>
           </View>
         )}
