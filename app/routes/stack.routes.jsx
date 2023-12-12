@@ -12,7 +12,8 @@ import Meta from "../pages/Meta";
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import PrivacyAndTerms from "../pages/PrivacyAndTerms";
 import About from "../pages/About";
-import HomePage from "../pages/HomePage";
+import EditarExercicio from "../pages/EditarExercicio";
+
 
 // import { Ionicons } from '@expo/vector-icons';
 // para ter acesso as bibliotecas de ícones, entrar no link: https://icons.expo.fyi/Index
@@ -40,6 +41,7 @@ export default function StackRoutesLayout() {
                     <Screen name="criarTreino" component={CriarTreino} />
                     <Screen name="exercicios" component={Exercicios} />
                     <Screen name="criarExercicio" component={CriarExercicio} />
+                    <Screen name="editarExercicio" component={EditarExercicio} />
                     <Screen name="history" component={History} />
                     <Screen name="settings" component={Settings} />
                     <Screen name="meta" component={Meta} />
