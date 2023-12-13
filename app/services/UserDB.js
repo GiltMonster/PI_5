@@ -26,6 +26,7 @@ export async function getUser() {
  */
 export async function cadastroUsuario(usuario) {
     try {
+        console.log('usu',usuario);
         const response = await fetch(API_URL_CADASTRAR_USUARIO, {
             method: 'POST',
             body: JSON.stringify(usuario),
