@@ -1,6 +1,7 @@
 export const IP = '10.135.151.11';
 export const API_URL_GET_USUARIO = `http://${IP}:3000/usuario/usuario`;
 export const API_URL_CADASTRAR_USUARIO = `http://${IP}:3000/usuario/cadastrarUsuario`;
+export const API_URL_ATUALIZA_USUARIO = `http://${IP}:3000/usuario/atualizarUsuario`;
 
 //TREINO
 export const API_URL_GET_TREINO = `http://${IP}:3000/treino/getTreino`;
