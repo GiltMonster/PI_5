@@ -13,6 +13,7 @@ import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import PrivacyAndTerms from "../pages/PrivacyAndTerms";
 import About from "../pages/About";
 import EditarExercicio from "../pages/EditarExercicio";
+import HomePage from "../pages/HomePage";
 
 
 // import { Ionicons } from '@expo/vector-icons';

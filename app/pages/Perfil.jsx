@@ -14,27 +14,25 @@ export default function Perfil({ navigation, onPress, takeRouter }) {
     const [userImage, setUserImage] = useState('');
     const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
-    const [user, setUser] = useState('');
+    const [user, setUser] = useState();
 
     useEffect(() => {
         getUser().then((res) => {
             if (!res) {
                 console.log("deuRuim");
-            }else{
+            } else {
 
-                setUser(res[0]);
-                
-                setUserName(res[0].nomeUsuario);
-                setHeight(String(res[0].alturaUsuario));
-                setWeight(String(res[0].pesoUsuario));
-                
-                if (res[0].avatarUsuario) {
-                    onChangeUserImage(res[0].avatarUsuario);
+                if (res.length > 0) {
+                    setUserName(res[0].nomeUsuario);
+                    setHeight(String(res[0].alturaUsuario));
+                    setWeight(String(res[0].pesoUsuario));
+                    if (res[0].avatarUsuario) {
+                        onChangeUserImage(res[0].avatarUsuario);
+                    }
                 }
+
             }
         });
-
-        
     }, []);
 
 

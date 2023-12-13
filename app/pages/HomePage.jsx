@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import getFont from '../util/fonts';
 import Header from '../components/Header';
 import WorkoutButton from '../components/WorkoutButton';
@@ -7,42 +7,58 @@ import Imc from '../components/Imc';
 import Goal from '../components/Goal';
 import Summary from '../components/Summary';
 import TabBar from '../components/tabBarComponents/TabBar';
-
-import img from '../assets/images/avatares/avt00.jpeg';
+import { getUser } from '../services/UserDB';
+import { getTreinos } from '../services/TreinoDB';
+import { obterTreinoMaisRecente } from '../util/data';
 
 export default function HomePage({ takeRouter, navigation }) {
-  const [treino, setTreino] = useState({
-    name: '',
-    members: '',
-  });
+  const [treino, setTreino] = useState();
 
-  const [user, setUser] = useState({
-    name: '',
-    image: undefined,
-    height: 0,
-    weight: 0, 
-    targetWeight: 0,
-  });
+  const [userName, setUserName] = useState('');
+  const [userImage, setUserImage] = useState();
+  const [height, setHeight] = useState();
+  const [weight, setWeight] = useState();
+  const [user, setUser] = useState();
 
-  const homeText = user.name === '' || user.name === undefined ? '' : 'Treino de hoje,';
+  useEffect(() => {
+    getUser().then((res) => {
+      if (!res) {
+        console.log("deuRuim");
+      } else {
+
+        if (res.length > 0) {
+          console.log(res[0]);
+          setUser(res[0]);
+          setUserName(res[0].nomeUsuario);
+          setHeight(res[0].alturaUsuario);
+          setWeight(res[0].pesoUsuario);
+          setUserImage(res[0].avatarUsuario);
+        }
+      }
+    });
+
+    
+  }, []);
+
+  const homeText = userName === '' || userName === undefined ? '' : 'Treino de hoje,';
 
   return (
     <View style={styles.homePageContainer}>
       <View style={styles.headerView}>
-        <Header takeRouter={() => takeRouter('perfil')} userImage={user.image} />
+        <Header takeRouter={() => takeRouter('perfil')} userImage={userImage} />
       </View>
       <ScrollView>
         <Text style={[styles.homeText, { fontFamily: getFont('sfProDisplayBold') }]}>
-          {homeText} {user.name}
+          {homeText} {userName}
         </Text>
-        <WorkoutButton takeRouter={takeRouter} trainingName={treino.name} members={treino.members === 's' ? 'Superior' : 'Inferior'} />
-        <Imc height={user.height} weight={user.weight} />
+        {/* <WorkoutButton takeRouter={takeRouter} trainingName={treino.name} members={treino.members === 's' ? 'Superior' : 'Inferior'} /> */}
+        {/* <Imc height={height} weight={weight} /> */}
         <Text style={[styles.targetText, { fontFamily: getFont('sfProDisplayBold') }]}>Meta</Text>
         <Goal
-        currentWeight={user.weight}
-        targetWeight={user.targetWeight}
-        takeRouter={takeRouter}
-      />
+          currentWeight={weight}
+          targetWeight={80}
+          takeRouter={takeRouter}
+        />
         <Summary takeRouter={takeRouter} />
       </ScrollView>
       <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} />
@@ -68,7 +84,7 @@ const styles = StyleSheet.create({
     color: '#E3ECF1'
   },
   headerView: {
-    height: 100, 
+    height: 100,
     zIndex: 1
   },
   tabBarStyle: {
