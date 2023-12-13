@@ -15,7 +15,7 @@ const PrivacidadeTermosTela = ({navigation}) => {
           Coleta de Dados:{'\n'}{'\n'}
           Em virtude da natureza local do nosso aplicativo, não realizamos nenhum compartilhamento dos dados coletados. As informações fornecidas por você permanecem seguras e são utilizadas exclusivamente para aprimorar a sua experiência dentro do aplicativo.{'\n'}
           
-          {'\n'}Se tiver dúvidas ou preocupações, entre em contato conosco em @Dominio.
+          {'\n'}Se tiver dúvidas ou preocupações, entre em contato conosco em fittrack@herdeiros.com.br.
         </Text>
       </ScrollView>
       <Image

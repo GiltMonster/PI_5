@@ -1,4 +1,4 @@
-export const IP = '192.168.2.29';
+export const IP = '10.43.48.10';
 export const API_URL_GET_USUARIO = `http://${IP}:3000/usuario/usuario`;
 export const API_URL_CADASTRAR_USUARIO = `http://${IP}:3000/usuario/cadastrarUsuario`;
 
