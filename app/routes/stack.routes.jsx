@@ -36,7 +36,6 @@ export default function StackRoutesLayout() {
             <ActionSheetProvider>
                 <Navigator initialRouteName='Home' screenOptions={{ headerShown: false }}>
                     <Screen name="home" component={Home} />
-                    <Screen name="homePage" component={HomePage} />
                     <Screen name="perfil" component={Perfil} />
                     <Screen name="treinos" component={TelaTreinos} />
                     <Screen name="criarTreino" component={CriarTreino} />

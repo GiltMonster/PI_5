@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
 import ToolBar from '../components/toolBarComponents/ToolBar';
 import getFont from '../util/fonts';
+import img from '../assets/images/perfil.png';
 
 const PrivacidadeTermosTela = ({navigation}) => {
   return (
@@ -14,9 +15,13 @@ const PrivacidadeTermosTela = ({navigation}) => {
           Coleta de Dados:{'\n'}{'\n'}
           Em virtude da natureza local do nosso aplicativo, não realizamos nenhum compartilhamento dos dados coletados. As informações fornecidas por você permanecem seguras e são utilizadas exclusivamente para aprimorar a sua experiência dentro do aplicativo.{'\n'}
           
-          {'\n'}Se tiver dúvidas ou preocupações, entre em contato conosco em @Dominio.
+          {'\n'}Se tiver dúvidas ou preocupações, entre em contato conosco em fittrack@herdeiros.com.br.
         </Text>
       </ScrollView>
+      <Image
+        source={img}
+        style={styles.perfilImage}
+      />
     </View>
     
   );
@@ -36,6 +41,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     textAlign: 'justify'
+  },
+  perfilImage: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
 });
 
