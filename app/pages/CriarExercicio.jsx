@@ -1,12 +1,13 @@
 
 import React, { useEffect, useState } from 'react';
-import { View, Alert, ScrollView } from 'react-native';
-import HeaderScreensNavigations from '../components/HeaderScreensNavigations';
+import { View, Alert, ScrollView, StyleSheet, Image } from 'react-native';
 import TextField from '../components/TextField';
 import BackgroundContainer from '../components/BackgroundContainer';
 import { createDescricaoExercicio, createExercicio } from '../services/Exercicio';
+import TabBar from '../components/tabBarComponents/TabBar';
+import img from '../assets/images/perfil.png';
 
-const CriarExercicio = ({ route, navigation }) => {
+const CriarExercicio = ({ route, navigation, takeRouter }) => {
   const idTreino = route.params.idTreino;
   
   const [nome, setNome] = useState('');
@@ -97,48 +98,66 @@ const CriarExercicio = ({ route, navigation }) => {
   };
 
   return (
-    <BackgroundContainer onPress={() => handleSalvar()} onPressBack={navigation.goBack} screenName={'Criar Exercício'} rightText={'Salvar'}> 
-      <ScrollView>
-        <TextField
-          label="Nome"
-          value={nome}
-          onChangeText={setNome}
-          placeholder="Digite o nome do exercício"
-        />
+    <View style={styles.container}>
+      <BackgroundContainer onPress={() => handleSalvar()} onPressBack={navigation.goBack} screenName={'Criar Exercício'} rightText={'Salvar'}> 
+        <ScrollView>
+          <TextField
+            label="Nome"
+            value={nome}
+            onChangeText={setNome}
+            placeholder="Digite o nome do exercício"
+          />
 
-        <TextField
-          label="Repetições"
-          value={repeticoes}
-          onChangeText={(text) => isValidNumber(text) && setRepeticoes(text)}
-          placeholder="Digite a quantidade de repetições"
-          keyboardType="numeric"
-        />
-        <TextField
-          label="Séries"
-          value={series}
-          onChangeText={(text) => isValidNumber(text) && setSeries(text)}
-          placeholder="Digite a quantidade de séries"
-          keyboardType="numeric"
-        />
+          <TextField
+            label="Repetições"
+            value={repeticoes}
+            onChangeText={(text) => isValidNumber(text) && setRepeticoes(text)}
+            placeholder="Digite a quantidade de repetições"
+            keyboardType="numeric"
+          />
+          <TextField
+            label="Séries"
+            value={series}
+            onChangeText={(text) => isValidNumber(text) && setSeries(text)}
+            placeholder="Digite a quantidade de séries"
+            keyboardType="numeric"
+          />
 
-        <TextField
-          label="Carga (kg)"
-          value={carga}
-          onChangeText={(text) => isValidFloat(text) && setCarga(text)}
-          placeholder="Digite a carga em kg"
-          keyboardType="numeric"
-        />
+          <TextField
+            label="Carga (kg)"
+            value={carga}
+            onChangeText={(text) => isValidFloat(text) && setCarga(text)}
+            placeholder="Digite a carga em kg"
+            keyboardType="numeric"
+          />
 
-        <TextField
-          label="Descrição"
-          value={descricao}
-          onChangeText={setDescricao}
-          placeholder="Digite uma descrição"
-          multiline
-        />
-      </ScrollView>
-    </BackgroundContainer>
+          <TextField
+            label="Descrição"
+            value={descricao}
+            onChangeText={setDescricao}
+            placeholder="Digite uma descrição"
+            multiline
+          />
+        </ScrollView>
+      </BackgroundContainer>
+      <Image
+        source={img}
+        style={styles.perfilImage}
+      />
+      {/* <TabBar takeRouter={takeRouter} style={styles.tabBarStyle} /> */}
+    </View>
   );
 };
 
 export default CriarExercicio;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  perfilImage: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+  },
+});

@@ -14,6 +14,7 @@ import PrivacyAndTerms from "../pages/PrivacyAndTerms";
 import About from "../pages/About";
 import EditarExercicio from "../pages/EditarExercicio";
 
+
 // import { Ionicons } from '@expo/vector-icons';
 // para ter acesso as bibliotecas de ícones, entrar no link: https://icons.expo.fyi/Index
 //<Ionicons name="home" size={24} color={color} />
@@ -34,6 +35,7 @@ export default function StackRoutesLayout() {
             <ActionSheetProvider>
                 <Navigator initialRouteName='Home' screenOptions={{ headerShown: false }}>
                     <Screen name="home" component={Home} />
+                    <Screen name="homePage" component={HomePage} />
                     <Screen name="perfil" component={Perfil} />
                     <Screen name="treinos" component={TelaTreinos} />
                     <Screen name="criarTreino" component={CriarTreino} />
